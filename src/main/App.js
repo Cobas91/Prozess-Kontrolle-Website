@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import Alert from 'react-bootstrap-sweetalert';
 import "../css/App.css"
-import * as dgapi from '..//utils/API/dgapi'
+import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
 import Body from "./body/index"
-
+import devData from "../utils/API/devData"
 class App extends Component {
   constructor(props) {
       super(props) 
       this.state = {
+        devMode: true,    //Entwickler Modus -> Entwickler Daten
         loading: true,    //Loadingscreen anzeigen?
         notify:{          //Object für die Benachrichtigung
             title: "",
@@ -27,20 +28,30 @@ class App extends Component {
   async componentDidMount(){
     var kunden = {}
     var systeme = {}
+    if(this.state.devMode === true){
+      this.setState({
+        loading: false,
+        data: {
+          systeme: devData.systeme,
+          kunden: devData.kunden
+        }
+      })
+    }else{
       await dgapi.getAllKunden().then(async (responseKunden)=>{
-      kunden = responseKunden
-    }).then(async ()=>{
-        await dgapi.getAllSystems().then((responseSysteme)=>{
-        systeme = responseSysteme
-          this.setState({ 
-            data: {
-              systeme: systeme,
-              kunden: kunden
-            },         
-            loading: false
-          })
-      }) 
-    })
+        kunden = responseKunden
+        }).then(async ()=>{
+          await dgapi.getAllSystems().then((responseSysteme)=>{
+          systeme = responseSysteme
+            this.setState({ 
+              data: {
+                systeme: systeme,
+                kunden: kunden
+              },         
+              loading: false
+            })
+        }) 
+      })
+    }  
   }
   _handleChange(event){
       var change = {}
@@ -57,7 +68,6 @@ class App extends Component {
         status: true
       }
     })
-    
   }
   render() {
     console.log("App-State", this.state)
