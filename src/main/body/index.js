@@ -14,20 +14,8 @@ import Navbar from "./components/NavBar"
 
 
 class Body extends Component {
-    constructor(props) {
-        super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-        this._handleChange = this._handleChange.bind(this);
-    }
-    _handleChange(event){
-        this.props.handleChange(event)
-    }
-    _handleSubmit(event){
-        this.props.handleSubmit(event)
-        event.preventDefault();
-    }
 
     render() {
-        console.log("Body-State: ",this.props.App)
         return (
             <div>
             <Router>
@@ -36,7 +24,7 @@ class Body extends Component {
                         <Navbar/>
                         <NewSystemForm {...this.props} handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit}/>
                     </Route>
-                    <Route path="/system/edit/:id">
+                    <Route path="/system/edit/">
                         <Navbar/>
                         <EditSystemForm {...this.props} handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit}/>
                     </Route>

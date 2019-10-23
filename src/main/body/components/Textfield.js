@@ -15,12 +15,12 @@ export class TextField extends Component {
     _handleChange(event) {
         this.setState({value: event.target.value});
         this.props.handleChange(event.target)
-        event.preventDefault()
+        event.preventDefault()        
     }
 
     render() {
         return (
-            <input placeholder={this.state.placeholder} value={this.state.value} id={this.state.id} onChange={this._handleChange} className={this.state.className + " form-control"}/>
+            <input onKeyPress={e => {if (e.key === 'Enter') e.preventDefault();}} placeholder={this.state.placeholder} id={this.state.id} onChange={this._handleChange} className={this.state.className + " form-control"}/>
         )
     }
 }

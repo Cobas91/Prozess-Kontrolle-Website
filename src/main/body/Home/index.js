@@ -6,9 +6,7 @@ import { MdDeleteSweep } from "react-icons/md";
 class Home extends Component {
     constructor(props) {
       super(props);
-      this.state = {
-          data: this.props.data
-    };
+      
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     
@@ -45,14 +43,13 @@ class Home extends Component {
             {
                 Header: "",
                 Cell: row => <div>
-                  <Link to={"system/edit/"+this.state.data.systeme[row.index].ID} data={row}> <FaBars/> </Link>
+                  <Link to={"system/edit"}> <FaBars/> </Link>
                   <MdDeleteSweep/>
                   </div>
             }
         ]
-        console.log(this.state.data)
       return (
-            <Tabelle data={this.state.data} header={header} filter={true}/>
+            <Tabelle data={this.props.data} header={header} filter={true}/>
       );
     }
   }

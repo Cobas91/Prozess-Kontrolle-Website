@@ -12,7 +12,6 @@ class EditSystemForm extends Component {
     // }
 
   render() {
-      console.log("Edit-System - Data", this.props.App)
       return(
         <div className="form-group">
             <h3>Edit System</h3>
