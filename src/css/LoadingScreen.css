@@ -1,0 +1,13 @@
+.loading_main {
+    width: 100vw;
+    height: 100vh;
+    background: #fc4503;
+    text-align: center;
+    display: flex;
+    
+  }
+
+.LoadingScreen{
+    margin: auto auto;
+
+}  
