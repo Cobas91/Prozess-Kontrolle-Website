@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//Test
+//Test Branch 2
 import Alert from 'react-bootstrap-sweetalert';
 import "../css/App.css"
 import * as dgapi from '../utils/API/dgapi'
@@ -57,7 +57,8 @@ class App extends Component {
     _handleChange(event) {
         var change = {}
         Object.assign(change, {
-            [event.id]: { value: event.value } })
+            [event.id]: { value: event.value }
+        })
         this.setState({
             change: change
         })
@@ -95,8 +96,8 @@ class App extends Component {
                 Body App = { this.state }
                 handleChange = { this._handleChange }
                 handleSubmit = { this._handleSubmit }
-                /> <
-                /div>
+                /> < /
+                div >
             )
 
     }
