@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+//Test
 import Alert from 'react-bootstrap-sweetalert';
 import "../css/App.css"
 import * as dgapi from '../utils/API/dgapi'
@@ -7,6 +8,7 @@ import Body from "./body/index"
 import devData from "../utils/API/devData"
 
 class App extends Component {
+
   constructor(props) {
       super(props) 
       this.state = {
@@ -22,33 +24,34 @@ class App extends Component {
           systeme: {},
           kunden: {}
         }
-      }
-      this._handleChange = this._handleChange.bind(this)
-      this._handleSubmit = this._handleSubmit.bind(this)
-  }
-  async componentDidMount(){
-    var kunden = {}
-    var systeme = {}
-    if(this.state.devMode === true){
-      this.setState({
-        loading: false,
-        data: {
-          systeme: devData.systeme,
-          kunden: devData.kunden
-        }
-      })
-    }else{
-      await dgapi.getAllKunden().then(async (responseKunden)=>{
-        kunden = responseKunden
-        }).then(async ()=>{
-          await dgapi.getAllSystems().then((responseSysteme)=>{
-          systeme = responseSysteme
-            this.setState({ 
-              data: {
-                systeme: systeme,
-                kunden: kunden
-              },         
-              loading: false
+        this._handleChange = this._handleChange.bind(this)
+        this._handleSubmit = this._handleSubmit.bind(this)
+    }
+    async componentDidMount() {
+        var kunden = {}
+        var systeme = {}
+        if (this.state.devMode === true) {
+            this.setState({
+                loading: false,
+                data: {
+                    systeme: devData.systeme,
+                    kunden: devData.kunden
+                }
+            })
+        } else {
+            await dgapi.getAllKunden().then(async(responseKunden) => {
+                kunden = responseKunden
+            }).then(async() => {
+                await dgapi.getAllSystems().then((responseSysteme) => {
+                    systeme = responseSysteme
+                    this.setState({
+                        data: {
+                            systeme: systeme,
+                            kunden: kunden
+                        },
+                        loading: false
+                    })
+                })
             })
         }) 
       })
@@ -99,8 +102,7 @@ class App extends Component {
           <Body App={this.state} />
         </div>
       )
-
-  }
+    }
 }
 
 export default App;
