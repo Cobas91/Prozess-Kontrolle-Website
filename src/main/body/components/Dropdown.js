@@ -1,26 +1,29 @@
-import React ,{Component} from 'react';
-import Select from 'react-dropdown'
-import 'react-dropdown/style.css'
+import React from "react";
 
-var kunden = []
-export class DropdownComp extends Component {
-    constructor(props) {
-        super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-        this.state = {
-          kunden: this.props.data.kunden,
-          value: 0
-        }
-        kunden = this.state.kunden.map(kunde => ({ label: kunde.Name, value: kunde.Kunden_ID }));
-    }
-    _handleChangeDropdown = (option)=> {
-        Object.assign(option, {id: this.props.id})
-        this.props.handleChange(option)
-     }
-    render() {
-        return (
-            <Select options={kunden} onChange={this._handleChangeDropdown} value={this.state.kunden[this.state.value].Name} className="dropdownmenu dropdown" id={this.props.id}/>
-        )
-    }
-}
-  
-export default DropdownComp;
+const Select = props => {
+  return (
+    <div className="form-group">
+      <label for={props.name}> {props.title} </label>
+      <select
+        id={props.name}
+        name={props.name}
+        value={props.value}
+        onChange={props.handleChange}
+        className="form-control"
+      >
+        <option value="" disabled>
+          {props.placeholder}
+        </option>
+        {props.options.map(option => {
+          return (
+            <option key={option} value={option} label={option}>
+              {option}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
+
+export default Select;

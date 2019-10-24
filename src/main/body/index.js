@@ -22,7 +22,7 @@ class Body extends Component {
                 <Switch>
                     <Route path="/system/new">
                         <Navbar/>
-                        <NewSystemForm {...this.props} handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit}/>
+                        <NewSystemForm {...this.props} />
                     </Route>
                     <Route path="/system/edit/">
                         <Navbar/>
