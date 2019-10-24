@@ -24,6 +24,7 @@ class App extends Component {
           systeme: {},
           kunden: {}
         }
+      }
         this._handleChange = this._handleChange.bind(this)
         this._handleSubmit = this._handleSubmit.bind(this)
     }
@@ -53,10 +54,8 @@ class App extends Component {
                     })
                 })
             })
-        }) 
-      })
-    }  
-  }
+        }  
+    }
   _handleChange(e) {
     this.setState(
       prevState => ({
