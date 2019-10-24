@@ -5,11 +5,12 @@ import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
 import Body from "./body/index"
 import devData from "../utils/API/devData"
+
 class App extends Component {
   constructor(props) {
       super(props) 
       this.state = {
-        devMode: true,    //Entwickler Modus -> Entwickler Daten
+        devMode: false,    //Entwickler Modus -> Entwickler Daten
         loading: true,    //Loadingscreen anzeigen?
         notify:{          //Object für die Benachrichtigung
             title: "",
@@ -53,13 +54,24 @@ class App extends Component {
       })
     }  
   }
-  _handleChange(event){
-      var change = {}
-      Object.assign(change,{[event.id]: { value: event.value}})
-      this.setState({
-        change: change
-      })
+  _handleChange(e) {
+    this.setState(
+      prevState => ({
+        change: {
+          ...prevState.change,
+          [e.id]: e.value
+        }
+      }),
+      () => console.log(this.state.change)
+    );
   }
+  // _handleChange(event){
+  //     var change = {}
+  //     Object.assign(change,{[event.id]: { value: event.value}})
+  //     this.setState({
+  //       change: change
+  //     })
+  // }
   _handleSubmit(event){
     console.log("Submit Detected: ", event)
     event.preventDefault();
@@ -84,7 +96,7 @@ class App extends Component {
                   title: this.state.notify.title,
                 }})}>{this.state.notify.message}
             </Alert>
-          <Body App={this.state} handleChange={this._handleChange} handleSubmit={this._handleSubmit}/>
+          <Body App={this.state} />
         </div>
       )
 

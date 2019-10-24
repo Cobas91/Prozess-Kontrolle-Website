@@ -25,21 +25,21 @@ async function getAllSystems() {
   return resjason
 }
 
-async function addNewSystem(inputs) {
-  console.log(inputs.input)
+async function addNewSystem(input) {
+  console.log(input)
   const data = {
     table: "systeme",
     data: {
-      SN: inputs.input,
-      LSNummer: "Unbekannt",
+      SN: input.sn,
+      LSNummer: input.lieferschein,
       Status: "Neu Angelegt",
-      Modell: "850G5",
-      Kunden_ID: inputs.dropdown,
+      Modell: input.modell,
+      Kunden_ID: input.kunde,
       Betankungs_ID: 0,
       Versand_ID: "NULL",
-      Checklisten_ID_Done: 0,
       Lager_ID: 0,
-      Job_ID: 0
+      Job_ID: 0,
+      Bemerkung: input.bemerkung
     }
   }
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add`, {
@@ -52,6 +52,7 @@ async function addNewSystem(inputs) {
   const resjason = await result.json()
   return resjason
 }
+
 
 
 export {getAllKunden, addNewSystem, getAllSystems}
