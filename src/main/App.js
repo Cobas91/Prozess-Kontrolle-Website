@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 //Test
-import Alert from 'react-bootstrap-sweetalert';
 import "../css/App.css"
 import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
@@ -88,16 +87,6 @@ class App extends Component {
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (
         <div>
-            <Alert
-                title={this.state.notify.title}
-                show={this.state.notify.status === true}
-                text={this.state.notify.message}
-                type={this.state.notify.type}
-                onConfirm={() => this.setState({notify: {
-                  status: false,
-                  title: this.state.notify.title,
-                }})}>{this.state.notify.message}
-            </Alert>
           <Body App={this.state} />
         </div>
       )

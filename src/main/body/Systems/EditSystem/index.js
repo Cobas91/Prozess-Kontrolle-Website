@@ -23,7 +23,6 @@ class EditSystemForm extends Component {
 
     _handleSubmit(e){
         e.preventDefault();
-    
         var result = this.props.App.data.systeme.find((system) => {
             if(system.SN === this.state.system.sn){
               return system
@@ -54,7 +53,7 @@ class EditSystemForm extends Component {
         );
       }
   render() {
-      if(this.state.getData === false){
+      if(this.state.getData === false || this.state.system.kunde === ""){
           return(
             <div className="form-group">
                 <h3>Edit System</h3>

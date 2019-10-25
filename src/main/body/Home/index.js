@@ -26,7 +26,7 @@ class Home extends Component {
         accessor: "SN"
           },{
                 Header: "Kunde",
-                accessor: "Kunden_ID"
+                accessor: "Kunde"
             },
             {
                 Header: "Lieferschein",

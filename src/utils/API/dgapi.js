@@ -26,20 +26,20 @@ async function getAllSystems() {
 }
 
 async function addNewSystem(input) {
-  console.log(input)
   const data = {
     table: "systeme",
+    Bemerkung: input.bemerkung,
     data: {
       SN: input.sn,
       LSNummer: input.lieferschein,
       Status: "Neu Angelegt",
       Modell: input.modell,
-      Kunden_ID: input.kunde,
+      Hersteller: input.hersteller,
+      Kunde: input.kunde,
       Betankungs_ID: 0,
       Versand_ID: "NULL",
       Lager_ID: 0,
-      Job_ID: 0,
-      Bemerkung: input.bemerkung
+      Job_ID: 0
     }
   }
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add`, {
