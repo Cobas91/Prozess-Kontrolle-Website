@@ -5,7 +5,7 @@ import "../../../../css/App.css"
 import Input from "../../components/Input"
 import TextArea from '../../components/TextArea'
 import Button from '../../components/Button'
-
+import Dropdown from '../../components/Dropdown'
 
 class EditSystemForm extends Component {
     constructor(props) {
@@ -15,8 +15,19 @@ class EditSystemForm extends Component {
             system:{
               sn: null,
               bemerkung: "",
-              kunde: ""
-            }
+              kunde: "",
+              status: ""
+            },
+            options:[
+              "Versendet", 
+              "Neu Angelegt",
+              "zurückgesetzt",
+              "Support Fall",
+              "Support angefragt",
+              "Ausgemustert",
+              "Defekt",
+              "DOA"
+            ]
         }
         this._handleInput = this._handleInput.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -96,6 +107,14 @@ class EditSystemForm extends Component {
                 <h4>Kunde: {this.state.system.Kunde}</h4>
                 <div className="form-group">
                     <form onSubmit={this._handleFormSubmit}>
+                        <Dropdown
+                        title={"Status"}
+                        name={"status"}
+                        options={this.state.options}
+                        value={this.state.system.Status}
+                        placeholder={"Status wählen"}
+                        handleChange={this._handleInput}
+                        />
                         <Input
                         inputType={"text"}
                         title={"Lieferschein"}
