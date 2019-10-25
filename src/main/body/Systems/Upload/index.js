@@ -108,6 +108,7 @@ class UploadForm extends Component {
                     title={"Upload .xlsx"}
                     name={"upload"}
                     handlechange={this._handleInput}
+                    accept={"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
                     />
                 </form>
             </div>

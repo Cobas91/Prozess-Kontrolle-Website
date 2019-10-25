@@ -15,6 +15,7 @@ const Input = props => {
         value={props.value}
         onChange={props.handlechange}
         placeholder={props.placeholder}
+        accept={props.accept}
         {...props}
       />
     </div>
