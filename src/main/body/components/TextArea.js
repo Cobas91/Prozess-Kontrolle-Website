@@ -9,7 +9,7 @@ const TextArea = props => (
       rows={props.rows}
       cols={props.cols}
       value={props.value}
-      onChange={props.handleChange}
+      onChange={props.handlechange}
       placeholder={props.placeholder}
     />
   </div>

@@ -9,7 +9,7 @@ import NewSystemForm from "./Systems/NewSystem/index"
 import EditSystemForm from "./Systems/EditSystem/index"
 import Home from "./Home/index"
 import Navbar from "./components/NavBar"
-
+import UploadForm from "./Systems/Upload"
 
 
 
@@ -24,14 +24,21 @@ class Body extends Component {
                         <Navbar/>
                         <NewSystemForm {...this.props} />
                     </Route>
-                    <Route path="/system/edit/">
+                    <Route path="/system/edit">
                         <Navbar/>
                         <EditSystemForm {...this.props} handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit}/>
                     </Route>
+                    <Route path="/system/upload">
+                        <Navbar/>
+                        <UploadForm/>
+                    </Route>
+                    
+                    {/* Home muss die letzte Route sein */}
                     <Route path="/">
                         <Navbar/>
                         <Home data={this.props.App.data}/>
                     </Route>
+
                 </Switch>
             </Router>   
             </div>

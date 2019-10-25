@@ -23,6 +23,9 @@ class Navigation extends Component {
                 <Link to="/system/edit">
                     <p>Edit System</p>
                 </Link>
+                <Link to="/system/upload">
+                    <p>Upload</p>
+                </Link>
             </div>
         )
     }

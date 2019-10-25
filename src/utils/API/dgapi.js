@@ -25,6 +25,50 @@ async function getAllSystems() {
   return resjason
 }
 
+async function addExcelImport(input){
+  console.log(input)
+  for(var index in input){
+    var system = {
+      table: "systeme",
+      Bemerkung: "",
+      data: {
+        SN: input[index].Seriennummer,
+        LSNummer: "Unbekannt",
+        Status: "Neu Angelegt",
+        Modell: input[index].Matchcode,
+        Hersteller: "Unbekannt",
+        Kunde: "Unbekannt",
+        Betankungs_ID: 0,
+        Versand_ID: "NULL",
+        Lager_ID: 0,
+        Job_ID: 0,
+        Lager_KHK: input[index].Lagerplatz
+      }
+    }
+    await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/excel`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(system)
+    })
+    // .then((result)=>{
+    //   addToLog(result)
+    // })
+
+  }
+}
+
+function addToLog(toLog){
+  var send = {data:toLog}
+  fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/log`, {
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(send)
+  })
+}
 async function addNewSystem(input) {
   const data = {
     table: "systeme",
@@ -55,4 +99,4 @@ async function addNewSystem(input) {
 
 
 
-export {getAllKunden, addNewSystem, getAllSystems}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport}

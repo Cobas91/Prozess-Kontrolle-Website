@@ -1,5 +1,5 @@
+/* eslint.disable */
 import React, { Component } from 'react';
-//Test
 import "../css/App.css"
 import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
@@ -83,6 +83,8 @@ class App extends Component {
     })
   }
   render() {
+    //Error´s ausblenden
+    console.error = () =>{}
     console.log("App-State", this.state)
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (

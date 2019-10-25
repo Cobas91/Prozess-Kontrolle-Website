@@ -1,8 +1,10 @@
+/* eslint.disable */
 import React, {Component} from 'react';
 import "../../../../css/App.css"
 
 import Input from "../../components/Input"
 import TextArea from '../../components/TextArea'
+import Button from '../../components/Button'
 
 
 class EditSystemForm extends Component {
@@ -11,14 +13,13 @@ class EditSystemForm extends Component {
         this.state = {
             getData: false,
             system:{
-              sn: "",
+              sn: null,
               bemerkung: "",
               kunde: ""
             }
         }
         this._handleInput = this._handleInput.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
-
     }
 
     _handleSubmit(e){
@@ -27,14 +28,15 @@ class EditSystemForm extends Component {
             if(system.SN === this.state.system.sn){
               return system
             }
+            else{
+              return null
+            }
         })
         console.log(result)
-
-
         this.setState(
             prevState => ({
                 getData: true,
-              system: result}
+                system: result}
             ),
             () => console.log("State aktualisiert: ",this.state.system)
           );
@@ -52,8 +54,21 @@ class EditSystemForm extends Component {
           () => console.log("State aktualisiert: ",this.state.system)
         );
       }
+    _handleTextArea(e){
+      let value = e.target.value;
+      this.setState({
+          bemerkung: value
+        },
+        () => console.log("State aktualisiert: ",this.state.system)
+      );
+    }
+    _handleFormSubmit(e){
+      e.preventDefault();
+      console.log("Form Submit")
+    }
   render() {
-      if(this.state.getData === false || this.state.system.kunde === ""){
+    console.log("Editform State: ", this.state)
+      if(this.state.getData === false){
           return(
             <div className="form-group">
                 <h3>Edit System</h3>
@@ -65,7 +80,7 @@ class EditSystemForm extends Component {
                         name={"sn"}
                         value={this.state.system.sn}
                         placeholder={"Bitte Seriennummer eintragen...."}
-                        handleChange={this._handleInput}
+                        handlechange={this._handleInput}
                         />
                     </form>
                 </div>
@@ -74,25 +89,33 @@ class EditSystemForm extends Component {
       }
       return(
         <div className="form-group">
-                <h3>Edit System S/N: {this.state.system.SN}</h3>
-                <h4>Kunde: {this.props.App.data.kunden[this.state.system.Kunden_ID-1].Name}</h4>
+                <h2>Edit System</h2>
+                <h4>Seriennummer: {this.state.system.SN}</h4>
+                <h4>Hersteller: {this.state.system.Hersteller}</h4>
+                <h4>Modell: {this.state.system.Modell}</h4>
+                <h4>Kunde: {this.state.system.Kunde}</h4>
                 <div className="form-group">
-                    <form onSubmit={this._handleInput}>
+                    <form onSubmit={this._handleFormSubmit}>
                         <Input
                         inputType={"text"}
                         title={"Lieferschein"}
                         name={"LSNummer"}
                         value={this.state.system.LSNummer}
                         placeholder={"Lieferscheinnummer"}
-                        handleChange={this._handleInput}
+                        handlechange={this._handleInput}
                         />
                         <TextArea
                         title={"Bemerkung"}
                         rows={3}
                         value={this.state.system.bemerkung}
-                        name={"newSystemDescription"}
-                        handleChange={this._handleTextArea}
+                        name={"bemerkung"}
+                        handlechange={this._handleInput}
                         placeholder={"Bemerkung hier eingeben"}
+                        />
+                        <Button
+                        action={this._handleFormSubmit}
+                        type={"primary"}
+                        title={"Speichern"}
                         /> 
                     </form>
                 </div>
@@ -100,5 +123,4 @@ class EditSystemForm extends Component {
       )
   }
 }
-
 export default EditSystemForm;
