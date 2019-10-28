@@ -63,21 +63,38 @@ class UploadForm extends Component {
             //     }
             // })
             var ergebnis = await excelHandler.excelImport(excelData)
-            await dgapi.addExcelImport(ergebnis)
-            this.setState({
-                excelData: ergebnis,
-                loading: false,
-                gotData: true,
-                notify:{        
+            await dgapi.addExcelImport(ergebnis).then((anfrage)=>{
+                var notify = {
                     title: "Erfolg",
-                    message: "Daten wurden erfolgreich in die Datenbank übertragen",
+                    message: "Daten erfolgreich eingespielt",
                     status: true,
                     type: "success"
                 }
+                var correctInsert = 0
+                var errorInsert = 0
+                for(var index in anfrage.erg){
+                    if(anfrage.erg[index].statusCode === 400){
+                        errorInsert++
+                        notify = {
+                            title: "Ergebnis Excel Import",
+                            message: `Hinzugefügt: ${correctInsert} \nFehler: ${errorInsert}`,
+                            status: true,
+                            type: "warning" 
+                        }
+                    }else{
+                        correctInsert++
+                    }
+                }
+                this.setState({
+                    excelData: ergebnis,
+                    loading: false,
+                    gotData: true,
+                    notify: notify
+                })
             })
+            
         }
         reader.readAsBinaryString(f)
-
     }
     _hideAlert(){
         this.setState(

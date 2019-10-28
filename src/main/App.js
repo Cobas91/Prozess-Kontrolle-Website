@@ -24,12 +24,9 @@ class App extends Component {
           kunden: {}
         }
       }
-        this._handleChange = this._handleChange.bind(this)
         this._handleSubmit = this._handleSubmit.bind(this)
     }
     async componentDidMount() {
-        var kunden = {}
-        var systeme = {}
         if (this.state.devMode === true) {
             this.setState({
                 loading: false,
@@ -39,40 +36,16 @@ class App extends Component {
                 }
             })
         } else {
-            await dgapi.getAllKunden().then(async(responseKunden) => {
-                kunden = responseKunden
-            }).then(async() => {
-                await dgapi.getAllSystems().then((responseSysteme) => {
-                    systeme = responseSysteme
-                    this.setState({
-                        data: {
-                            systeme: systeme,
-                            kunden: kunden
-                        },
-                        loading: false
-                    })
-                })
+            var data = await dgapi.getAllData()
+            this.setState({
+              data:{
+                systeme: data.systeme,
+                kunden: data.kunden
+              },
+              loading: false
             })
         }  
     }
-  _handleChange(e) {
-    this.setState(
-      prevState => ({
-        change: {
-          ...prevState.change,
-          [e.id]: e.value
-        }
-      }),
-      () => console.log(this.state.change)
-    );
-  }
-  // _handleChange(event){
-  //     var change = {}
-  //     Object.assign(change,{[event.id]: { value: event.value}})
-  //     this.setState({
-  //       change: change
-  //     })
-  // }
   _handleSubmit(event){
     console.log("Submit Detected: ", event)
     event.preventDefault();

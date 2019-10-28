@@ -48,7 +48,6 @@ class NewSystemForm extends Component {
       e.preventDefault();
       let newSystem = this.state.newSystem;
       await dgapi.addNewSystem(newSystem).then((anfrage)=>{
-        console.log(anfrage.result)
         if(anfrage.result.statusCode === 400){
           this.setState(
             prevState => ({
@@ -197,14 +196,14 @@ class NewSystemForm extends Component {
                     options={this.state.options}
                     value={this.state.newSystem.kunde}
                     placeholder={"Bitte Kunde wählen..."}
-                    handleChange={this._handleInput}
+                    handlechange={this._handleInput}
                   />
                   <TextArea
                     title={"Bemerkung"}
                     rows={3}
                     value={this.state.newSystem.bemerkung}
                     name={"newSystemDescription"}
-                    handleChange={this._handleTextArea}
+                    handlechange={this._handleTextArea}
                     placeholder={"Bemerkung hier eingeben"}
                   />  
                     <Button

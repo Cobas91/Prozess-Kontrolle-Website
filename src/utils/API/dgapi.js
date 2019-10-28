@@ -26,37 +26,15 @@ async function getAllSystems() {
 }
 
 async function addExcelImport(input){
-  console.log(input)
-  for(var index in input){
-    var system = {
-      table: "systeme",
-      Bemerkung: "",
-      data: {
-        SN: input[index].Seriennummer,
-        LSNummer: "Unbekannt",
-        Status: "Neu Angelegt",
-        Modell: input[index].Matchcode,
-        Hersteller: "Unbekannt",
-        Kunde: "Unbekannt",
-        Betankungs_ID: 0,
-        Versand_ID: "NULL",
-        Lager_ID: 0,
-        Job_ID: 0,
-        Lager_KHK: input[index].Lagerplatz
-      }
-    }
-    await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/excel`, {
+      var result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/excel`, {
       method: 'post',
       headers: {
           'Content-Type': 'application/json',
       },
-      body:JSON.stringify(system)
+      body:JSON.stringify(input)
     })
-    // .then((result)=>{
-    //   addToLog(result)
-    // })
-
-  }
+    const resjason = await result.json()
+    return resjason
 }
 
 function addToLog(toLog){
@@ -69,6 +47,7 @@ function addToLog(toLog){
     body:JSON.stringify(send)
   })
 }
+
 async function addNewSystem(input) {
   const data = {
     table: "systeme",
@@ -86,6 +65,7 @@ async function addNewSystem(input) {
       Job_ID: 0
     }
   }
+
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add`, {
       method: 'post',
       headers: {
@@ -98,5 +78,16 @@ async function addNewSystem(input) {
 }
 
 
+async function getAllData(){
+  var kunden = await getAllKunden();
+  var systeme = await getAllSystems();
+  const data = {
+    systeme: systeme,
+    kunden: kunden
+  }
+  return data;
+}
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport}
+
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData}
