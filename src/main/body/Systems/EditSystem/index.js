@@ -2,8 +2,6 @@
 import React, {Component} from 'react';
 import SweetAlert from 'react-bootstrap-sweetalert'
 
-import "../../../../css/App.css"
-
 import * as dgapi from '../../../../utils/API/dgapi'
 
 import Input from "../../components/Input"

@@ -54,14 +54,6 @@ class UploadForm extends Component {
     
             /* Convert array to json*/
             const excelData = XLSX.utils.sheet_to_json(ws, {header:1});
-            // var result = excelData.find((system) => {
-            //     if(system.SN === this.state.system.sn){
-            //       return system
-            //     }
-            //     else{
-            //       return null
-            //     }
-            // })
             var ergebnis = await excelHandler.excelImport(excelData)
             await dgapi.addExcelImport(ergebnis).then((anfrage)=>{
                 var notify = {
