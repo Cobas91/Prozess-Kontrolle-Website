@@ -7,7 +7,7 @@ import {
 
 import NewSystemForm from "./Systems/NewSystem/index"
 import EditSystemForm from "./Systems/EditSystem/index"
-import Home from "./Dashboard/index"
+import Dashboard from "./Dashboard/index"
 import Navbar from "./components/NavBar"
 import UploadForm from "./Systems/Upload"
 
@@ -32,10 +32,10 @@ class Body extends Component {
                         <UploadForm/>
                     </Route>
                     
-                    {/* Home muss die letzte Route sein */}
+                    {/* Dashboard muss die letzte Route sein */}
                     <Route path="/">
                         <Navbar/>
-                        <Home data={this.props.App.data}/>
+                        <Dashboard data={this.props.App.data}/>
                     </Route>
 
                 </Switch>

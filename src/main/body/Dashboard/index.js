@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Tabelle from '../components/Table'
 import {  FaBars } from 'react-icons/fa';
 import { MdDeleteSweep } from "react-icons/md";
-class Home extends Component {
+class Dashboard extends Component {
     constructor(props) {
       super(props);
       
@@ -53,4 +53,4 @@ class Home extends Component {
       );
     }
   }
-  export default Home;
+  export default Dashboard;
