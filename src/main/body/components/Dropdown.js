@@ -1,6 +1,10 @@
 import React from "react";
 
 const Select = props => {
+  var kundenNamen = []
+  for(var index in props.options){
+    kundenNamen.push(props.options[index].Name)
+  }
   return (
     <div className="form-group">
       <label> {props.title} </label>
@@ -14,7 +18,7 @@ const Select = props => {
         <option value="" disabled>
           {props.placeholder}
         </option>
-        {props.options.map(option => {
+        {kundenNamen.map(option => {
           return (
             <option key={option} value={option} label={option}>
               {option}

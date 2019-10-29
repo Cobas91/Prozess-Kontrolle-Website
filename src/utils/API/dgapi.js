@@ -37,17 +37,6 @@ async function addExcelImport(input){
     return resjason
 }
 
-function addToLog(toLog){
-  var send = {data:toLog}
-  fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/log`, {
-    method: 'post',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body:JSON.stringify(send)
-  })
-}
-
 async function addNewSystem(input) {
   const data = {
     table: "systeme",
@@ -77,17 +66,45 @@ async function addNewSystem(input) {
   return resjason
 }
 
+async function getAllStatus(){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/all/status`, {
+      method: 'get'
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
 async function getAllData(){
   var kunden = await getAllKunden();
   var systeme = await getAllSystems();
+  var status = await getAllStatus();
   const data = {
     systeme: systeme,
-    kunden: kunden
+    kunden: kunden,
+    status : status
   }
   return data;
 }
 
+async function updateSystem(input){
+  const data = {
+    table: "systeme",
+    set: input,
+    where: {
+      ID: input.ID
+    }
+  }
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/update`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData}
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem}

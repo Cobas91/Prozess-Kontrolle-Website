@@ -24,7 +24,7 @@ class App extends Component {
           kunden: {}
         }
       }
-        this._handleSubmit = this._handleSubmit.bind(this)
+        this._updateApp = this._updateApp.bind(this)
     }
     async componentDidMount() {
         if (this.state.devMode === true) {
@@ -40,29 +40,25 @@ class App extends Component {
             this.setState({
               data:{
                 systeme: data.systeme,
-                kunden: data.kunden
+                kunden: data.kunden,
+                status: data.status
               },
               loading: false
             })
         }  
     }
-  _handleSubmit(event){
-    console.log("Submit Detected: ", event)
-    event.preventDefault();
-    this.setState({
-      notify:{
-        status: true
-      }
-    })
+  _updateApp(){
+    this.componentDidMount()
   }
   render() {
     //Error´s ausblenden
+    console.warning = () =>{}
     console.error = () =>{}
     console.log("App-State", this.state)
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (
         <div>
-          <Body App={this.state} />
+          <Body App={this.state} updateApp={this._updateApp}/>
         </div>
       )
     }

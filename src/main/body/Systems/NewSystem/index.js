@@ -11,9 +11,9 @@ import * as dgapi from '../../../../utils/API/dgapi'
 
 
 class NewSystemForm extends Component {
-    
     constructor(props) {
       super(props);
+
       this.state = {
           statusInsert: "",
           newSystem:{
@@ -24,12 +24,7 @@ class NewSystemForm extends Component {
             lieferschein: "",
             hersteller:""
           },
-          options: [
-            "Jungheinrich",
-            "Minimax",
-            "NRW Bank",
-            "BHL"
-          ],
+          options: this.props.App.data.kunden,
           notify:{          //Object für die Benachrichtigung
             title: "",
             message: "",
@@ -72,6 +67,7 @@ class NewSystemForm extends Component {
             }),
             () => console.log("State Aktualisiert: ",this.state)
           );
+          this.props.updateApp()
         }
         setTimeout(() => {
           this.setState(

@@ -14,7 +14,6 @@ import UploadForm from "./Systems/Upload"
 
 
 class Body extends Component {
-
     render() {
         return (
             <div>
@@ -26,7 +25,7 @@ class Body extends Component {
                     </Route>
                     <Route path="/system/edit">
                         <Navbar/>
-                        <EditSystemForm {...this.props} handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit}/>
+                        <EditSystemForm {...this.props}/>
                     </Route>
                     <Route path="/system/upload">
                         <Navbar/>

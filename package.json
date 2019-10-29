@@ -21,6 +21,7 @@
     "react-widgets": "^4.4.11",
     "sweetalert": "^2.1.2",
     "sweetalert-react": "^0.4.11",
+    "sweetalert2-react": "^0.8.3",
     "xlsx": "^0.15.1"
   },
   "scripts": {
