@@ -7,7 +7,7 @@ import {
 
 import NewSystemForm from "./Systems/NewSystem/index"
 import EditSystemForm from "./Systems/EditSystem/index"
-import Home from "./Home/index"
+import Home from "./Dashboard/index"
 import Navbar from "./components/NavBar"
 import UploadForm from "./Systems/Upload"
 
