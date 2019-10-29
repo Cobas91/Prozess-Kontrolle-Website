@@ -4,27 +4,14 @@ import Tabelle from '../components/Table'
 import {  FaBars } from 'react-icons/fa';
 import { MdDeleteSweep } from "react-icons/md";
 class Dashboard extends Component {
-    constructor(props) {
-      super(props);
-      
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    
-    async handleSubmit(event) {
 
-    }
-
-    handleDropdown = (value) =>{
-
-    }
-    handleInput = (value) =>{
-
-    }
     render() {
-      const header = [{
-        Header: "Seriennummer",
-        accessor: "SN"
-          },{
+      const header = [
+            {
+                Header: "Seriennummer",
+                accessor: "SN"
+            },
+            {
                 Header: "Kunde",
                 accessor: "Kunde"
             },

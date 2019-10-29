@@ -53,7 +53,7 @@ class NewSystemForm extends Component {
                 status: true
               }
             }),
-            () => console.log("State Aktualisiert: ",this.state)
+            () => console.log("NewSystemFormState Aktualisiert: ",this.state)
           );
         }else{
           this.setState(
@@ -65,7 +65,7 @@ class NewSystemForm extends Component {
                 status: true
               }
             }),
-            () => console.log("State Aktualisiert: ",this.state)
+            () => console.log("NewSystemFormState State Aktualisiert: ",this.state)
           );
           this.props.updateApp()
         }
@@ -95,7 +95,7 @@ class NewSystemForm extends Component {
             bemerkung: value
           }
         }),
-        () => console.log("State Aktualisiert: ",this.state.newSystem)
+        () => console.log("NewSystemFormState State Aktualisiert: ",this.state.newSystem)
       );
     }
 

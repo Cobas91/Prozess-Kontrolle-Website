@@ -15,11 +15,12 @@ class Tabelle extends Component {
             nextText: "Nächste",
             noDataText: "Keine Daten gefunden...",
             rowsText: "Datensätze",
-            pageText: "Seite"
+            pageText: "Seite",
+            defaultPageSize: 10
         })        
         return (
             <div>
-            <ReactTable data={this.props.data.systeme} columns={this.props.header} />
+                <ReactTable data={this.props.data.systeme} columns={this.props.header} />
             </div>
           )
     }

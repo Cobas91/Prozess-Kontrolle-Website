@@ -41,7 +41,7 @@ class EditSystemForm extends Component {
                     getData: true,
                     system: result}
                 ),
-                () => console.log("State aktualisiert: ",this.state.system)
+                () => console.log("Editform  State aktualisiert: ",this.state.system)
               );
               return system
             }
@@ -69,7 +69,7 @@ class EditSystemForm extends Component {
               [name]: value
             }
           }),
-          () => console.log("State aktualisiert: ",this.state.system)
+          () => console.log("Editform State aktualisiert: ",this.state.system)
         );
       }
     _handleTextArea(e){
@@ -77,7 +77,7 @@ class EditSystemForm extends Component {
       this.setState({
           bemerkung: value
         },
-        () => console.log("State aktualisiert: ",this.state.system)
+        () => console.log("Editform State aktualisiert: ",this.state.system)
       );
     }
     async _handleFormSubmit(e){

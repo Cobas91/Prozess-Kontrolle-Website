@@ -19,19 +19,13 @@ class Navigation extends Component {
                     <Link to="/">
                         <p>Dashboard</p>
                     </Link>
-                    <NavDropdown eventKey={3} title="Systeme" id="basic-nav-    dropdown">
+                    <NavDropdown eventKey={1} title="Systeme" id="basic-nav-    dropdown">
                         <NavDropdown.Item href="/system/new" className="NavbarItem">New System</NavDropdown.Item>
                         <NavDropdown.Item href="/system/edit">Edit System</NavDropdown.Item>
                     </NavDropdown>
-                    {/* <Link to="/system/new">
-                        <p>Neues System</p>
-                    </Link> */}
-                    {/* <Link to="/system/edit">
-                        <p>Edit System</p>
-                    </Link> */}
-                    <Link to="/system/upload">
-                        <p>Upload</p>
-                    </Link>
+                    <NavDropdown eventKey={2} title="Import" id="basic-nav-    dropdown">
+                        <NavDropdown.Item href="/system/upload" className="NavbarItem">Import Seriennummer auskunft</NavDropdown.Item>
+                    </NavDropdown>
                 </Navbar>
             </div>
 
