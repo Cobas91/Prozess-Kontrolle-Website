@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Navbar, NavDropdown } from 'react-bootstrap';
 
 
@@ -19,12 +19,12 @@ class Navigation extends Component {
                     <Link to="/">
                         <p>Dashboard</p>
                     </Link>
-                    <NavDropdown eventKey={1} title="Systeme" id="basic-nav-    dropdown">
-                        <NavDropdown.Item href="/system/new" className="NavbarItem">New System</NavDropdown.Item>
-                        <NavDropdown.Item href="/system/edit">Edit System</NavDropdown.Item>
+                    <NavDropdown eventKey={1} title="Systeme" id="basic-nav-dropdown">
+                        <NavLink to="/system/new">New System</NavLink>
+                        <NavLink to="/system/edit">Edit System</NavLink>
                     </NavDropdown>
-                    <NavDropdown eventKey={2} title="Import" id="basic-nav-    dropdown">
-                        <NavDropdown.Item href="/system/upload" className="NavbarItem">Import Seriennummer auskunft</NavDropdown.Item>
+                    <NavDropdown eventKey={2} title="Import" id="basic-nav-dropdown">
+                        <NavLink to="/system/upload">KHK Import</NavLink>
                     </NavDropdown>
                 </Navbar>
             </div>

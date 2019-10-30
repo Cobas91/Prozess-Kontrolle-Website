@@ -105,6 +105,23 @@ async function updateSystem(input){
   return resjason
 }
 
+async function pxeReset(sn){
+  const data = {
+    data: {
+      SN: sn,
+    }
+  }
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/pxeReset`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem}
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset}

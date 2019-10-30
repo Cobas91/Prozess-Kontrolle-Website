@@ -50,10 +50,15 @@ class App extends Component {
   _updateApp(){
     this.componentDidMount()
   }
+
   render() {
+    setTimeout(() => {
+      this.componentDidMount()
+    }, 4000);
     //Error´s ausblenden
     console.warning = () =>{}
     console.error = () =>{}
+    // console.log = () =>{}
     console.log("App-State", this.state)
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (

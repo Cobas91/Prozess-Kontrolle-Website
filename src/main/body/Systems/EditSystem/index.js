@@ -15,7 +15,7 @@ class EditSystemForm extends Component {
         this.state = {
             getData: false,   //Steuert die anzeige, ob nur SN zu sehen ist.
             system:{
-              SN: ""
+              SN: this.props.sn
             },
             status:this.props.App.data.status,
             kunden: this.props.App.data.kunden,
@@ -31,7 +31,16 @@ class EditSystemForm extends Component {
         this._handleFormSubmit = this._handleFormSubmit.bind(this)
         this._hideAlert = this._hideAlert.bind(this)
     }
-
+    componentDidMount(){
+      if(this.props.sn !== ""){
+        this.setState({
+          system:{
+            SN: this.props.sn
+          }
+        })
+        
+      }
+    }
     _handleSubmit(e){
         e.preventDefault();
         var result = this.props.App.data.systeme.find((system) => {
