@@ -49,7 +49,7 @@ async function addNewSystem(input) {
       Hersteller: input.hersteller,
       Kunde: input.kunde,
       Betankungs_ID: 0,
-      Versand_ID: "NULL",
+      Versand_ID: 0,
       Lager_ID: 0,
       Job_ID: 0
     }
