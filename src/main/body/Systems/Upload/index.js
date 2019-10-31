@@ -105,11 +105,11 @@ class UploadForm extends Component {
     console.log("UploadForm State: ", this.state)
         if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" /> //Loading Screen  
         return(
-            <div className="form-group">
+            <div >
             <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
             </SweetAlert>
-            <h3>Upload Excel</h3>
+            <h2>Upload Excel</h2>
             <div className="form-group">
                 <form onSubmit={this._handleSubmit}>
                     <Input

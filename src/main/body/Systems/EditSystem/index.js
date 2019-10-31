@@ -118,7 +118,7 @@ class EditSystemForm extends Component {
               <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
               </SweetAlert>
-                <h3>Edit System</h3>
+                <h2>Edit System</h2>
                 <div className="form-group">
                     <form onSubmit={this._handleSubmit}>
                         <Input
@@ -135,11 +135,14 @@ class EditSystemForm extends Component {
           )
       }
       return(
-        <div className="form-group">
+        <div >
                 <h2>Edit System</h2>
-                <h4>Seriennummer: {this.state.system.SN}</h4>
-                <h4>Modell: {this.state.system.Modell}</h4>
-                <h4>KHK Lager: {this.state.system.Lager_KHK}</h4>
+                <div className="jumbotron">
+                <p>Seriennummer: {this.state.system.SN}</p>
+                <p>Modell: {this.state.system.Modell}</p>
+                <p>KHK Lager: {this.state.system.Lager_KHK}</p>
+                </div>
+
                         <Input
                         inputType={"text"}
                         title={"Hersteller"}

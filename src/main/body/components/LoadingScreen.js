@@ -15,9 +15,9 @@ class LoadingScreenClass extends Component {
         return (
             <div className="loading_main">
                 <div className="LoadingScreen">
-                    <label>Loading</label>
+                    <label>LOADING</label>
                     {/* <ReactLoading type={this.type} color={this.color} height={'20%'} width={'20%'} className={this.className} /> */}
-                    <ReactLoading type="spinningBubbles" color="#A61609" className="loading_canvas" height={'100%'} width={'100%'}/>
+                    <ReactLoading type="spinningBubbles" color="#A61609" className="loading_canvas" height={'200%'} width={'200%'}/>
                 </div>
             </div>
 

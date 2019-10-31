@@ -147,12 +147,12 @@ class NewSystemForm extends Component {
     }
     render() {
         return (
-          <div>
+          <div >
             <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
             </SweetAlert>
             <div className="container-fluid" >
-              <h3>New System</h3>
+              <h2>New System</h2>
               <form onSubmit={this._handleFormSubmit} onKeyPress={this._onKeyPress}>
                   <Input
                     inputtype={"text"}

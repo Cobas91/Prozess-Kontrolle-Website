@@ -52,9 +52,9 @@ class App extends Component {
   }
 
   render() {
-    setTimeout(() => {
-      this.componentDidMount()
-    }, 4000);
+    // setTimeout(() => {
+    //   this.componentDidMount()
+    // }, 4000);
     //Error´s ausblenden
     console.warning = () =>{}
     console.error = () =>{}
@@ -62,7 +62,7 @@ class App extends Component {
     console.log("App-State", this.state)
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (
-        <div>
+        <div className="container-fluid">
           <Body App={this.state} updateApp={this._updateApp}/>
         </div>
       )

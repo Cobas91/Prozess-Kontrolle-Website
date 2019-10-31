@@ -1,13 +1,25 @@
 .loading_main {
     width: 100vw;
     height: 100vh;
-    background: #fc4503;
+    background: #DDE1E5;
     text-align: center;
     display: flex;
-    
+    position: relative;
   }
 
 .LoadingScreen{
     margin: auto auto;
-
+    position: relative;
 }  
+
+.LoadingScreen label {
+  text-align: center;
+font-family: 'robotobold', sans-serif;
+  font-size: 3.0rem;
+  margin-bottom: 20px;
+}
+
+.loading_canvas {
+  right: 50%;
+  position: relative;
+}

@@ -83,20 +83,21 @@ class Dashboard extends Component {
                 accessor: "Status"
             },
             {
-                Header: "",
+                Header: "Bearbeiten",
                 accessor: "SN",
                 Cell: row => <div>
                     <Link to={`/system/edit/?sn=${row.value}`}><FaBars/></Link>
                   </div>
             },
             {
-                Header: "",
+                Header: "PXE Zurücksetzen",
                 accessor: "SN",
                 Cell: row => (<Button action={() => this._resetPXE(row.value)} title="Reset"/>) 
             },
         ]
       return (
             <div>
+              <h2>Dashboard</h2>
               <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
               </SweetAlert>
