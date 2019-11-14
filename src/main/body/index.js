@@ -21,29 +21,18 @@ function getParams(location) {
 class Body extends Component {
     render() {
         return (
+            <div className="row">
             <Router>
-                <Switch>
-                <div className="row">
-                <Navbar/>
-                    <div className="col-md-11">
-
-                        <Route name="newsystem" path="/system/new" >
-                            
+            <Navbar/>
+            <div className="col-md-11">
+                <Switch>             
+                        <Route name="newsystem" path="/system/new" >             
                             <NewSystemForm {...this.props} />
                         </Route>
-                        {/* <Route name="editsystem" path="/system/edit/">
-                            <Navbar/>
-                            <EditSystemForm {...this.props}/>
-                        </Route>
-                        <Route name="editsystem" path="/system/edit/:sn" component={<EditSystemForm/>}>
-                            <Navbar/>
-                            <EditSystemForm {...this.props}/>
-                        </Route> */}
                         <Route
                         path="/system/edit"
                         render={({ location, history }) => {
                             const {sn} = getParams(location);
-                            console.log("SN=",sn)
                             return (
                                 <div>
                                     <EditSystemForm sn={sn} {...this.props} />
@@ -52,19 +41,16 @@ class Body extends Component {
                         }}
                         />
                         <Route path="/system/upload">
-                            {/* <Navbar/> */}
                             <UploadForm {...this.props}/>
                         </Route>
-                        
                         {/* Dashboard muss die letzte Route sein */}
                         <Route path="/">
-                            {/* <Navbar/> */}
                             <Dashboard data={this.props.App.data} {... this.props}/>
-                        </Route>
-                    </div>  
-                </div>
+                        </Route>  
                 </Switch>
+                </div> 
             </Router>
+            </div>
             
         )
 

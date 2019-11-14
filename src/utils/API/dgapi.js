@@ -48,10 +48,6 @@ async function addNewSystem(input) {
       Modell: input.modell,
       Hersteller: input.hersteller,
       Kunde: input.kunde,
-      Betankungs_ID: 0,
-      Versand_ID: 0,
-      Lager_ID: 0,
-      Job_ID: 0
     }
   }
 
@@ -122,6 +118,24 @@ async function pxeReset(sn){
   return resjason
 }
 
+async function getStatus(sn){
+  const data = {
+    table: "comments_systeme",
+    where: {
+      system_ID: sn
+    }
+  }
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/get/status`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset}
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus}

@@ -8,6 +8,7 @@ import Input from "../../components/Input"
 import TextArea from '../../components/TextArea'
 import Button from '../../components/Button'
 import Dropdown from '../../components/Dropdown'
+import Accordion from '../../components/Accordion'
 
 class EditSystemForm extends Component {
     constructor(props) {
@@ -34,11 +35,31 @@ class EditSystemForm extends Component {
     componentDidMount(){
       if(this.props.sn !== ""){
         this.setState({
-          system:{
-            SN: this.props.sn
-          }
+          system: this.props.sn,
         })
-        
+        var result = this.props.App.data.systeme.find((system) => {
+          if(system.SN === this.state.system.SN){
+            this.setState(
+              prevState => ({
+                  getData: true,
+                  system: result}
+              ),
+              () => console.log("Editform  State aktualisiert: ",this.state.system)
+            );
+            return system
+          }
+          else{
+            this.setState({
+              notify:{  
+                title: "Nicht gefunden",
+                message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden`,
+                status: true,
+                type: "error"
+            },
+            })
+            return null
+          }
+      })
       }
     }
     _handleSubmit(e){
@@ -141,8 +162,8 @@ class EditSystemForm extends Component {
                 <p>Seriennummer: {this.state.system.SN}</p>
                 <p>Modell: {this.state.system.Modell}</p>
                 <p>KHK Lager: {this.state.system.Lager_KHK}</p>
+                <Accordion name="Bemerkungen anzeigen" sn={this.state.system.ID}/>
                 </div>
-
                         <Input
                         inputType={"text"}
                         title={"Hersteller"}
@@ -179,7 +200,7 @@ class EditSystemForm extends Component {
                         handlechange={this._handleInput}
                         />
                         <TextArea
-                        title={"Bemerkung"}
+                        title={"Letzte Bemerkung"}
                         rows={3}
                         value={this.state.system.Bemerkung}
                         name={"Bemerkung"}

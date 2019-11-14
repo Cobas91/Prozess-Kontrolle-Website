@@ -1,4 +1,4 @@
 module.exports = {
-    ip: "192.168.10.26",
+    ip: "localhost",
     port: "3003"
 }
