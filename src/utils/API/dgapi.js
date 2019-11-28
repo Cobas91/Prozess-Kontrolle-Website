@@ -70,14 +70,24 @@ async function getAllStatus(){
   return resjason
 }
 
+async function getAllChecklistenTemplates(){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/get/checkliste`, {
+      method: 'get'
+    })
+  const resjason = await result.json()
+  return resjason
+}
+
 async function getAllData(){
   var kunden = await getAllKunden();
   var systeme = await getAllSystems();
   var status = await getAllStatus();
+  var checklisten = await getAllChecklistenTemplates();
   const data = {
     systeme: systeme,
     kunden: kunden,
-    status : status
+    status : status,
+    checklistenTemplate: checklisten
   }
   return data;
 }

@@ -41,7 +41,8 @@ class App extends Component {
               data:{
                 systeme: data.systeme,
                 kunden: data.kunden,
-                status: data.status
+                status: data.status,
+                checklistenTemplate: data.checklistenTemplate
               },
               loading: false
             })

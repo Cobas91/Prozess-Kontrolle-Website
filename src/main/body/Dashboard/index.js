@@ -2,6 +2,7 @@ import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import SweetAlert from 'react-bootstrap-sweetalert'
 import {  FaBars } from 'react-icons/fa';
+import { FiEdit } from "react-icons/fi";
 
 import Tabelle from '../components/Table'
 import Button from '../components/Button.js'
@@ -71,6 +72,10 @@ class Dashboard extends Component {
                 accessor: "Kunde"
             },
             {
+              Header: "Lager",
+              accessor: "Lager_KHK"
+            },
+            {
                 Header: "Lieferschein",
                 accessor: "LSNummer"
             },
@@ -85,14 +90,23 @@ class Dashboard extends Component {
             {
                 Header: "Bearbeiten",
                 accessor: "SN",
-                Cell: row => <div>
+                Cell: row => <div className="tabelle_feld">
                     <Link to={`/system/edit/?sn=${row.value}`}><FaBars/></Link>
                   </div>
             },
             {
+              Header: "Checkliste",
+              accessor: "SN",
+              Cell: row => <div className="tabelle_feld">
+                  <Link to={`/admin/checkliste/edit/?sn=${row.value}`}><FiEdit/></Link>
+                </div>
+          },
+            {
                 Header: "PXE Zurücksetzen",
                 accessor: "SN",
-                Cell: row => (<Button action={() => this._resetPXE(row.value)} title="Reset"/>) 
+                Cell: row => <div className="tabelle_feld">
+                  <Button className="tabelle_Feld" action={() => this._resetPXE(row.value)} title="Reset"/>
+                  </div>
             },
         ]
       return (

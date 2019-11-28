@@ -17,7 +17,7 @@ class Tabelle extends Component {
             rowsText: "Datensätze",
             pageText: "Seite",
             defaultPageSize: 10
-        })        
+        })
         return (
             <div>
                 <ReactTable data={this.props.data.systeme} columns={this.props.header} />
