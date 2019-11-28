@@ -20,7 +20,7 @@ const Select = props => {
         </option>
         {kundenNamen.map(option => {
           return (
-            <option key={option} value={option} label={option}>
+            <option id={option} value={option} label={option}>
               {option}
             </option>
           );

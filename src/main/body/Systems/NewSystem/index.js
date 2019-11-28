@@ -126,7 +126,7 @@ class NewSystemForm extends Component {
         () => console.log(this.state.newSystem)
       );
     }
-
+    //Abfangen wenn Enter gedrückt wird
     _onKeyPress(event) {
       if (event.which === 13 /* Enter */) {
         event.preventDefault();

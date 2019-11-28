@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox } from "react-icons/fi";
+import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList } from "react-icons/fi";
 
 
 
@@ -40,6 +40,17 @@ class Navigation extends Component {
                         <li>
                             <Link to="/system/upload"><FiDownload className="navIcon"/>KHK Import</Link>
                         </li>    
+                        </ul>
+
+                    </li>
+                    <li> <FiDatabase className="navIcon"/>Administration
+                        <ul className="sub-menu">
+                        <li>
+                            <Link to="/admin/checkliste/new"><FiList className="navIcon"/>Checkliste erstellen</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/checkliste/edit"><FiList className="navIcon"/>Checkliste bearbeiten</Link>
+                        </li>     
                         </ul>
 
                     </li>
