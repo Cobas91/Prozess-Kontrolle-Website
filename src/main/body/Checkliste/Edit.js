@@ -5,9 +5,13 @@ import * as functions from '../../../utils/functions'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import 'react-dropdown/style.css'
 
+import * as dgapi from '../../../utils/API/dgapi'
+
+
 import Input from "../components/Input"
 import TextArea from '../components/TextArea'
 import Dropdown from 'react-dropdown'
+import Button from "../components/Button"
 
 // import Dropdown from 'react-dropdown'
 class ChecklisteEdit extends Component {
@@ -27,10 +31,14 @@ class ChecklisteEdit extends Component {
         this._hideAlert = this._hideAlert.bind(this)
         this._handleDropdownInput = this._handleDropdownInput.bind(this)
         this._onChangeInput = this._onChangeInput.bind(this)
+        this._handleFormSubmit = this._handleFormSubmit.bind(this)
     }
 
-    _handleSubmit(e){
-        
+    _handleFormSubmit(e){
+        e.preventDefault();
+        console.log(this.state)
+        dgapi.addChecklistenAttributForSN(this.state.system);
+        this.props.updateApp()
 
     }
 
@@ -102,9 +110,11 @@ class ChecklisteEdit extends Component {
                         label: "Nein",
                     }
                 ]
+                ergebnis.push(<label>{element.Att_Name}</label>)
                 ergebnis.push(<Dropdown options={options} onChange={this._handleDropdownInput} name={element.Att_Name} title={element.Att_Name} value={this._checkDropDownValue(element.Att_Name)} placeholder="Bitte auswählen..."/>)
             }
         });
+        //Bemerkungsfeld
         ergebnis.push(
             <TextArea
             title={"Bemerkung"}
@@ -114,6 +124,14 @@ class ChecklisteEdit extends Component {
             placeholder={"Bemerkung hier eingeben"}
             />
         )
+        //Submit Button
+        ergebnis.push(
+        <Button
+        action={this._handleFormSubmit}
+        type={"primary"}
+        title={"Speichern"}
+        />
+        ) 
         return ergebnis
     }
     _keinKundeGefunden(){

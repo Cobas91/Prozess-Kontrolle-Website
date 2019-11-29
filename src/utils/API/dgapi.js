@@ -146,6 +146,18 @@ async function getStatus(sn){
   return resjason
 }
 
+async function addChecklistenAttributForSN(input){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/checklisteSN`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(input)
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus}
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus, addChecklistenAttributForSN}
