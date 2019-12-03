@@ -46,12 +46,6 @@ class Body extends Component {
                             <UploadForm {...this.props}/>
                         </Route>
                         {/* Checklisten */}
-                        <Route path="/admin/checkliste/new">
-                            <ChecklisteNew {...this.props}/>
-                        </Route>
-                        {/* <Route path="/admin/checkliste/edit">
-                            <ChecklisteEdit {...this.props}/>
-                        </Route> */}
                         <Route
                         path="/admin/checkliste/edit"
                         render={({ location, history }) => {
