@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList } from "react-icons/fi";
+import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList, FiMenu } from "react-icons/fi";
 
 
 
@@ -8,29 +8,58 @@ class Navigation extends Component {
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.state = {
-          load: false
+          isOpen: this.props.App.window.isOpen,
+          mobile: this.props.App.window.mobile
         }
+        this._toggleMenu = this._toggleMenu.bind(this)
     }
-    
+    _toggleMenu(){
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
+    }
+    componentDidMount(){
+        if(this.props.App.window.windowWidth <= 992){
+            this.props.toggleMobile()
+            this.props.toggleMenu()
+            console.log("Mobile Version", this.props.App.window.windowWidth)
+        }        
+        
+    }
     render() {
+        var sideBarClass = "";
+        if(this.state.mobile === false){
+            sideBarClass = "navi bd-links" 
+        }
+        if(this.state.mobile === true){
+            sideBarClass = "navi bd-links closed"
+        }
+        if(this.state.isOpen === false){
+            sideBarClass = "navi bd-links closed"
+        }
+        if(this.state.isOpen === true){
+            sideBarClass = "navi bd-links"
+        }
+        console.log("Sidebar State", this.state)
         return (
-            <div className="col-md-1 sidebar">
+            <div className="col-lg-1 sidebar">
                 <div className="logo">
                     <img src="logo_dg.png" alt="DG Logo"/>
                 </div>
-                <ul className="navi bd-links">
+                <FiMenu onClick={this._toggleMenu} className="sideBarToggle"/>
+                <ul className={sideBarClass}>
                     <li>
-                        <Link to="/">
-                        <FiHome className="navIcon"/>Dashboard
+                        <Link onClick={this._toggleMenu} to="/">
+                        <FiHome onClick={this._toggleMenu} className="navIcon"/>Dashboard
                         </Link>
                     </li>
                     <li> <FiBox className="navIcon"/>Systeme
                         <ul className="sub-menu">
                         <li>
-                            <Link to="/system/new"><FiPlusSquare className="navIcon"/>New System</Link>
+                            <Link onClick={this._toggleMenu} to="/system/new"><FiPlusSquare onClick={this._toggleMenu} className="navIcon"/>New System</Link>
                         </li>    
                         <li>
-                            <Link to="/system/edit"><FiEdit className="navIcon"/>Edit System</Link>
+                            <Link onClick={this._toggleMenu} to="/system/edit"><FiEdit onClick={this._toggleMenu} className="navIcon"/>Edit System</Link>
                         </li>  
                         </ul>
 
@@ -38,7 +67,7 @@ class Navigation extends Component {
                     <li> <FiUpload className="navIcon"/>Upload
                         <ul className="sub-menu">
                         <li>
-                            <Link to="/system/upload"><FiDownload className="navIcon"/>KHK Import</Link>
+                            <Link onClick={this._toggleMenu} to="/system/upload"><FiDownload onClick={this._toggleMenu} className="navIcon"/>KHK Import</Link>
                         </li>    
                         </ul>
 
@@ -46,10 +75,10 @@ class Navigation extends Component {
                     <li> <FiDatabase className="navIcon"/>Administration
                         <ul className="sub-menu">
                         <li>
-                            <Link to="/admin/checkliste/new"><FiList className="navIcon"/>Checkliste erstellen</Link>
+                            <Link onClick={this._toggleMenu} to="/admin/checkliste/new"><FiList onClick={this._toggleMenu} className="navIcon"/>Checkliste erstellen</Link>
                         </li>
                         <li>
-                            <Link to="/admin/checkliste/edit"><FiList className="navIcon"/>Checkliste bearbeiten</Link>
+                            <Link onClick={this._toggleMenu} to="/admin/checkliste/edit"><FiList onClick={this._toggleMenu} className="navIcon"/>Checkliste bearbeiten</Link>
                         </li>     
                         </ul>
 

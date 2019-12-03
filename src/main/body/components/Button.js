@@ -2,6 +2,7 @@ import React from "react";
 
 const Button = props => {
   return (
+    <div className="form-group">
     <button
       style={props.style}
       className={
@@ -11,6 +12,7 @@ const Button = props => {
     >
       {props.title}
     </button>
+    </div>
   );
 };
 

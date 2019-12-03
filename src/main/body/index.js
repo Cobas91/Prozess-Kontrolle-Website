@@ -25,7 +25,7 @@ class Body extends Component {
         return (
             <div className="row">
             <Router>
-            <Navbar/>
+            <Navbar {...this.props}/>
             <div className="col-md-11">
                 <Switch>             
                         <Route name="newsystem" path="/system/new" >             
@@ -58,7 +58,7 @@ class Body extends Component {
                             const {sn} = getParams(location);
                             return (
                                 <div>
-                                    <ChecklisteEdit seriennummer={sn} {...this.props} />
+                                    <ChecklisteEdit params={{Seriennummer:sn}} {...this.props} />
                                 </div>
                             );
                         }}

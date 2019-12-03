@@ -25,7 +25,10 @@ class App extends Component {
         }
       }
         this._updateApp = this._updateApp.bind(this)
+        this._toggleMenu = this._toggleMenu.bind(this)
+        this._toggleMobile = this._toggleMobile.bind(this)
     }
+
     async componentDidMount() {
         if (this.state.devMode === true) {
             this.setState({
@@ -37,12 +40,24 @@ class App extends Component {
             })
         } else {
             var data = await dgapi.getAllData()
+            var mobile = false
+            var isOpen = true
+            if(window.innerWidth <= 900){
+              mobile = true
+              isOpen = false
+            }
             this.setState({
-              data:{
+              data:{ 
                 systeme: data.systeme,
                 kunden: data.kunden,
                 status: data.status,
                 checklistenTemplate: data.checklistenTemplate
+              },
+              window: {
+                windowWidth: window.innerWidth,
+                windowHeight: window.innerHeight,
+                isOpen: isOpen,
+                mobile: mobile
               },
               loading: false
             })
@@ -51,7 +66,16 @@ class App extends Component {
   _updateApp(){
     this.componentDidMount()
   }
-
+  _toggleMobile(){
+    this.setState({
+      mobile: !this.state.mobile
+    })
+  }
+  _toggleMenu(){
+    this.setState({
+      isOpen: !this.isOpen
+    })
+  }
   render() {
     // setTimeout(() => {
     //   this.componentDidMount()
@@ -64,7 +88,7 @@ class App extends Component {
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (
         <div className="container-fluid">
-          <Body App={this.state} updateApp={this._updateApp}/>
+          <Body App={this.state} toggleMobile={this._toggleMobile} toggleMenu={this._toggleMenu} updateApp={this._updateApp}/>
         </div>
       )
     }

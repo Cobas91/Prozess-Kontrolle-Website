@@ -51,3 +51,36 @@
     margin-bottom: 5px;
     margin-right: 8px;
 }
+
+.sideBarToggle {
+    display: none
+}
+
+
+
+@media only screen and (max-width: 992px){
+    .sidebar {
+        height: auto;
+        position: relative !important;
+    }
+
+    .navi {
+        transition: all 0.5s ease-in;
+        left:0;
+        transform: translateX(0%);
+    }
+    .sideBarToggle {
+        font-size: 4em;
+        display: block
+    }
+    .navi.closed {
+        margin-left: 0;
+        width: 200px;
+        position: fixed;
+        left: -230px;
+        overflow-y: scroll;
+        z-index: 1000;
+        transform: translateX(-100%);
+    }
+
+}

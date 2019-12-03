@@ -4,7 +4,7 @@ import "../../../../css/App.css"
 import SweetAlert from 'react-bootstrap-sweetalert'
 
 
-class Checkliste extends Component {
+class Template extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +20,7 @@ class Checkliste extends Component {
     }
 
     _handleSubmit(e){
-        
+        e.preventDefault();
 
     }
 
@@ -35,7 +35,7 @@ class Checkliste extends Component {
             <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
             </SweetAlert>
-            <h2>Upload Excel</h2>
+            <h2>Template</h2>
             <div className="form-group">
                 <form onSubmit={this._handleSubmit}>
                     
@@ -45,4 +45,4 @@ class Checkliste extends Component {
         )
     }
 }
-export default Checkliste;
+export default Template;
