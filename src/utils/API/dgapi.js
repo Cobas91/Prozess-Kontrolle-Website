@@ -70,24 +70,15 @@ async function getAllStatus(){
   return resjason
 }
 
-async function getAllChecklistenTemplates(){
-  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/get/checkliste`, {
-      method: 'get'
-    })
-  const resjason = await result.json()
-  return resjason
-}
 
 async function getAllData(){
   var kunden = await getAllKunden();
   var systeme = await getAllSystems();
   var status = await getAllStatus();
-  var checklisten = await getAllChecklistenTemplates();
   const data = {
     systeme: systeme,
     kunden: kunden,
-    status : status,
-    checklistenTemplate: checklisten
+    status : status
   }
   return data;
 }
@@ -146,7 +137,8 @@ async function getStatus(sn){
   return resjason
 }
 
-async function addChecklistenAttributForSN(input){
+async function addChecklisteToSystem(input){
+  console.log(input)
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/checklisteSN`, {
       method: 'post',
       headers: {
@@ -158,6 +150,4 @@ async function addChecklistenAttributForSN(input){
   return resjason
 }
 
-
-
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus, addChecklistenAttributForSN}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus, addChecklisteToSystem}

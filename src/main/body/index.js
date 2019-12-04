@@ -10,7 +10,6 @@ import EditSystemForm from "./Systems/EditSystem/index"
 import Dashboard from "./Dashboard/index"
 import Navbar from "./components/SideBar"
 import UploadForm from "./Systems/Upload"
-import ChecklisteNew from "./Checkliste/New"
 import ChecklisteEdit from "./Checkliste/Edit"
 
 function getParams(location) {

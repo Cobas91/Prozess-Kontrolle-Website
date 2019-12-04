@@ -8,6 +8,8 @@ import Input from '../../body/components/Input.js'
 import TextArea from '../../body/components/TextArea.js'
 import Button from '../../body/components/Button.js'
 
+import * as dgapi from '../../../utils/API/dgapi'
+
 
 class ChecklistenEdit extends Component {
     constructor(props) {
@@ -88,7 +90,7 @@ class ChecklistenEdit extends Component {
           );
     }
 
-    _save(){
+    async _save(){
         if(!this.state.Input.Seriennummer){
             this.setState(
                 prevState => ({
@@ -105,7 +107,6 @@ class ChecklistenEdit extends Component {
                 )
               );
         }else{
-            //API Daten schicken Anfrage senden
             this.setState(
                 prevState => ({
                     ...prevState,
@@ -115,7 +116,8 @@ class ChecklistenEdit extends Component {
                         status: true,
                         type: "default",
                         okButton: "Ja, speichern!",
-                        cancleButton: "Nein, ich überlege nochmal..."
+                        cancleButton: "Nein, ich überlege nochmal...",
+                        onConfirm: dgapi.addChecklisteToSystem(this.state.Input)
                       }
                 }
                 )
@@ -140,7 +142,7 @@ class ChecklistenEdit extends Component {
     console.log("Checklisten State: ", this.state)
         return(
             <div >
-            <SweetAlert showCancel title={this.state.notify.title} confirmBtnText={this.state.notify.okButton} cancelBtnText={this.state.notify.cancleButton} onCancel={this._cancelAlert} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
+            <SweetAlert custom showCancel title={this.state.notify.title} customIcon={this.state.notify.icon} confirmBtnText={this.state.notify.okButton} cancelBtnText={this.state.notify.cancleButton} onCancel={this._cancelAlert} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
             </SweetAlert>
             <h2>Checkliste zu System {this.props.params.Seriennummer}</h2>

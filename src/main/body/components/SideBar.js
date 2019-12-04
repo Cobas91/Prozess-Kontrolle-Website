@@ -1,6 +1,7 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList, FiMenu } from "react-icons/fi";
+import logo from '../../../images/logo_dg.png'
 
 
 
@@ -44,7 +45,7 @@ class Navigation extends Component {
         return (
             <div className="col-lg-1 sidebar">
                 <div className="logo">
-                    <img src="logo_dg.png" alt="DG Logo"/>
+                    <img src={logo} alt="DG Logo"/>
                 </div>
                 <FiMenu onClick={this._toggleMenu} className="sideBarToggle"/>
                 <ul className={sideBarClass}>
