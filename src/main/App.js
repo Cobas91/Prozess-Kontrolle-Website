@@ -4,6 +4,7 @@ import "../css/App.css"
 import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
 import Body from "./body/index"
+import Footer from "./footer/index"
 import devData from "../utils/API/devData"
 
 class App extends Component {
@@ -11,7 +12,8 @@ class App extends Component {
   constructor(props) {
       super(props) 
       this.state = {
-        devMode: false,    //Entwickler Modus -> Entwickler Daten
+        Version: "1.0",
+        devMode: false,     //Entwickler Modus -> Entwickler Daten
         loading: true,    //Loadingscreen anzeigen?
         notify:{          //Object für die Benachrichtigung
             title: "",
@@ -89,6 +91,7 @@ class App extends Component {
     return (
         <div className="container-fluid">
           <Body App={this.state} toggleMobile={this._toggleMobile} toggleMenu={this._toggleMenu} updateApp={this._updateApp}/>
+          <Footer App={this.state}/>
         </div>
       )
     }
