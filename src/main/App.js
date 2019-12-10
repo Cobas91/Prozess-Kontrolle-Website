@@ -79,9 +79,9 @@ class App extends Component {
     })
   }
   render() {
-    // setTimeout(() => {
-    //   this.componentDidMount()
-    // }, 4000);
+    setTimeout(() => {
+      this.componentDidMount()
+    }, 5000);
     //Error´s ausblenden
     console.warning = () =>{}
     console.error = () =>{}
