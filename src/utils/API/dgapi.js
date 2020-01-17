@@ -70,15 +70,27 @@ async function getAllStatus(){
   return resjason
 }
 
+async function getAllChecklisten(){
+    const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/all/checklisten`, {
+      method: 'get'
+    })
+  const resjason = await result.json()
+  return resjason
+}
+
 
 async function getAllData(){
   var kunden = await getAllKunden();
   var systeme = await getAllSystems();
   var status = await getAllStatus();
+  var checklisten = await getAllChecklisten();
   const data = {
     systeme: systeme,
     kunden: kunden,
-    status : status
+    status : status,
+    auswertung:{
+      checklisten: checklisten
+    }
   }
   return data;
 }
@@ -138,7 +150,6 @@ async function getStatus(sn){
 }
 
 async function addChecklisteToSystem(input){
-  console.log(input)
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/add/checklisteSN`, {
       method: 'post',
       headers: {
@@ -150,4 +161,21 @@ async function addChecklisteToSystem(input){
   return resjason
 }
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus, addChecklisteToSystem}
+async function askforPDF(data, name){
+  const pdf = {
+    filename: name,
+    content: data
+  }
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/create/pdf`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(pdf)
+    })
+  const resjason = await result
+  console.log(result)
+  return resjason
+}
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus, addChecklisteToSystem, askforPDF}

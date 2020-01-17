@@ -11,6 +11,7 @@ import Dashboard from "./Dashboard/index"
 import Navbar from "./components/SideBar"
 import UploadForm from "./Systems/Upload"
 import ChecklisteEdit from "./Checkliste/Edit"
+import Auswertung from "./Systems/Auswertung/index"
 
 function getParams(location) {
     const searchParams = new URLSearchParams(location.search);
@@ -26,10 +27,13 @@ class Body extends Component {
             <Router>
             <Navbar {...this.props}/>
             <div className="col-md-11">
-                <Switch>             
+                <Switch>
+                        {/* Neues System */}
                         <Route name="newsystem" path="/system/new" >             
                             <NewSystemForm {...this.props} />
                         </Route>
+
+                        {/* System Editieren */}
                         <Route
                         path="/system/edit"
                         render={({ location, history }) => {
@@ -41,9 +45,17 @@ class Body extends Component {
                             );
                         }}
                         />
+
+                        {/* KHK Upload */}
                         <Route path="/system/upload">
                             <UploadForm {...this.props}/>
                         </Route>
+
+                        {/* Auswertung */}
+                        <Route path="/system/auswertung">
+                            <Auswertung {...this.props}/>
+                        </Route>
+
                         {/* Checklisten */}
                         <Route
                         path="/admin/checkliste/edit"
@@ -56,6 +68,7 @@ class Body extends Component {
                             );
                         }}
                         />
+
                         {/* Dashboard muss die letzte Route sein */}
                         <Route path="/">
                             <Dashboard data={this.props.App.data} {... this.props}/>

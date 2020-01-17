@@ -1,13 +1,13 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList, FiMenu } from "react-icons/fi";
+import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList, FiMenu, FiTrello } from "react-icons/fi";
 import logo from '../../../images/logo_dg.png'
 
 
 
 class Navigation extends Component {
     constructor(props) {
-        super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
+        super(props)    //since we are extending class Table so we have to use super in order to override Component class constructor
         this.state = {
           isOpen: this.props.App.window.isOpen,
           mobile: this.props.App.window.mobile
@@ -41,7 +41,6 @@ class Navigation extends Component {
         if(this.state.isOpen === true){
             sideBarClass = "navi bd-links"
         }
-        console.log("Sidebar State", this.state)
         return (
             <div className="col-lg-1 sidebar">
                 <div className="logo">
@@ -61,7 +60,10 @@ class Navigation extends Component {
                         </li>    
                         <li>
                             <Link onClick={this._toggleMenu} to="/system/edit"><FiEdit onClick={this._toggleMenu} className="navIcon"/>Edit System</Link>
-                        </li>  
+                        </li>
+                        <li>
+                            <Link onClick={this._toggleMenu} to="/system/auswertung"><FiTrello onClick={this._toggleMenu} className="navIcon"/>Auswertung</Link>
+                        </li>   
                         </ul>
 
                     </li>

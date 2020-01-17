@@ -1,8 +1,8 @@
 import React ,{Component} from 'react';
 import ReactTable, {ReactTableDefaults}  from 'react-table';
 import 'react-table/react-table.css'
-
-
+import Export from "../components/ExcelExport"
+import * as Time from "../../../utils/time"
 class Tabelle extends Component {
 
     
@@ -18,11 +18,21 @@ class Tabelle extends Component {
             pageText: "Seite",
             defaultPageSize: 10
         })
-        return (
-            <div>
-                <ReactTable data={this.props.data.systeme} columns={this.props.header} />
-            </div>
-          )
+        if(this.props.export){
+            return (
+                <>
+                    <Export csvData={this.props.data} fileName={this.props.TableName+"_"+Time.convert(Date.now())} Name={this.props.TableName + " Exportieren"}/>
+                    <ReactTable data={this.props.data} columns={this.props.header} />
+                </>
+            )
+        }else{
+            return (
+                <>
+                    <ReactTable data={this.props.data} columns={this.props.header} />
+                </>
+            )
+        }
+
     }
 }
   

@@ -5,7 +5,6 @@ import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
 import Body from "./body/index"
 import Footer from "./footer/index"
-import devData from "../utils/API/devData"
 
 class App extends Component {
 
@@ -13,7 +12,6 @@ class App extends Component {
       super(props) 
       this.state = {
         Version: "1.0",
-        devMode: false,     //Entwickler Modus -> Entwickler Daten
         loading: true,    //Loadingscreen anzeigen?
         notify:{          //Object für die Benachrichtigung
             title: "",
@@ -32,15 +30,6 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        if (this.state.devMode === true) {
-            this.setState({
-                loading: false,
-                data: {
-                    systeme: devData.systeme,
-                    kunden: devData.kunden
-                }
-            })
-        } else {
             var data = await dgapi.getAllData()
             var mobile = false
             var isOpen = true
@@ -52,8 +41,10 @@ class App extends Component {
               data:{ 
                 systeme: data.systeme,
                 kunden: data.kunden,
-                status: data.status,
-                checklistenTemplate: data.checklistenTemplate
+                status: data.status
+              },
+              auswertung:{
+                checklisten: data.auswertung.checklisten
               },
               window: {
                 windowWidth: window.innerWidth,
@@ -62,8 +53,7 @@ class App extends Component {
                 mobile: mobile
               },
               loading: false
-            })
-        }  
+            })  
     }
   _updateApp(){
     this.componentDidMount()
@@ -79,9 +69,9 @@ class App extends Component {
     })
   }
   render() {
-    setTimeout(() => {
-      this.componentDidMount()
-    }, 5000);
+    // setTimeout(() => {
+    //   this.componentDidMount()
+    // }, 5000);
     //Error´s ausblenden
     console.warning = () =>{}
     console.error = () =>{}

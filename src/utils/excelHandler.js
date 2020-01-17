@@ -17,7 +17,4 @@ function excelImport(importData){
     return result
 }
 
-
-
-
 export {excelImport}

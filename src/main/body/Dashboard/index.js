@@ -115,7 +115,7 @@ class Dashboard extends Component {
               <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
               </SweetAlert>
-              <Tabelle data={this.props.data} header={header} filter={true}/>
+              <Tabelle data={this.props.data.systeme} header={header} filter={true}/>
             </div>
       );
     }
