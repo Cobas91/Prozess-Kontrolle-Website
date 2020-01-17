@@ -1,6 +1,6 @@
+import * as Time from "../../utils/time";
 const serverData = require("../serverOptions");
 var FileSaver = require('file-saver');
-
 async function getAllKunden() {
     const data = {
         table: "kunden",
@@ -162,6 +162,11 @@ async function addChecklisteToSystem(input){
   return resjason
 }
 
+function createFileDownloadName(type, extension){
+  var name = type + "_" + Time.convert(Date.now()) + "_" + extension
+  return name;
+}
+
 async function askforPDF(data, name){
   const pdf = {
     filename: name,
@@ -175,8 +180,10 @@ async function askforPDF(data, name){
       body:JSON.stringify(pdf)
     })
   const resjason = await result
+  console.log("R1",result)
   result.blob().then(function(result){
-    FileSaver.saveAs(result, "hello world.pdf");
+    FileSaver.saveAs(result, createFileDownloadName(name, ".pdf"));
+    console.log(result)
   })
   return resjason
 }

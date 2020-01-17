@@ -60,7 +60,7 @@ class Auswertung extends Component {
     };
 
     _createPDF(){
-      dgapi.askforPDF(this.props.App.auswertung.checklisten, "Testfile")
+      dgapi.askforPDF(this.props.App.auswertung.checklisten, "Auswertung_Checklisten")
     }
     render() {
         const TableHeaderChecklisten = [
