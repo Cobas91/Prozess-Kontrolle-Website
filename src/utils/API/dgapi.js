@@ -1,4 +1,5 @@
 const serverData = require("../serverOptions");
+var FileSaver = require('file-saver');
 
 async function getAllKunden() {
     const data = {
@@ -174,7 +175,9 @@ async function askforPDF(data, name){
       body:JSON.stringify(pdf)
     })
   const resjason = await result
-  console.log(result)
+  result.blob().then(function(result){
+    FileSaver.saveAs(result, "hello world.pdf");
+  })
   return resjason
 }
 
