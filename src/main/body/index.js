@@ -71,7 +71,7 @@ class Body extends Component {
 
                         {/* Dashboard muss die letzte Route sein */}
                         <Route path="/">
-                            <Dashboard data={this.props.App.data} {... this.props}/>
+                            <Dashboard {... this.props}/>
                         </Route>  
                 </Switch>
                 </div> 
