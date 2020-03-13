@@ -32,6 +32,7 @@ class EditSystemForm extends Component {
         this._handleSubmit = this._handleSubmit.bind(this);
         this._handleFormSubmit = this._handleFormSubmit.bind(this)
         this._hideAlert = this._hideAlert.bind(this)
+        this._reset = this._reset.bind(this);
     }
     componentDidMount(){
       if(this.props.sn !== ""){
@@ -132,6 +133,14 @@ class EditSystemForm extends Component {
         () => console.log(this.state)
       );      
     }
+    _reset(){
+      this.setState({
+        getData: false,
+        system:{
+          SN: null
+        }
+      })
+    }
   render() {
     console.log("Editform State: ", this.state)
       if(this.state.getData === false){
@@ -159,6 +168,11 @@ class EditSystemForm extends Component {
       return(
         <div >
                 <h2>Edit System</h2>
+                <Button
+                  action={this._reset}
+                  type={"error"}
+                  title={"Neues Geräte"}
+                />
                 <div className="jumbotron">
                 <p>Seriennummer: {this.state.system.SN}</p>
                 <p>Modell: {this.state.system.Modell}</p>
