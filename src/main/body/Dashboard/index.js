@@ -2,12 +2,16 @@ import React ,{Component} from 'react';
 import SweetAlert from 'react-bootstrap-sweetalert'
 import EditSystemForm from "../Systems/EditSystem/index"
 import NewSystemForm from "../Systems/NewSystem/index"
+import ReadMe from "../components/ReadMe"
 import Input from "../components/Input"
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            readme:{
+              manual: ["Wenn das System bereits in der Datenbank zu finden ist wird das Editierfenster geladen.", "Falls das System nicht im System gefunden wird, kann nach bestätigung das System angelegt werden."]
+            },
             notify:{         
                 title: "",
                 message: "",
@@ -23,37 +27,12 @@ class Dashboard extends Component {
                 newform: false
               }
         }
-        // this._resetPXE = this._resetPXE.bind(this)
         this._hideAlert = this._hideAlert.bind(this)
         this._handleInput = this._handleInput.bind(this)
         this._handleSubmit = this._handleSubmit.bind(this)
         this._reset = this._reset.bind(this)
     }
-    // async _resetPXE(sn){
-    //     await dgapi.pxeReset(sn).then((result)=>{
-    //         this.setState({
-    //             notify:{         
-    //                 title: "Erfolg",
-    //                 message: `${sn} wird zurückgesetzt.`,
-    //                 status: true,
-    //                 type: "default"
-    //               }
-    //         })
-    //         setTimeout(() => {
-    //             this.setState(
-    //                 {
-    //                 notify: {
-    //                   title: "",
-    //                   message: "",
-    //                   status: false,
-    //                   type: "default"
-    //                 }
-    //               }
-    //             );
-    //             this.props.updateApp()
-    //           }, 800);
-    //     }) 
-    // }
+
     _hideAlert(){
         this.setState({
             notify: {
@@ -139,13 +118,19 @@ class Dashboard extends Component {
           }
         }
     }
-
+    _handleAccordion(){
+      if(this.state.isOpen === true){
+          this.setState({isOpen: false})
+      }else{
+          this.setState({isOpen: true})
+      }
+    }
     render() {
-
       if(this.state.side.dashboard){
         return (
           <div>
             <h2>Dashboard</h2>
+            <ReadMe buttonName="Read me" note={this.state.readme.manual}/>
             <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} showCancel onCancel={this._reset} show={this.state.notify.status} type={this.state.notify.type}>
             {this.state.notify.message}
             </SweetAlert>
@@ -159,8 +144,6 @@ class Dashboard extends Component {
                 handlechange={this._handleInput}
               />
             </form>
-            
-            {/* <Tabelle data={this.props.data.systeme} header={header} filter={true}/> */}
           </div>
         );
       }
