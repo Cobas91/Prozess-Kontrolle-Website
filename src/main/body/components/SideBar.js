@@ -75,14 +75,7 @@ class Navigation extends Component {
                         </ul>
 
                     </li>
-                    <li> <FiDatabase className="navIcon"/>Administration
-                        <ul className="sub-menu">
-                        <li>
-                            <Link onClick={this._toggleMenu} to="/admin/checkliste/edit"><FiList onClick={this._toggleMenu} className="navIcon"/>Checkliste bearbeiten</Link>
-                        </li>     
-                        </ul>
 
-                    </li>
                 </ul>
             </div>
 
