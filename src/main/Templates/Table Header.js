@@ -45,3 +45,29 @@
       //             </div>
       //       },
       //   ]
+
+          // async _resetPXE(sn){
+    //     await dgapi.pxeReset(sn).then((result)=>{
+    //         this.setState({
+    //             notify:{         
+    //                 title: "Erfolg",
+    //                 message: `${sn} wird zurückgesetzt.`,
+    //                 status: true,
+    //                 type: "default"
+    //               }
+    //         })
+    //         setTimeout(() => {
+    //             this.setState(
+    //                 {
+    //                 notify: {
+    //                   title: "",
+    //                   message: "",
+    //                   status: false,
+    //                   type: "default"
+    //                 }
+    //               }
+    //             );
+    //             this.props.updateApp()
+    //           }, 800);
+    //     }) 
+    // }
