@@ -15,9 +15,9 @@ class ChecklistenEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            params: this.props.params,
+            SN: this.props.SN,
             Input:{
-                Seriennummer: this.props.params.Seriennummer,
+                Seriennummer: this.props.SN,
                 SCCM_Anlage: false,
                 PXE_Start: false,
                 Bootstick_Start: false,
@@ -145,14 +145,7 @@ class ChecklistenEdit extends Component {
             <SweetAlert custom showCancel title={this.state.notify.title} customIcon={this.state.notify.icon} confirmBtnText={this.state.notify.okButton} cancelBtnText={this.state.notify.cancleButton} onCancel={this._cancelAlert} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
               {this.state.notify.message}
             </SweetAlert>
-            <h2>Checkliste zu System {this.props.params.Seriennummer}</h2>
-                    <Input
-                    title={"Seriennummer"}
-                    name={"Seriennummer"}
-                    value={this.state.Input.Seriennummer}
-                    placeholder={"Seriennummer eingeben"}
-                    handlechange={this._handleInput}
-                    />
+            <h2>Checkliste</h2>
                     {/* Gerät in SCCM angelegt */}
                     <Switch  title="Gerät in SCCM angelegt" onChange={(e) => this._handleSwitchChange(e, "SCCM_Anlage")} checked={this.state.Input.SCCM_Anlage} />
                     {/* BIOS geprüft */}
@@ -177,7 +170,7 @@ class ChecklistenEdit extends Component {
                     <Button
                     action={this._save}
                     type={"primary"}
-                    title={"Speichern"}
+                    title={"Checkliste Speichern"}
                     /> 
         </div> 
         )

@@ -9,6 +9,7 @@ import TextArea from '../../components/TextArea'
 import Button from '../../components/Button'
 import Dropdown from '../../components/Dropdown'
 import Accordion from '../../components/Accordion'
+import Checkliste from '../../Checkliste/Edit'
 
 class EditSystemForm extends Component {
     constructor(props) {
@@ -210,10 +211,11 @@ class EditSystemForm extends Component {
                         <Button
                         action={this._handleFormSubmit}
                         type={"primary"}
-                        title={"Speichern"}
+                        title={"Grunddaten Speichern"}
                         /> 
                     </form>
                 </div>
+              <Checkliste SN={this.state.system.SN} {...this.props}/>
             </div>
       )
   }
