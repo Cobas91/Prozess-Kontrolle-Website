@@ -27,28 +27,10 @@ class Dashboard extends Component {
                 newform: false
               }
         }
-        this._hideAlert = this._hideAlert.bind(this)
         this._handleInput = this._handleInput.bind(this)
         this._handleSubmit = this._handleSubmit.bind(this)
         this._reset = this._reset.bind(this)
     }
-
-    _hideAlert(){
-        this.setState({
-            notify: {
-              title: "",
-              message: "",
-              status: false,
-              type: "default"
-            },
-            side: {
-              dashboard: false,
-              editform: false,
-              newform: true
-            }
-          },
-        );      
-      }
       
       _handleInput(e) {
         let value = e.target.value;
@@ -64,15 +46,10 @@ class Dashboard extends Component {
         );
       }
       _reset(){
+        this.props.setAlert({})
         this.setState(
           prevState => ({
             ...prevState,
-            notify: {         
-              title: "",
-              message: "",
-              status: false,
-              type: "default"
-            },
             side: {
               dashboard: true,
               editform: false,
@@ -97,18 +74,16 @@ class Dashboard extends Component {
               )
             }
             else{
-              this.setState(
-                prevState => ({
-                  ...prevState,
-                  notify: {
-                    title: "Gerät anlegen?",
-                    message: `Möchten sie das Gerät mit der Seriennummer ${this.state.system.SN} anlegen?`,
-                    status: true,
-                    type: "default"
-                  }
-                })
+              this.props.setAlert(
+                {
+                  title: "Gerät anlegen?",
+                  message: `Möchten sie das Gerät mit der Seriennummer ${this.state.system.SN} anlegen?`,
+                  status: true,
+                  type: "default"
+                }
               )
             }
+            return null
         })
         if(result){
           try {
@@ -131,8 +106,8 @@ class Dashboard extends Component {
           <div>
             <h2>Dashboard</h2>
             <ReadMe buttonName="Read me" note={this.state.readme.manual}/>
-            <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} showCancel onCancel={this._reset} show={this.state.notify.status} type={this.state.notify.type}>
-            {this.state.notify.message}
+            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+            {this.props.App.notify.message}
             </SweetAlert>
             <form onSubmit={this._handleSubmit}>
               <Input

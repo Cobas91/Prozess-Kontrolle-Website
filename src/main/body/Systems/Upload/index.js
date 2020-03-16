@@ -27,7 +27,6 @@ class UploadForm extends Component {
             },
         }
         this._handleInput = this._handleInput.bind(this)
-        this._hideAlert = this._hideAlert.bind(this)
     }
 
     _handleSubmit(e){
@@ -80,34 +79,21 @@ class UploadForm extends Component {
                 this.setState({
                     excelData: ergebnis,
                     loading: false,
-                    gotData: true,
-                    notify: notify
+                    gotData: true
                 })
+                this.props.setAlert(notify)
             })
             
         }
         reader.readAsBinaryString(f)
     }
-    _hideAlert(){
-        this.setState(
-          prevState => ({
-            notify: {
-              title: "",
-              message: "",
-              status: false,
-              type: "default"
-            }
-          }),
-          () => console.log(this.state)
-        );      
-      }
   render() {
     console.log("UploadForm State: ", this.state)
         if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" /> //Loading Screen  
         return(
             <div >
-            <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
-              {this.state.notify.message}
+            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this.props.hideAlert} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+                {this.props.App.notify.message}
             </SweetAlert>
             <h2>Upload Excel</h2>
             <div className="form-group">

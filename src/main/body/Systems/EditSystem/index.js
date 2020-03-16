@@ -9,7 +9,7 @@ import TextArea from '../../components/TextArea'
 import Button from '../../components/Button'
 import Dropdown from '../../components/Dropdown'
 import Accordion from '../../components/Accordion'
-import Checkliste from '../../Checkliste/Edit'
+import Checkliste from '../../Checkliste'
 
 class EditSystemForm extends Component {
     constructor(props) {
@@ -31,7 +31,6 @@ class EditSystemForm extends Component {
         this._handleInput = this._handleInput.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
         this._handleFormSubmit = this._handleFormSubmit.bind(this)
-        this._hideAlert = this._hideAlert.bind(this)
         this._reset = this._reset.bind(this);
     }
     componentDidMount(){
@@ -49,15 +48,12 @@ class EditSystemForm extends Component {
               () => console.log("Editform  State aktualisiert: ",this.state.system)
             );
             return system
-          }
-          else{
-            this.setState({
-              notify:{  
-                title: "Nicht gefunden",
-                message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden`,
-                status: true,
-                type: "error"
-            },
+          }else{
+            this.props.setAlert({  
+              title: "Nicht gefunden",
+              message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden`,
+              status: true,
+              type: "error"
             })
             return null
           }
@@ -78,13 +74,11 @@ class EditSystemForm extends Component {
               return system
             }
             else{
-              this.setState({
-                notify:{  
+              this.props.setAlert({  
                   title: "Nicht gefunden",
                   message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden`,
                   status: true,
                   type: "error"
-              },
               })
               return null
             }
@@ -120,19 +114,6 @@ class EditSystemForm extends Component {
       
     }
 
-    _hideAlert(){
-      this.setState(
-        prevState => ({
-          notify: {
-            title: "",
-            message: "",
-            status: false,
-            type: "default"
-          }
-        }),
-        () => console.log(this.state)
-      );      
-    }
     _reset(){
       this.setState({
         getData: false,
@@ -142,12 +123,11 @@ class EditSystemForm extends Component {
       })
     }
   render() {
-    console.log("Editform State: ", this.state)
       if(this.state.getData === false){
           return(
             <div className="form-group">
-              <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
-              {this.state.notify.message}
+              <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this.props.hideAlert} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+              {this.props.App.notify.message}
               </SweetAlert>
                 <h2>Edit System</h2>
                 <div className="form-group">
@@ -171,7 +151,7 @@ class EditSystemForm extends Component {
                 <Button
                   action={this._reset}
                   type={"error"}
-                  title={"Neues Geräte"}
+                  title={"Neues Gerät"}
                 />
                 <div className="jumbotron">
                 <p>Seriennummer: {this.state.system.SN}</p>
@@ -197,7 +177,6 @@ class EditSystemForm extends Component {
                         handlechange={this._handleInput}
                         />
                 <div className="form-group">
-                    <form onSubmit={this._handleFormSubmit}>
                         <Dropdown
                         title={"Status"}
                         name={"Status"}
@@ -227,7 +206,6 @@ class EditSystemForm extends Component {
                         type={"primary"}
                         title={"Grunddaten Speichern"}
                         /> 
-                    </form>
                 </div>
               <Checkliste SN={this.state.system.SN} {...this.props}/>
             </div>

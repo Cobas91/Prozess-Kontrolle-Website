@@ -36,7 +36,7 @@ class NewSystemForm extends Component {
       this._handleClearForm = this._handleClearForm.bind(this);
       this._handleFormSubmit = this._handleFormSubmit.bind(this);
       this._handleInput = this._handleInput.bind(this);
-      this._hideAlert = this._hideAlert.bind(this)
+
     }
     
     async _handleFormSubmit(e) {
@@ -44,29 +44,19 @@ class NewSystemForm extends Component {
       let newSystem = this.state.newSystem;
       await dgapi.addNewSystem(newSystem).then((anfrage)=>{
         if(anfrage.result.statusCode === 400){
-          this.setState(
-            prevState => ({
-              notify: {
-                title: "Fehler...",
-                message: anfrage.result.message,
-                type: "error",
-                status: true
-              }
-            }),
-            () => console.log("NewSystemFormState Aktualisiert: ",this.state)
-          );
+          this.props.setAlert({
+            title: "Fehler...",
+            message: anfrage.result.message,
+            type: "error",
+            status: true
+          })
         }else{
-          this.setState(
-            prevState => ({
-              notify: {
-                title: "Erfolg",
-                message: "Gerät wurde erfolgreich hinzugefügt.",
-                type: "success",
-                status: true
-              }
-            }),
-            () => console.log("NewSystemFormState State Aktualisiert: ",this.state)
-          );
+          this.props.setAlert({
+            title: "Erfolg",
+            message: "Gerät wurde erfolgreich hinzugefügt.",
+            type: "success",
+            status: true
+          })
           this.props.updateApp()
         }
         setTimeout(() => {
@@ -132,24 +122,11 @@ class NewSystemForm extends Component {
         event.preventDefault();
       }
     }
-    _hideAlert(){
-      this.setState(
-        prevState => ({
-          notify: {
-            title: "",
-            message: "",
-            status: false,
-            type: "default"
-          }
-        }),
-        () => console.log(this.state)
-      );      
-    }
     render() {
         return (
           <div >
-            <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
-              {this.state.notify.message}
+            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+              {this.props.App.notify.message}
             </SweetAlert>
             <div className="container-fluid" >
               <h2>New System</h2>

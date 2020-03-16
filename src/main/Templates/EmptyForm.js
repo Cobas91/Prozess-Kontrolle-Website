@@ -32,8 +32,8 @@ class Template extends Component {
     console.log("Checklisten State: ", this.state)
         return(
             <div >
-            <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
-              {this.state.notify.message}
+            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+                {this.props.App.notify.message}
             </SweetAlert>
             <h2>Template</h2>
             <div className="form-group">

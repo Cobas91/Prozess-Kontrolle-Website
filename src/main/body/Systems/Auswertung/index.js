@@ -20,7 +20,6 @@ class Auswertung extends Component {
             type: "default"
         },
     };
-      this._hideAlert = this._hideAlert.bind(this)
       this._handleChangeStart = this._handleChangeStart.bind(this)
       this._handleChangeEnde = this._handleChangeEnde.bind(this)
       this._createPDF = this._createPDF.bind(this)
@@ -103,8 +102,8 @@ class Auswertung extends Component {
         ]
         return (
           <>
-            <SweetAlert title={this.state.notify.title} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
-              {this.state.notify.message}
+            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+            {this.props.App.notify.message}
             </SweetAlert>
             <Tabelle data={this.props.App.auswertung.checklisten} header={TableHeaderChecklisten} filter={true} export={true} TableName="Checklisten"/>
             <Button
