@@ -10,9 +10,7 @@ import EditSystemForm from "./Systems/EditSystem/index"
 import Dashboard from "./Dashboard/index"
 import Navbar from "./components/SideBar"
 import UploadForm from "./Systems/Upload"
-import ChecklisteEdit from "./Checkliste/Edit"
 import Auswertung from "./Systems/Auswertung/index"
-
 function getParams(location) {
     const searchParams = new URLSearchParams(location.search);
     return {
@@ -55,24 +53,10 @@ class Body extends Component {
                         <Route path="/system/auswertung">
                             <Auswertung {...this.props}/>
                         </Route>
-
-                        {/* Checklisten */}
-                        <Route
-                        path="/admin/checkliste/edit"
-                        render={({ location, history }) => {
-                            const {sn} = getParams(location);
-                            return (
-                                <div>
-                                    <ChecklisteEdit params={{Seriennummer:sn}} {...this.props} />
-                                </div>
-                            );
-                        }}
-                        />
-
-                        {/* Dashboard muss die letzte Route sein */}
+                        
                         <Route path="/">
                             <Dashboard {... this.props}/>
-                        </Route>  
+                        </Route> 
                 </Switch>
                 </div> 
             </Router>

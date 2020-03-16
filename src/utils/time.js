@@ -17,8 +17,8 @@ function convert(UNIX_timestamp) {
     var year = a.getFullYear();
     var month = months[a.getMonth()];
     var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
+    // var hour = a.getHours();
+    // var min = a.getMinutes();
     var sec = a.getSeconds();
     if (sec < 10) {
       sec = ("0" + sec).slice(-2);

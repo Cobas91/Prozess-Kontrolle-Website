@@ -21,7 +21,6 @@ class Template extends Component {
         }
       } 
   render() {
-    console.log("Checklisten State: ", this.state)
         return(
         <div >
             <Button color="info" onClick={this._handleClick} style={{ marginBottom: '1rem' }}>{this.props.buttonName}</Button>

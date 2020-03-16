@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiDatabase, FiList, FiMenu, FiTrello } from "react-icons/fi";
+import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiMenu, FiTrello } from "react-icons/fi";
 import logo from '../../../images/logo_dg.png'
 
 

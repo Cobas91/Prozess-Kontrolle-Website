@@ -5,11 +5,13 @@ import * as dgapi from '../utils/API/dgapi'
 import LoadingScreen from "./body/components/LoadingScreen"
 import Body from "./body/index"
 import Footer from "./footer/index"
+import Login from "./body/Login/index"
 
 class App extends Component {
 
   constructor(props) {
-      super(props) 
+      super(props)
+      //State initialisieren 
       this.state = {
         Version: "1.0",
         loading: true,    //Loadingscreen anzeigen?
@@ -18,15 +20,14 @@ class App extends Component {
             message: "",
             status: false,
             type: "default"
-        },
-        data: {
-          systeme: {},
-          kunden: {}
         }
       }
         this._updateApp = this._updateApp.bind(this)
         this._toggleMenu = this._toggleMenu.bind(this)
         this._toggleMobile = this._toggleMobile.bind(this)
+        this._checkLogin = this._checkLogin.bind(this)
+        this._hideAlert = this._hideAlert.bind(this)
+        this._setAlert = this._setAlert.bind(this)
     }
 
     async componentDidMount() {
@@ -52,7 +53,8 @@ class App extends Component {
                 isOpen: isOpen,
                 mobile: mobile
               },
-              loading: false
+              loading: false,
+              login: true
             })  
     }
   _updateApp(){
@@ -68,6 +70,51 @@ class App extends Component {
       isOpen: !this.isOpen
     })
   }
+  _checkLogin(data){
+    if(data.username === "User"){
+      this.setState({
+        login: true
+      })
+    }else{
+      this.setState(
+        prevState => ({
+          notify: {
+            title: "Benutzername oder Passwort falsch",
+            message: "Die eingegebenen Daten stimmen nicht! Bitte Eingabe überprüfen.",
+            status: true,
+            type: "default"
+          }
+        }),
+        () => console.log(this.state)
+      )
+    }
+  }
+  _hideAlert(){
+    this.setState(
+      prevState => ({
+        notify: {
+          title: "",
+          message: "",
+          status: false,
+          type: "default"
+        }
+      }),
+      () => console.log(this.state)
+    );      
+  }
+  _setAlert(alert){
+    this.setState(
+      {
+        notify: {
+          title: alert.title,
+          message: alert.message,
+          status: alert.status,
+          type: alert.type
+        }
+      }
+    );
+    
+  }
   render() {
     // setTimeout(() => {
     //   this.componentDidMount()
@@ -77,10 +124,12 @@ class App extends Component {
     console.error = () =>{}
     // console.log = () =>{}
     console.log("App-State", this.state)
+    
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
+    // if(this.state.login === false) return <Login checkLogin={this._checkLogin} App={this.state} hideAlert={this._hideAlert}/>
     return (
         <div className="container-fluid">
-          <Body App={this.state} toggleMobile={this._toggleMobile} toggleMenu={this._toggleMenu} updateApp={this._updateApp}/>
+          <Body App={this.state} toggleMobile={this._toggleMobile} toggleMenu={this._toggleMenu} updateApp={this._updateApp} setAlert={this._setAlert} hideAlert={this._hideAlert}/>
           <Footer App={this.state}/>
         </div>
       )
