@@ -51,7 +51,7 @@ class Dashboard extends Component {
       _handleSubmit(e){
         e.preventDefault();
         var result = this.props.App.data.systeme.find((system) => {
-            if(system.SN === this.state.system.SN){
+            if(system.SN.toLowerCase() === this.state.system.SN.toLowerCase()){
               this.props.setSite("editsystem", {SN: system.SN})
               return null
             }

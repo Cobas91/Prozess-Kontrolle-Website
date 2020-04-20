@@ -43,7 +43,7 @@ class Navigation extends Component {
         return (
             <div className="col-lg-1 sidebar">
                 <div className="logo">
-                    <img src={logo} alt="DG Logo"/>
+                    <Link onClick={() => { this.props.setSite("dashboard", {SN: null}) }}><img src={logo} alt="DG Logo"/></Link>
                 </div>
                 <FiMenu onClick={this._toggleMenu} className="sideBarToggle"/>
                 <ul className={sideBarClass}>
