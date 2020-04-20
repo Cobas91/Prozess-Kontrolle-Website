@@ -20,16 +20,12 @@ class Dashboard extends Component {
               },
               system:{
                 SN: ""
-              },
-              side:{
-                dashboard: true,
-                editform: false,
-                newform: false
               }
         }
         this._handleInput = this._handleInput.bind(this)
         this._handleSubmit = this._handleSubmit.bind(this)
         this._reset = this._reset.bind(this)
+        this._addNewSystem = this._addNewSystem.bind(this)
     }
       
       _handleInput(e) {
@@ -42,36 +38,22 @@ class Dashboard extends Component {
               [name]: value
             }
           }),
-          () => console.log("Dashboard State aktualisiert: ", this.props)
+          () => console.log("Dashboard State aktualisiert: ", this.state)
         );
       }
       _reset(){
-        this.props.setAlert({})
-        this.setState(
-          prevState => ({
-            ...prevState,
-            side: {
-              dashboard: true,
-              editform: false,
-              newform: false
-            }
-          })
-        )
+        this.props.hideAlert({})
+      }
+      _addNewSystem(){
+        this.props.hideAlert({})
+        this.props.setSite("newsystem", {SN: this.state.system.SN})
       }
       _handleSubmit(e){
         e.preventDefault();
         var result = this.props.App.data.systeme.find((system) => {
             if(system.SN === this.state.system.SN){
-              this.setState(
-                prevState => ({
-                  ...prevState,
-                  side: {
-                    dashboard: false,
-                    editform: true,
-                    newform: false
-                  }
-                })
-              )
+              this.props.setSite("editsystem", {SN: system.SN})
+              return null
             }
             else{
               this.props.setAlert(
@@ -101,12 +83,11 @@ class Dashboard extends Component {
       }
     }
     render() {
-      if(this.state.side.dashboard){
         return (
           <div>
             <h2>Dashboard</h2>
             <ReadMe buttonName="Read me" note={this.state.readme.manual}/>
-            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+            <SweetAlert title={this.props.App.notify.title} onConfirm={this._addNewSystem} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
             {this.props.App.notify.message}
             </SweetAlert>
             <form onSubmit={this._handleSubmit}>
@@ -122,20 +103,5 @@ class Dashboard extends Component {
           </div>
         );
       }
-      if(this.state.side.editform){
-        return(
-          <div>
-            <EditSystemForm sn={this.state.system.SN} {...this.props} />
-          </div>
-        )
-      }
-      if(this.state.side.newform){
-        return(
-          <div>
-            <NewSystemForm {...this.props} />
-          </div>
-        )      
-      }
-    }
   }
   export default Dashboard;

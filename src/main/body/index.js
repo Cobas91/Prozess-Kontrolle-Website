@@ -8,7 +8,7 @@ import {
 import NewSystemForm from "./Systems/NewSystem/index"
 import EditSystemForm from "./Systems/EditSystem/index"
 import Dashboard from "./Dashboard/index"
-import Navbar from "./components/SideBar"
+import Navbar from "./components/Sidebar"
 import UploadForm from "./Systems/Upload"
 import Auswertung from "./Systems/Auswertung/index"
 function getParams(location) {
@@ -20,49 +20,99 @@ function getParams(location) {
 
 class Body extends Component {
     render() {
-        return (
-            <div className="row">
-            <Router>
-            <Navbar {...this.props}/>
-            <div className="col-md-11">
-                <Switch>
-                        {/* Neues System */}
-                        <Route name="newsystem" path="/system/new" >             
-                            <NewSystemForm {...this.props} />
-                        </Route>
+        //Dashboard anzeigen
+        if(this.props.App.site === "dashboard"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <Dashboard {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        //New System anzeigen
+        if(this.props.App.site === "newsystem"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <NewSystemForm {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        if(this.props.App.site === "editsystem"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <EditSystemForm {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        if(this.props.App.site === "upload"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <UploadForm {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
 
-                        {/* System Editieren */}
-                        <Route
-                        path="/system/edit"
-                        render={({ location, history }) => {
-                            const {sn} = getParams(location);
-                            return (
-                                <div>
-                                    <EditSystemForm sn={sn} {...this.props} />
-                                </div>
-                            );
-                        }}
-                        />
 
-                        {/* KHK Upload */}
-                        <Route path="/system/upload">
-                            <UploadForm {...this.props}/>
-                        </Route>
 
-                        {/* Auswertung */}
-                        <Route path="/system/auswertung">
-                            <Auswertung {...this.props}/>
-                        </Route>
+
+
+
+
+
+        // return (
+        //     <div className="row">
+        //     <Router>
+        //     <Navbar {...this.props}/>
+        //     <div className="col-md-11">
+        //         <Switch>
+        //                 {/* Neues System */}
+        //                 <Route name="newsystem" path="/system/new" >             
+        //                     <NewSystemForm {...this.props} />
+        //                 </Route>
+
+        //                 {/* System Editieren */}
+        //                 <Route
+        //                 path="/system/edit"
+        //                 render={({ location, history }) => {
+        //                     const {sn} = getParams(location);
+        //                     return (
+        //                         <div>
+        //                             <EditSystemForm sn={sn} {...this.props} />
+        //                         </div>
+        //                     );
+        //                 }}
+        //                 />
+
+        //                 {/* KHK Upload */}
+        //                 <Route path="/system/upload">
+        //                     <UploadForm {...this.props}/>
+        //                 </Route>
+
+        //                 {/* Auswertung */}
+        //                 {/* <Route path="/system/auswertung">
+        //                     <Auswertung {...this.props}/>
+        //                 </Route> */}
                         
-                        <Route path="/">
-                            <Dashboard {... this.props}/>
-                        </Route> 
-                </Switch>
-                </div> 
-            </Router>
-            </div>
+        //                 <Route path="/">
+        //                     <Dashboard {... this.props}/>
+        //                 </Route> 
+        //         </Switch>
+        //         </div> 
+        //     </Router>
+        //     </div>
             
-        )
+        // )
 
     }
 }

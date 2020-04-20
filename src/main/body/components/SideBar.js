@@ -24,8 +24,7 @@ class Navigation extends Component {
             this.props.toggleMobile()
             this.props.toggleMenu()
             console.log("Mobile Version", this.props.App.window.windowWidth)
-        }        
-        
+        }
     }
     render() {
         var sideBarClass = "";
@@ -49,28 +48,23 @@ class Navigation extends Component {
                 <FiMenu onClick={this._toggleMenu} className="sideBarToggle"/>
                 <ul className={sideBarClass}>
                     <li>
-                        <Link onClick={this._toggleMenu} to="/">
-                        <FiHome onClick={this._toggleMenu} className="navIcon"/>Dashboard
-                        </Link>
+                        <Link onClick={() => { this.props.setSite("dashboard", {SN: null}) }}><FiHome onClick={() => { this.props.setSite("dashboard", {SN: null}) }} className="navIcon"/>Dashboard</Link>
                     </li>
                     <li> <FiBox className="navIcon"/>Systeme
                         <ul className="sub-menu">
-                        <li>
-                            <Link onClick={this._toggleMenu} to="/system/new"><FiPlusSquare onClick={this._toggleMenu} className="navIcon"/>New System</Link>
-                        </li>    
-                        <li>
-                            <Link onClick={this._toggleMenu} to="/system/edit"><FiEdit onClick={this._toggleMenu} className="navIcon"/>Edit System</Link>
-                        </li>
-                        <li>
-                            <Link onClick={this._toggleMenu} to="/system/auswertung"><FiTrello onClick={this._toggleMenu} className="navIcon"/>Auswertung</Link>
-                        </li>   
+                            <li>
+                                <Link onClick={() => { this.props.setSite("newsystem", {}) }} ><FiPlusSquare onClick={() => { this.props.setSite("newsystem", {}) }} className="navIcon"/>New System</Link>
+                            </li>    
+                            <li>
+                                <Link onClick={() => { this.props.setSite("editsystem", {SN: null}) }} ><FiEdit onClick={() => { this.props.setSite("editsystem", {}) }} className="navIcon"/>Edit System</Link>
+                            </li>
                         </ul>
 
                     </li>
                     <li> <FiUpload className="navIcon"/>Upload
                         <ul className="sub-menu">
                         <li>
-                            <Link onClick={this._toggleMenu} to="/system/upload"><FiDownload onClick={this._toggleMenu} className="navIcon"/>KHK Import</Link>
+                            <Link onClick={() => { this.props.setSite("upload", {}) }}><FiDownload onClick={() => { this.props.setSite("upload", {}) }} className="navIcon"/>KHK Import</Link>
                         </li>    
                         </ul>
 

@@ -14,9 +14,9 @@ class ChecklistenEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            SN: this.props.SN,
+            SN: this.props.App.workData.SN,
             Input:{
-                Seriennummer: this.props.SN,
+                Seriennummer: this.props.App.workData.SN,
                 SCCM_Anlage: false,
                 PXE_Start: false,
                 Bootstick_Start: false,
@@ -24,8 +24,8 @@ class ChecklistenEdit extends Component {
                 Computername: false,
                 Software: false,
                 BIOS: false,
-                Time: "Checkliste bearbeitet am: -"
-            },
+                timestamp: "Keine Checkliste gefunden",
+            },            
             notify:{         
                 title: "",
                 message: "",
@@ -43,13 +43,14 @@ class ChecklistenEdit extends Component {
     }
     componentDidMount(){
         this._checkExist()
+        this.props.hideAlert()
     }
     _checkExist(){
-        this.props.App.auswertung.checklisten.find((system) => {
+        this.props.App.data.checklisten.find((system) => {
             if(system.Seriennummer === this.props.SN){
-                console.log(system)
                 this.setState({
                     Input:{
+                        Seriennummer: system.Seriennummer,
                         SCCM_Anlage: system.SCCM_Anlage,
                         PXE_Start: system.PXE_Start,
                         Bootstick_Start: system.Bootstick_Start,
@@ -57,15 +58,14 @@ class ChecklistenEdit extends Component {
                         Computername: system.Computername,
                         Software: system.Software,
                         BIOS: system.BIOS,
-                        Time: system.timestamp
-                    }  
+                        timestamp: system.timestamp  
+                    }                    
                 })
                 return true
             }else{
                 console.log("Kein Gerät gefunden für Checkliste")
                 return false
-            }
-            
+            }  
         })
     }
     _handleInput(e){
@@ -108,38 +108,8 @@ class ChecklistenEdit extends Component {
     }
 
     async _save(){
-        if(!this.state.Input.Seriennummer){
-            this.setState(
-                prevState => ({
-                    ...prevState,
-                    notify:{         
-                        title: "Bitte Seriennummer eingeben",
-                        message: "Keine Seriennummer gefunden",
-                        status: true,
-                        type: "warning",
-                        okButton: "Ja, is ja gut...!",
-                        cancleButton: "Mach die Augen auf!"
-                      }
-                }
-                )
-              );
-        }else{
-            this.setState(
-                prevState => ({
-                    ...prevState,
-                    notify:{         
-                        title: "S/N: "+this.state.Input.Seriennummer,
-                        message: "Das Gerät "+this.state.Input.Seriennummer+" speichern?",
-                        status: true,
-                        type: "default",
-                        okButton: "Ja, speichern!",
-                        cancleButton: "Nein, ich überlege nochmal...",
-                        onConfirm: dgapi.addChecklisteToSystem(this.state.Input)
-                      }
-                }
-                )
-              );
-        }
+        dgapi.addChecklisteToSystem(this.state.Input)
+        this.props.updateApp()
     }
     _cancelAlert(){
         this.setState(
@@ -151,16 +121,16 @@ class ChecklistenEdit extends Component {
                     status: false,
                     type: "default"
                   }
-            }
+                }
             )
           );
     }
   render() {
-    console.log("Checklisten Props: ", this.props)
+    console.log("Checklisten Props: ", this.state)
         return(
             <div >
-            <SweetAlert custom showCancel title={this.state.notify.title} customIcon={this.state.notify.icon} confirmBtnText={this.state.notify.okButton} cancelBtnText={this.state.notify.cancleButton} onCancel={this._cancelAlert} onConfirm={this._hideAlert} show={this.state.notify.status} type={this.state.notify.type}>
-              {this.state.notify.message}
+            <SweetAlert showCancel title={this.props.App.notify.title} onCancel={this.props.hideAlert} onConfirm={this._save} show={this.props.App.notify.status} type={this.props.App.notify.type}>
+              {this.props.App.notify.message}
             </SweetAlert>
             <h2>Checkliste</h2>
                     {/* Gerät in SCCM angelegt */}
@@ -184,7 +154,7 @@ class ChecklistenEdit extends Component {
                     handlechange={this._handleInput}
                     placeholder={"Bemerkung hier eingeben"}
                     />
-                    <label>{this.state.Input.Time}</label>
+                    <label>{"Checkliste bearbeitet am: "+this.state.Input.timestamp}</label>
                     <Button
                     action={this._save}
                     type={"primary"}

@@ -17,7 +17,7 @@ class EditSystemForm extends Component {
         this.state = {
             getData: false,   //Steuert die anzeige, ob nur SN zu sehen ist.
             system:{
-              SN: this.props.sn
+              SN: this.props.App.workData.SN
             },
             status:this.props.App.data.status,
             kunden: this.props.App.data.kunden,
@@ -34,9 +34,9 @@ class EditSystemForm extends Component {
         this._reset = this._reset.bind(this);
     }
     componentDidMount(){
-      if(this.props.sn !== ""){
+      if(this.props.App.workData.SN !== null){
         this.setState({
-          system: this.props.sn,
+          system: this.props.App.WorkData
         })
         var result = this.props.App.data.systeme.find((system) => {
           if(system.SN === this.state.system.SN){
@@ -48,16 +48,17 @@ class EditSystemForm extends Component {
               () => console.log("Editform  State aktualisiert: ",this.state.system)
             );
             return system
-          }else{
-            this.props.setAlert({  
-              title: "Nicht gefunden",
-              message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden`,
-              status: true,
-              type: "error"
-            })
-            return null
           }
-      })
+        })
+      }else if(this.props.App.workData.SN === null){
+        this.props.hideAlert();
+      }else{
+        this.props.setAlert({  
+          title: "Nicht gefunden",
+          message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden!`,
+          status: true,
+          type: "error"
+        })
       }
     }
     _handleSubmit(e){

@@ -13,7 +13,7 @@ class App extends Component {
       super(props)
       //State initialisieren 
       this.state = {
-        Version: "1.0",
+        Version: "1.1",
         loading: true,    //Loadingscreen anzeigen?
         notify:{          //Object für die Benachrichtigung
             title: "",
@@ -25,9 +25,9 @@ class App extends Component {
         this._updateApp = this._updateApp.bind(this)
         this._toggleMenu = this._toggleMenu.bind(this)
         this._toggleMobile = this._toggleMobile.bind(this)
-        this._checkLogin = this._checkLogin.bind(this)
         this._hideAlert = this._hideAlert.bind(this)
         this._setAlert = this._setAlert.bind(this)
+        this._setSite = this._setSite.bind(this)
     }
 
     async componentDidMount() {
@@ -42,10 +42,8 @@ class App extends Component {
               data:{ 
                 systeme: data.systeme,
                 kunden: data.kunden,
-                status: data.status
-              },
-              auswertung:{
-                checklisten: data.auswertung.checklisten
+                status: data.status,
+                checklisten: data.checklisten
               },
               window: {
                 windowWidth: window.innerWidth,
@@ -53,8 +51,9 @@ class App extends Component {
                 isOpen: isOpen,
                 mobile: mobile
               },
+              workData: {SN: null},
               loading: false,
-              login: true
+              site: "dashboard"
             })  
     }
   _updateApp(){
@@ -65,33 +64,19 @@ class App extends Component {
       mobile: !this.state.mobile
     })
   }
+  _setWorkData(){
+
+  }
   _toggleMenu(){
     this.setState({
       isOpen: !this.isOpen
     })
   }
-  _checkLogin(data){
-    if(data.username === "User"){
-      this.setState({
-        login: true
-      })
-    }else{
-      this.setState(
-        prevState => ({
-          notify: {
-            title: "Benutzername oder Passwort falsch",
-            message: "Die eingegebenen Daten stimmen nicht! Bitte Eingabe überprüfen.",
-            status: true,
-            type: "default"
-          }
-        }),
-        () => console.log(this.state)
-      )
-    }
-  }
+
   _hideAlert(){
     this.setState(
       prevState => ({
+        ...prevState,
         notify: {
           title: "",
           message: "",
@@ -104,16 +89,24 @@ class App extends Component {
   }
   _setAlert(alert){
     this.setState(
-      {
-        notify: {
-          title: alert.title,
-          message: alert.message,
-          status: alert.status,
-          type: alert.type
-        }
-      }
+      prevState => ({
+        ...prevState,
+        notify: alert
+      }),
+      () => console.log(this.state)
     );
-    
+  }
+  _setSite(site, data){
+    if(site !== ""){
+      this.setState(
+        prevState => ({
+          ...prevState,
+          workData: data,
+          site: site
+        }),
+        () => console.log("Seitenanzeige aktualisiert", this.state)
+      );
+    }
   }
   render() {
     // setTimeout(() => {
@@ -126,10 +119,9 @@ class App extends Component {
     console.log("App-State", this.state)
     
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
-    // if(this.state.login === false) return <Login checkLogin={this._checkLogin} App={this.state} hideAlert={this._hideAlert}/>
     return (
         <div className="container-fluid">
-          <Body App={this.state} toggleMobile={this._toggleMobile} toggleMenu={this._toggleMenu} updateApp={this._updateApp} setAlert={this._setAlert} hideAlert={this._hideAlert}/>
+          <Body App={this.state} toggleMobile={this._toggleMobile} toggleMenu={this._toggleMenu} setSite={this._setSite} updateApp={this._updateApp} setAlert={this._setAlert} hideAlert={this._hideAlert}/>
           <Footer App={this.state}/>
         </div>
       )

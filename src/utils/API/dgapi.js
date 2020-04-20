@@ -89,9 +89,7 @@ async function getAllData(){
     systeme: systeme,
     kunden: kunden,
     status : status,
-    auswertung:{
-      checklisten: checklisten
-    }
+    checklisten: checklisten
   }
   return data;
 }

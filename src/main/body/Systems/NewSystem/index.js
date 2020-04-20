@@ -19,7 +19,7 @@ class NewSystemForm extends Component {
           newSystem:{
             bemerkung: "",
             kunde: "",
-            sn: null,
+            sn: this.props.App.workData.SN,
             modell: "",
             lieferschein: "",
             hersteller:""
@@ -85,7 +85,7 @@ class NewSystemForm extends Component {
             bemerkung: value
           }
         }),
-        () => console.log("NewSystemFormState State Aktualisiert: ",this.state.newSystem)
+        () => console.log("NewSystemFormState State Aktualisiert: ",this.state)
       );
     }
 
