@@ -20,6 +20,9 @@ class App extends Component {
             message: "",
             status: false,
             type: "default"
+          },
+        user: {
+          name: ""
         }
       }
         this._updateApp = this._updateApp.bind(this)
@@ -28,6 +31,7 @@ class App extends Component {
         this._hideAlert = this._hideAlert.bind(this)
         this._setAlert = this._setAlert.bind(this)
         this._setSite = this._setSite.bind(this)
+        this._setUsername = this._setUsername.bind(this)
     }
 
     async componentDidMount() {
@@ -83,8 +87,7 @@ class App extends Component {
           status: false,
           type: "default"
         }
-      }),
-      () => console.log(this.state)
+      })
     );      
   }
   _setAlert(alert){
@@ -92,8 +95,7 @@ class App extends Component {
       prevState => ({
         ...prevState,
         notify: alert
-      }),
-      () => console.log(this.state)
+      })
     );
   }
   _setSite(site, data){
@@ -108,6 +110,17 @@ class App extends Component {
       );
     }
   }
+  _setUsername(input){
+    this.setState(
+      prevState => ({
+        ...prevState,
+        user: {
+          name: input
+        }
+      }),
+      () => console.log("Setting Username", this.state)
+    );
+  }
   render() {
     // setTimeout(() => {
     //   this.componentDidMount()
@@ -117,7 +130,7 @@ class App extends Component {
     console.error = () =>{}
     // console.log = () =>{}
     console.log("App-State", this.state)
-    
+    if(this.state.user.name === "") return <Login App={this.state} setName={this._setUsername}/>
     if(this.state.loading === true) return <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
     return (
         <div className="container-fluid">

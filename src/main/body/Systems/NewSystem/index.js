@@ -57,6 +57,8 @@ class NewSystemForm extends Component {
             type: "success",
             status: true
           })
+          //TODO Nach anlage in Edit Fenster gehen
+          //this.props.setSite("editsystem", {SN: this.props.App.workData.SN})
           this.props.updateApp()
         }
         setTimeout(() => {

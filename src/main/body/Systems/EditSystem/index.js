@@ -32,8 +32,24 @@ class EditSystemForm extends Component {
         this._handleSubmit = this._handleSubmit.bind(this);
         this._handleFormSubmit = this._handleFormSubmit.bind(this)
         this._reset = this._reset.bind(this);
+        this._insertNewUSer = this._insertNewUSer.bind(this)
+    }
+    _insertNewUSer(){
+      this.setState(
+        prevState => ({
+            system: {
+              ...prevState.system,
+              Bearbeiter: this.props.App.user.name,
+            }
+          }
+        ),
+        () => console.log("Editform: Changing Akt_Bearbeiter: ",this.state.system)
+      );
+      
+      console.log("User kram", this.state)
     }
     componentDidMount(){
+      
       if(this.props.App.workData.SN !== null){
         this.setState({
           system: this.props.App.WorkData
@@ -42,8 +58,10 @@ class EditSystemForm extends Component {
           if(system.SN === this.state.system.SN){
             this.setState(
               prevState => ({
+                  ...prevState,
                   getData: true,
-                  system: result}
+                  system: result
+                }
               ),
               () => console.log("Editform  State aktualisiert: ",this.state.system)
             );
@@ -60,6 +78,7 @@ class EditSystemForm extends Component {
           type: "error"
         })
       }
+      this._insertNewUSer()
     }
     _handleSubmit(e){
         e.preventDefault();
@@ -68,7 +87,8 @@ class EditSystemForm extends Component {
               this.setState(
                 prevState => ({
                     getData: true,
-                    system: result}
+                    system: result
+                  }
                 ),
                 () => console.log("Editform  State aktualisiert: ",this.state.system)
               );
@@ -114,7 +134,6 @@ class EditSystemForm extends Component {
       this.props.updateApp()
       
     }
-
     _reset(){
       this.setState({
         getData: false,
@@ -201,6 +220,14 @@ class EditSystemForm extends Component {
                         name={"Bemerkung"}
                         handlechange={this._handleInput}
                         placeholder={"Bemerkung hier eingeben"}
+                        />
+                        <Input
+                        inputType={"text"}
+                        title={"Änderungen vorgenommen von:"}
+                        name={"Bearbeiter"}
+                        value={this.props.App.user.name}
+                        placeholder={""}
+                        handlechange={this._handleInput}
                         />
                         <Button
                         action={this._handleFormSubmit}
