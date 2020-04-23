@@ -13,7 +13,7 @@ class App extends Component {
       super(props)
       //State initialisieren 
       this.state = {
-        Version: "1.1",
+        Version: "1.2",
         loading: true,    //Loadingscreen anzeigen?
         notify:{          //Object für die Benachrichtigung
             title: "",
