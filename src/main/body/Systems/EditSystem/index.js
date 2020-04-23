@@ -34,7 +34,7 @@ class EditSystemForm extends Component {
         this._reset = this._reset.bind(this);
         this._insertNewUSer = this._insertNewUSer.bind(this)
     }
-    _insertNewUSer(){
+    async _insertNewUSer(){
       this.setState(
         prevState => ({
             system: {
@@ -46,7 +46,7 @@ class EditSystemForm extends Component {
         () => console.log("Editform: Changing Akt_Bearbeiter: ",this.state.system)
       );
       
-      console.log("User kram", this.state)
+      return true
     }
     componentDidMount(){
       
@@ -78,7 +78,6 @@ class EditSystemForm extends Component {
           type: "error"
         })
       }
-      this._insertNewUSer()
     }
     _handleSubmit(e){
         e.preventDefault();
@@ -129,9 +128,16 @@ class EditSystemForm extends Component {
     }
     async _handleFormSubmit(e){
       e.preventDefault();
-
-      await dgapi.updateSystem(this.state.system)
-      this.props.updateApp()
+      if(this.state.system.Bearbeiter !== this.props.App.user.name){
+        await this._insertNewUSer()
+        await dgapi.updateSystem(this.state.system)
+        this.props.updateApp()
+      }else{
+        await dgapi.updateSystem(this.state.system)
+        this.props.updateApp()
+      }
+      
+      
       
     }
     _reset(){
@@ -222,10 +228,11 @@ class EditSystemForm extends Component {
                         placeholder={"Bemerkung hier eingeben"}
                         />
                         <Input
+                        disabled
                         inputType={"text"}
                         title={"Änderungen vorgenommen von:"}
                         name={"Bearbeiter"}
-                        value={this.props.App.user.name}
+                        value={this.state.system.Bearbeiter}
                         placeholder={""}
                         handlechange={this._handleInput}
                         />
