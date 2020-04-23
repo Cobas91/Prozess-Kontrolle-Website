@@ -13,7 +13,7 @@ class Accordion extends Component {
     }
 
   async componentDidMount(){
-    const bemerkungen = await dgapi.getStatus(this.props.sn)
+    const bemerkungen = await dgapi.getComments(this.props.sn)
     this.setState({bemerkungen: bemerkungen, loading: false})
   }
   _handleClick(){

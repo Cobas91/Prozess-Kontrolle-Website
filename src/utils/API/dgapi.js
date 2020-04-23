@@ -130,14 +130,14 @@ async function pxeReset(sn){
   return resjason
 }
 
-async function getStatus(sn){
+async function getComments(sn){
   const data = {
     table: "comments_systeme",
     where: {
       system_ID: sn
     }
   }
-  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/get/status`, {
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/get/comments`, {
       method: 'post',
       headers: {
           'Content-Type': 'application/json',
@@ -186,4 +186,4 @@ async function askforPDF(data, name){
   return resjason
 }
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getStatus, addChecklisteToSystem, askforPDF}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF}
