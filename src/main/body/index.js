@@ -62,6 +62,16 @@ class Body extends Component {
                 </div>
             )   
         }
+        if(this.props.App.site === "uebersicht"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <Auswertung {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
 
 
 

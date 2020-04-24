@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiMenu, FiTrello } from "react-icons/fi";
+import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiMenu, FiActivity } from "react-icons/fi";
 import logo from '../../../images/logo_dg.png'
 
 
@@ -48,7 +48,10 @@ class Navigation extends Component {
                 <FiMenu onClick={this._toggleMenu} className="sideBarToggle"/>
                 <ul className={sideBarClass}>
                     <li>
-                        <Link onClick={() => { this.props.setSite("dashboard", {SN: null}) }}><FiHome onClick={() => { this.props.setSite("dashboard", {SN: null}) }} className="navIcon"/>Dashboard</Link>
+                        <Link className="navIcon" onClick={() => { this.props.setSite("dashboard", {SN: null}) }}><FiHome onClick={() => { this.props.setSite("dashboard", {SN: null}) }} className="navIcon"/>Dashboard</Link>
+                    </li>
+                    <li>
+                        <Link className="navIcon" onClick={() => { this.props.setSite("uebersicht", {SN: null}) }}><FiActivity onClick={() => { this.props.setSite("uebersicht", {SN: null}) }} className="navIcon"/>Übersicht</Link>
                     </li>
                     <li> <FiBox className="navIcon"/>Systeme
                         <ul className="sub-menu">
@@ -67,7 +70,6 @@ class Navigation extends Component {
                             <Link onClick={() => { this.props.setSite("upload", {}) }}><FiDownload onClick={() => { this.props.setSite("upload", {}) }} className="navIcon"/>KHK Import</Link>
                         </li>    
                         </ul>
-
                     </li>
 
                 </ul>

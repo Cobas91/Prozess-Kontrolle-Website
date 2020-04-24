@@ -202,7 +202,7 @@ class EditSystemForm extends Component {
                         placeholder={"Kunde wählen...."}
                         handlechange={this._handleInput}
                         />
-                <div className="form-group">
+                <div className="form-group"> 
                         <Dropdown
                         title={"Status"}
                         name={"Status"}
