@@ -183,6 +183,7 @@ class EditSystemForm extends Component {
                 <p>Seriennummer: {this.state.system.SN}</p>
                 <p>Modell: {this.state.system.Modell}</p>
                 <p>KHK Lager: {this.state.system.Lager_KHK}</p>
+                <p>KHK Kunde: {this.state.system.Kunde_KHK}</p>
                 <Accordion name="Bemerkungen anzeigen" sn={this.state.system.ID}/>
                 </div>
                         <Input
@@ -193,7 +194,6 @@ class EditSystemForm extends Component {
                         placeholder={"Hersteller eintragen...."}
                         handlechange={this._handleInput}
                         />
-
                         <Dropdown
                         title={"Kunde"}
                         name={"Kunde"}

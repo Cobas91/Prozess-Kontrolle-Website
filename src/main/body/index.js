@@ -11,6 +11,7 @@ import Dashboard from "./Dashboard/index"
 import Navbar from "./components/Sidebar"
 import UploadForm from "./Systems/Upload"
 import Auswertung from "./Systems/Auswertung/index"
+import Admin from "./Administration/index"
 function getParams(location) {
     const searchParams = new URLSearchParams(location.search);
     return {
@@ -68,6 +69,16 @@ class Body extends Component {
                 <Navbar {...this.props}/>
                     <div className="col-md-11">
                         <Auswertung {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        if(this.props.App.site === "admin"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <Admin {... this.props}/>
                     </div>
                 </div>
             )   

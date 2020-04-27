@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiMenu, FiActivity } from "react-icons/fi";
+import { FiHome, FiPlusSquare, FiEdit, FiUpload, FiDownload, FiBox, FiMenu, FiActivity, FiCodesandbox } from "react-icons/fi";
 import logo from '../../../images/logo_dg.png'
 
 
@@ -64,8 +64,12 @@ class Navigation extends Component {
                         </ul>
 
                     </li>
-                    <li> <FiUpload className="navIcon"/>Upload
+
+                    <li> <FiCodesandbox className="navIcon"/>Administration
                         <ul className="sub-menu">
+                        <li>
+                            <Link onClick={() => { this.props.setSite("admin", {}) }}><FiDownload onClick={() => { this.props.setSite("admin", {}) }} className="navIcon"/>Admin Panel</Link>
+                        </li>
                         <li>
                             <Link onClick={() => { this.props.setSite("upload", {}) }}><FiDownload onClick={() => { this.props.setSite("upload", {}) }} className="navIcon"/>KHK Import</Link>
                         </li>    

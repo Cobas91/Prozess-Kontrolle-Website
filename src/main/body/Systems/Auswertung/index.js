@@ -33,6 +33,10 @@ class Auswertung extends Component {
             accessor: "Kunde"
           },
           {
+            Header: "KHK Matchcode",
+            accessor: "Kunde_KHK"
+          },
+          {
             Header: "Aktueller Status",
             accessor: "Status"
           },

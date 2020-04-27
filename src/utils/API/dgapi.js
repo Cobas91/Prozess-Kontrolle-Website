@@ -186,4 +186,11 @@ async function askforPDF(data, name){
   return resjason
 }
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF}
+async function startKHKImport_Lagerbestand(){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/import/lager`, {
+      method: 'get'
+    })
+  return await result
+}
+
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand}
