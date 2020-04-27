@@ -1,7 +1,6 @@
 /* eslint.disable */
 import React, {Component} from 'react';
 import "../../../../css/App.css"
-import SweetAlert from 'react-bootstrap-sweetalert'
 
 
 class Template extends Component {
@@ -32,9 +31,6 @@ class Template extends Component {
     console.log("Checklisten State: ", this.state)
         return(
             <div >
-            <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
-                {this.props.App.notify.message}
-            </SweetAlert>
             <h2>Template</h2>
             <div className="form-group">
                 <form onSubmit={this._handleSubmit}>
