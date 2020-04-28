@@ -10,6 +10,7 @@ import Button from '../../components/Button'
 import Dropdown from '../../components/Dropdown'
 import Accordion from '../../components/Accordion'
 import Checkliste from '../../Checkliste'
+import Switch from '../../components/Switch.js';
 
 class EditSystemForm extends Component {
     constructor(props) {
@@ -18,6 +19,14 @@ class EditSystemForm extends Component {
             getData: false,   //Steuert die anzeige, ob nur SN zu sehen ist.
             system:{
               SN: this.props.App.workData.SN
+            },
+            checkliste:{
+              SCCM_Anlage: false,
+              BIOS: false,
+              PXE_Start: false,
+              Bootstick_Start: false,
+              Computername: false,
+              Software: false
             },
             status:this.props.App.data.status,
             kunden: this.props.App.data.kunden,
@@ -29,8 +38,7 @@ class EditSystemForm extends Component {
             },
         }
         this._handleInput = this._handleInput.bind(this);
-        this._handleSubmit = this._handleSubmit.bind(this);
-        this._handleFormSubmit = this._handleFormSubmit.bind(this)
+        this._save = this._save.bind(this)
         this._reset = this._reset.bind(this);
         this._insertNewUSer = this._insertNewUSer.bind(this)
     }
@@ -48,14 +56,39 @@ class EditSystemForm extends Component {
       
       return true
     }
+    _getCheckliste(input){
+      console.log("Suche checkliste für", input)
+      this.props.App.data.checklisten.find((system) => {
+        console.log("checking entry", system.Seriennummer)
+          if(system.Seriennummer === input.SN){
+              this.setState({
+                  checkliste:{
+                      Seriennummer: system.Seriennummer,
+                      SCCM_Anlage: system.SCCM_Anlage,
+                      PXE_Start: system.PXE_Start,
+                      Bootstick_Start: system.Bootstick_Start,
+                      Bemerkung: system.Bemerkung,
+                      Computername: system.Computername,
+                      Software: system.Software,
+                      BIOS: system.BIOS,
+                      timestamp: system.timestamp  
+                  }                    
+              })
+              return true
+          }else{
+              console.log("Kein Gerät gefunden für Checkliste")
+              return false
+          }  
+      })
+    }
     componentDidMount(){
-      
       if(this.props.App.workData.SN !== null){
         this.setState({
           system: this.props.App.WorkData
         })
         var result = this.props.App.data.systeme.find((system) => {
           if(system.SN === this.state.system.SN){
+            this._getCheckliste(system)
             this.setState(
               prevState => ({
                   ...prevState,
@@ -63,7 +96,7 @@ class EditSystemForm extends Component {
                   system: result
                 }
               ),
-              () => console.log("Editform  State aktualisiert: ",this.state.system)
+              () => console.log("Editform  State aktualisiert: ",this.state)
             );
             return system
           }
@@ -79,32 +112,6 @@ class EditSystemForm extends Component {
         })
       }
     }
-    _handleSubmit(e){
-        e.preventDefault();
-        var result = this.props.App.data.systeme.find((system) => {
-            if(system.SN === this.state.system.SN){
-              this.setState(
-                prevState => ({
-                    getData: true,
-                    system: result
-                  }
-                ),
-                () => console.log("Editform  State aktualisiert: ",this.state.system)
-              );
-              return system
-            }
-            else{
-              this.props.setAlert({  
-                  title: "Nicht gefunden",
-                  message: `Seriennummer ${this.state.system.SN} konnte nicht gefunden werden`,
-                  status: true,
-                  type: "error"
-              })
-              return null
-            }
-        })
-
-    }
     _handleInput(e) {
         let value = e.target.value;
         let name = e.target.name;
@@ -115,7 +122,7 @@ class EditSystemForm extends Component {
               [name]: value
             }
           }),
-          () => console.log("Editform State aktualisiert: ",this.state.system)
+          () => console.log("Editform State aktualisiert: ",this.state)
         );
       }
     _handleTextArea(e){
@@ -123,30 +130,41 @@ class EditSystemForm extends Component {
       this.setState({
           bemerkung: value
         },
-        () => console.log("Editform State aktualisiert: ",this.state.system)
+        () => console.log("Editform State aktualisiert: ",this.state)
       );
     }
-    async _handleFormSubmit(e){
+    async _save(e){
       e.preventDefault();
       if(this.state.system.Bearbeiter !== this.props.App.user.name){
         await this._insertNewUSer()
         await dgapi.updateSystem(this.state.system)
+        await dgapi.addChecklisteToSystem(this.state.checkliste)
         this.props.updateApp()
+        this.props.hideAlert()
       }else{
         await dgapi.updateSystem(this.state.system)
+        await dgapi.addChecklisteToSystem(this.state.checkliste)
         this.props.updateApp()
-      }
-      
-      
-      
+        this.props.hideAlert()
+      }  
     }
     _reset(){
+      this.props.hideAlert()
       this.setState({
-        getData: false,
-        system:{
-          SN: null
-        }
+        getData: false
       })
+    }
+    _handleSwitchChange(value, Name){
+      this.setState(
+          prevState => ({
+              checkliste:{
+                  ...prevState.checkliste,
+                  [Name]: value
+              }
+          }
+      ),
+      () => console.log("Checkliste aktualisiert: ",this.state)
+     );
     }
   render() {
       if(this.state.getData === false){
@@ -202,7 +220,8 @@ class EditSystemForm extends Component {
                         placeholder={"Kunde wählen...."}
                         handlechange={this._handleInput}
                         />
-                <div className="form-group"> 
+                <div className="form-group">
+                        {/* Grunddaten */}
                         <Dropdown
                         title={"Status"}
                         name={"Status"}
@@ -227,22 +246,39 @@ class EditSystemForm extends Component {
                         handlechange={this._handleInput}
                         placeholder={"Bemerkung hier eingeben"}
                         />
-                        <Input
-                        disabled
-                        inputType={"text"}
-                        title={"Änderungen vorgenommen von:"}
-                        name={"Bearbeiter"}
-                        value={this.state.system.Bearbeiter}
-                        placeholder={""}
-                        handlechange={this._handleInput}
-                        />
+                        
+                        {/* Checkliste */}
+                          <h2>Checkliste</h2>
+                          {/* Gerät in SCCM angelegt */}
+                          <Switch  title="Gerät in SCCM angelegt" onChange={(e) => this._handleSwitchChange(e, "SCCM_Anlage")} checked={this.state.checkliste.SCCM_Anlage} />
+                          {/* BIOS geprüft */}
+                          <Switch  title="Bios Settings" onChange={(e) => this._handleSwitchChange(e, "BIOS")} checked={this.state.checkliste.BIOS} />
+                          {/* Gerät via PXE gestartet */}
+                          <Switch  title="Gerät via PXE gestartet" onChange={(e) => this._handleSwitchChange(e, "PXE_Start")} checked={this.state.checkliste.PXE_Start} />
+                          {/* Gerät via Boot Stick gestartet */}
+                          <Switch  title="Gerät via Boot Stick gestartet" onChange={(e) => this._handleSwitchChange(e, "Bootstick_Start")} checked={this.state.checkliste.Bootstick_Start} />
+                          {/* Gerät mit Computernamen versehen */}
+                          <Switch  title="Computername aufgeklebt" onChange={(e) => this._handleSwitchChange(e, "Computername")} checked={this.state.checkliste.Computername} />
+                          {/* Software geprüft */}
+                          <Switch  title="Software geprüft falls nötig" onChange={(e) => this._handleSwitchChange(e, "Software")} checked={this.state.checkliste.Software} />
+                          {/* Bemerkung */}
+                          <label>{"Letzte Ändernung am: "+this.state.checkliste.timestamp}</label>
+                          <Input
+                          disabled
+                          inputType={"text"}
+                          title={"Änderungen vorgenommen von:"}
+                          name={"Bearbeiter"}
+                          value={this.state.system.Bearbeiter}
+                          placeholder={""}
+                          handlechange={this._handleInput}
+                          />
+                        {/*  */}
                         <Button
-                        action={this._handleFormSubmit}
+                        action={this._save}
                         type={"primary"}
-                        title={"Grunddaten Speichern"}
+                        title={"Speichern"}
                         /> 
                 </div>
-              <Checkliste SN={this.state.system.SN} {...this.props}/>
             </div>
       )
   }
