@@ -10,7 +10,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             readme:{
-              manual: ["Wenn das System bereits in der Datenbank zu finden ist wird das Editierfenster geladen.", "Falls das System nicht im System gefunden wird, kann nach bestätigung das System angelegt werden."]
+              manual: ["In der Übersicht kann besser gefiltert werden", "In der Übersicht wird die anzahl der angezeigten Systeme dargestellt", "In Edit System ist nur noch 1 Knopf zum speichern"]
             },
             notify:{         
                 title: "",
@@ -86,7 +86,7 @@ class Dashboard extends Component {
         return (
           <div>
             <h2>Dashboard</h2>
-            <ReadMe buttonName="Read me" note={this.state.readme.manual}/>
+            <ReadMe buttonName="New Features" note={this.state.readme.manual}/>
             <SweetAlert title={this.props.App.notify.title} onConfirm={this._addNewSystem} showCancel onCancel={this._reset} show={this.props.App.notify.status} type={this.props.App.notify.type}>
             {this.props.App.notify.message}
             </SweetAlert>
