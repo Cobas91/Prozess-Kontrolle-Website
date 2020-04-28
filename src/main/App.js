@@ -99,6 +99,7 @@ class App extends Component {
     );
   }
   _setSite(site, data){
+    this._hideAlert();
     if(site !== ""){
       this.setState(
         prevState => ({
