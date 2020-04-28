@@ -12,12 +12,6 @@ import Navbar from "./components/Sidebar"
 import UploadForm from "./Systems/Upload"
 import Auswertung from "./Systems/Auswertung/index"
 import Admin from "./Administration/index"
-function getParams(location) {
-    const searchParams = new URLSearchParams(location.search);
-    return {
-      sn: searchParams.get("sn") || ""
-    };
-  }
 
 class Body extends Component {
     render() {

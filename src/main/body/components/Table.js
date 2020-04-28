@@ -3,9 +3,42 @@ import ReactTable, {ReactTableDefaults}  from 'react-table';
 import 'react-table/react-table.css'
 import Export from "../components/ExcelExport"
 import * as Time from "../../../utils/time"
+import Select from "react-select";
+import "react-table-filter/lib/styles.css";
 class Tabelle extends Component {
-
+    constructor(props) {
+        super(props);
+  
+        this.state = {
+            normalData: this.props.data,
+            filteredData: this.props.data,
+            selectedFilters:{
+                filterKunden: null
+            }
+        }
+        
+    };
+    onFilteredChangeKunden = (value, accessor) => {
+        let filtered = this.state.filteredData;
+        let insertNewFilter = 1;
     
+        if (filtered.length) {
+          filtered.forEach((filter, i) => {
+            if (filter["id"] === accessor) {
+              if (value === "" || !value.length) filtered.splice(i, 1);
+              else filter["value"] = value;
+    
+              insertNewFilter = 0;
+            }
+          });
+        }
+    
+        if (insertNewFilter) {
+          filtered.push({ id: accessor, value: value });
+        }
+    
+        this.setState({ filtered: filtered });
+      };
     render() {
         //Set Defaults for Table
         Object.assign(ReactTableDefaults, {
@@ -25,6 +58,12 @@ class Tabelle extends Component {
                     <ReactTable data={this.props.data} columns={this.props.header} />
                 </>
             )
+        }else if(this.props.DropdownFilter){
+            return(
+                <>                      
+                    <ReactTable data={this.props.data} columns={this.props.header} filterable={true} />
+                </>
+            )      
         }else{
             return (
                 <>
