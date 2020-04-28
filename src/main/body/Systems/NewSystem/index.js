@@ -22,7 +22,9 @@ class NewSystemForm extends Component {
             sn: this.props.App.workData.SN,
             modell: "",
             lieferschein: "",
-            hersteller:""
+            hersteller:"",
+            computername: "",
+            assetnummer: ""
           },
           options: this.props.App.data.kunden,
           notify:{          //Object für die Benachrichtigung
@@ -171,6 +173,22 @@ class NewSystemForm extends Component {
                     options={this.state.options}
                     value={this.state.newSystem.kunde}
                     placeholder={"Bitte Kunde wählen..."}
+                    handlechange={this._handleInput}
+                  />
+                  <Input
+                    inputType={"text"}
+                    title={"Computername"}
+                    name={"computername"}
+                    value={this.state.newSystem.computername}
+                    placeholder={"Computername eingeben...."}
+                    handlechange={this._handleInput}
+                  />
+                  <Input
+                    inputType={"text"}
+                    title={"Assetnummer"}
+                    name={"assetnummer"}
+                    value={this.state.newSystem.assetnummer}
+                    placeholder={"Assetnummer eingeben...."}
                     handlechange={this._handleInput}
                   />
                   <TextArea

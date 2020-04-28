@@ -49,6 +49,8 @@ async function addNewSystem(input) {
       Modell: input.modell,
       Hersteller: input.hersteller,
       Kunde: input.kunde,
+      Computername: input.computername,
+      Assetnummer: input.assetnummer
     }
   }
 

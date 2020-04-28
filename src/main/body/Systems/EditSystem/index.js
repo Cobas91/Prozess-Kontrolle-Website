@@ -229,6 +229,14 @@ class EditSystemForm extends Component {
                         placeholder={"Computername eingeben...."}
                         handlechange={this._handleInput}
                         />
+                        <Input
+                        inputType={"text"}
+                        title={"Assetnummer"}
+                        name={"Assetnummer"}
+                        value={this.state.system.Assetnummer}
+                        placeholder={"Assetnummer eingeben...."}
+                        handlechange={this._handleInput}
+                        />
                         {/* Grunddaten */}
                         <Dropdown
                         title={"Status"}
