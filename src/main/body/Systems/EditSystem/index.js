@@ -21,6 +21,7 @@ class EditSystemForm extends Component {
               SN: this.props.App.workData.SN
             },
             checkliste:{
+              Seriennummer: this.props.App.workData.SN,
               SCCM_Anlage: false,
               BIOS: false,
               PXE_Start: false,
@@ -220,7 +221,14 @@ class EditSystemForm extends Component {
                         placeholder={"Kunde wählen...."}
                         handlechange={this._handleInput}
                         />
-                <div className="form-group">
+                        <Input
+                        inputType={"text"}
+                        title={"Computername"}
+                        name={"Computername"}
+                        value={this.state.system.Computername}
+                        placeholder={"Computername eingeben...."}
+                        handlechange={this._handleInput}
+                        />
                         {/* Grunddaten */}
                         <Dropdown
                         title={"Status"}
@@ -278,7 +286,6 @@ class EditSystemForm extends Component {
                         type={"primary"}
                         title={"Speichern"}
                         /> 
-                </div>
             </div>
       )
   }
