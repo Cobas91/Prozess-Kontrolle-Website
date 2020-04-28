@@ -3,7 +3,7 @@ import ReactTable, {ReactTableDefaults}  from 'react-table';
 import 'react-table/react-table.css'
 import Export from "../components/ExcelExport"
 import * as Time from "../../../utils/time"
-import Select from "react-select";
+import tableCount from "../components/tableCount";
 import "react-table-filter/lib/styles.css";
 class Tabelle extends Component {
     constructor(props) {
@@ -16,8 +16,10 @@ class Tabelle extends Component {
                 filterKunden: null
             }
         }
-        
     };
+    componentDidMount(nextProps, nextState) {
+        
+    }
     onFilteredChangeKunden = (value, accessor) => {
         let filtered = this.state.filteredData;
         let insertNewFilter = 1;
@@ -51,6 +53,7 @@ class Tabelle extends Component {
             pageText: "Seite",
             defaultPageSize: 10
         })
+        
         if(this.props.export){
             return (
                 <>
@@ -61,7 +64,7 @@ class Tabelle extends Component {
         }else if(this.props.DropdownFilter){
             return(
                 <>                      
-                    <ReactTable data={this.props.data} columns={this.props.header} filterable={true} />
+                    <ReactTable data={this.props.data} columns={this.props.header} filterable={true} showPagination={true} PaginationComponent={tableCount}/>
                 </>
             )      
         }else{
