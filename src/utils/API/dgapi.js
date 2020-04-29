@@ -81,17 +81,31 @@ async function getAllChecklisten(){
   return resjason
 }
 
-
+function _sortUebersicht(data){
+  var erg = []
+  data.forEach(system => {
+  if(system.Status === "Versand Ready"){
+      erg.push(system)
+    }
+  });
+  if(erg.length <= 0){
+    return []
+  }else{
+    return erg
+  }
+}
 async function getAllData(){
   var kunden = await getAllKunden();
   var systeme = await getAllSystems();
   var status = await getAllStatus();
   var checklisten = await getAllChecklisten();
+  var uebersichtVersand = await _sortUebersicht(systeme);
   const data = {
     systeme: systeme,
     kunden: kunden,
     status : status,
-    checklisten: checklisten
+    checklisten: checklisten,
+    uebersichtVersand : uebersichtVersand
   }
   return data;
 }
@@ -113,6 +127,25 @@ async function updateSystem(input){
     })
   const resjason = await result.json()
   return resjason
+}
+
+async function setStatus(input){
+  console.log(input)
+  for (var property in input) {
+    const data = {
+      where: {
+        SN: property
+      }
+    }  
+    fetch(`http://${serverData.ip}:${serverData.port}/api/db/updateStatus`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(data)
+    })
+  }
+
 }
 
 async function pxeReset(sn){
@@ -195,4 +228,4 @@ async function startKHKImport_Lagerbestand(){
   return await result
 }
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus}

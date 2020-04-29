@@ -47,12 +47,22 @@ class Navigation extends Component {
                 </div>
                 <FiMenu onClick={this._toggleMenu} className="sideBarToggle"/>
                 <ul className={sideBarClass}>
+                    {/* Dashboard */}
                     <li>
                         <Link className="navIcon" onClick={() => { this.props.setSite("dashboard", {SN: null}) }}><FiHome onClick={() => { this.props.setSite("dashboard", {SN: null}) }} className="navIcon"/>Dashboard</Link>
                     </li>
-                    <li>
-                        <Link className="navIcon" onClick={() => { this.props.setSite("uebersicht", {SN: null}) }}><FiActivity onClick={() => { this.props.setSite("uebersicht", {SN: null}) }} className="navIcon"/>Übersicht</Link>
+                    {/* Übersicht */}
+                    <li> <FiCodesandbox className="navIcon"/>Übersicht
+                        <ul className="sub-menu">
+                            <li>
+                                <Link onClick={() => { this.props.setSite("uebersicht", {SN: null}) }}><FiActivity onClick={() => { this.props.setSite("uebersicht", {SN: null}) }} className="navIcon"/>Alle Geräte</Link>
+                            </li>
+                            <li>
+                                <Link onClick={() => { this.props.setSite("uebersicht_versand", {SN: null}) }}><FiActivity onClick={() => { this.props.setSite("uebersicht_versand", {SN: null}) }} className="navIcon"/>Versand</Link>
+                            </li>    
+                        </ul>
                     </li>
+                    {/* Systeme */}
                     <li> <FiBox className="navIcon"/>Systeme
                         <ul className="sub-menu">
                             <li>
@@ -62,9 +72,8 @@ class Navigation extends Component {
                                 <Link onClick={() => { this.props.setSite("editsystem", {SN: null}) }} ><FiEdit onClick={() => { this.props.setSite("editsystem", {}) }} className="navIcon"/>Edit System</Link>
                             </li>
                         </ul>
-
                     </li>
-
+                    {/* Administration */}
                     <li> <FiCodesandbox className="navIcon"/>Administration
                         <ul className="sub-menu">
                         <li>

@@ -10,7 +10,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             readme:{
-              manual: ["In der Übersicht kann besser gefiltert werden", "In der Übersicht wird die anzahl der angezeigten Systeme dargestellt", "In Edit System ist nur noch 1 Knopf zum speichern"]
+              manual: ["Übersicht anzeige für Versand hinzugefügt", "In Übersicht Alle Geräte Spalte Computername ergänzt"]
             },
             notify:{         
                 title: "",

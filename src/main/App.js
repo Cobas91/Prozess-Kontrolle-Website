@@ -47,7 +47,8 @@ class App extends Component {
                 systeme: data.systeme,
                 kunden: data.kunden,
                 status: data.status,
-                checklisten: data.checklisten
+                checklisten: data.checklisten,
+                uebersichtVersand: data.uebersichtVersand
               },
               window: {
                 windowWidth: window.innerWidth,
@@ -61,7 +62,7 @@ class App extends Component {
             })  
     }
   _updateApp(){
-    this.componentDidMount()
+    this.componentDidMount()    
   }
   _toggleMobile(){
     this.setState({

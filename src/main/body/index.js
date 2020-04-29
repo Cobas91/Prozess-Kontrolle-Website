@@ -10,7 +10,8 @@ import EditSystemForm from "./Systems/EditSystem/index"
 import Dashboard from "./Dashboard/index"
 import Navbar from "./components/Sidebar"
 import UploadForm from "./Systems/Upload"
-import Auswertung from "./Systems/Auswertung/index"
+import Uebersicht from "./components/Uebersicht"
+import UebersichtVersand from "./components/UebersichtVersand"
 import Admin from "./Administration/index"
 
 class Body extends Component {
@@ -62,7 +63,17 @@ class Body extends Component {
                 <div className="row">
                 <Navbar {...this.props}/>
                     <div className="col-md-11">
-                        <Auswertung {... this.props}/>
+                        <Uebersicht {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        if(this.props.App.site === "uebersicht_versand"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <UebersichtVersand {... this.props}/>
                     </div>
                 </div>
             )   
@@ -77,6 +88,7 @@ class Body extends Component {
                 </div>
             )   
         }
+        
 
 
 

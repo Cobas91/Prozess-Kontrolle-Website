@@ -1,11 +1,11 @@
 import React ,{Component} from 'react';
 import SweetAlert from 'react-bootstrap-sweetalert'
 
-import Tabelle from '../../components/Table'
-import Button from "../../components/Button"
-import Dropdown from '../../components/Dropdown'
+import Tabelle from './Table'
+import Button from "./Button"
+import Dropdown from './Dropdown'
 import matchSorter from 'match-sorter'
-import * as dgapi from '../../../../utils/API/dgapi'
+import * as dgapi from '../../../utils/API/dgapi'
 
 
 class Auswertung extends Component {
@@ -19,26 +19,10 @@ class Auswertung extends Component {
             message: "",
             status: false,
             type: "default"
-          },
-          filter:{
-            kunde: "",
           }
       };
-      this._handleFilterInput = this._handleFilterInput.bind(this)
     }
-    _handleFilterInput(e){
-      let value = e.target.value;
-      let name = e.target.name;
-      this.setState(
-        prevState => ({
-          filter: {
-            ...prevState.newSystem,
-            [name]: value
-          }
-        }),
-        () => console.log("New Filter added",this.state.filter)
-      );
-    }
+
     render() {
       
         const TableHeaderChecklisten = [
@@ -48,6 +32,13 @@ class Auswertung extends Component {
               filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["SN"] }),
               filterAll: true
+          },
+          {
+            Header: "Computername",
+            accessor: "Computername",
+            filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["Computername"] }),
+            filterAll: true
           },
           {
               Header: "Modell",
@@ -62,13 +53,6 @@ class Auswertung extends Component {
             filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["Kunde"] }),
               filterAll: true  
-          },
-          {
-            Header: "KHK Matchcode",
-            accessor: "Kunde_KHK",
-            filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["Kunde_KHK"] }),
-              filterAll: true
           },
           {
             Header: "Aktueller Status",
@@ -87,7 +71,9 @@ class Auswertung extends Component {
               Cell: row => 
               <div className="tabelle_feld">
                 <Button className="tabelle_Feld" action={() => this.props.setSite("editsystem",{SN: row.value})} title="Editieren"/>
-              </div>
+              </div>,
+            filterable: false,
+            sortable: false
           }
         ]
         return (
