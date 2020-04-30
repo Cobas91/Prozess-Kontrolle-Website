@@ -5,6 +5,7 @@
 @import "./font/roboto.css";
 @import "./Tabelle.css";
 @import "./Button.css";
+@import "./MassImport.css";
 
 html {
     font-size: 10px;

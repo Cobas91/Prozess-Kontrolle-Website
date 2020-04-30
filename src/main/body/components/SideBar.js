@@ -66,6 +66,9 @@ class Navigation extends Component {
                     <li> <FiBox className="navIcon"/>Systeme
                         <ul className="sub-menu">
                             <li>
+                                <Link onClick={() => { this.props.setSite("masschange", {SN: null}) }} ><FiEdit onClick={() => { this.props.setSite("masschange", {}) }} className="navIcon"/>Massen Änderung</Link>
+                            </li>
+                            <li>
                                 <Link onClick={() => { this.props.setSite("newsystem", {}) }} ><FiPlusSquare onClick={() => { this.props.setSite("newsystem", {}) }} className="navIcon"/>New System</Link>
                             </li>    
                             <li>

@@ -8,11 +8,12 @@ import {
 import NewSystemForm from "./Systems/NewSystem/index"
 import EditSystemForm from "./Systems/EditSystem/index"
 import Dashboard from "./Dashboard/index"
-import Navbar from "./components/Sidebar"
+import Navbar from "./components/SideBar"
 import UploadForm from "./Systems/Upload"
 import Uebersicht from "./components/Uebersicht"
 import UebersichtVersand from "./components/UebersichtVersand"
 import Admin from "./Administration/index"
+import MassChange from "./MassChange/index"
 
 class Body extends Component {
     render() {
@@ -84,6 +85,16 @@ class Body extends Component {
                 <Navbar {...this.props}/>
                     <div className="col-md-11">
                         <Admin {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        if(this.props.App.site === "masschange"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <MassChange {... this.props}/>
                     </div>
                 </div>
             )   

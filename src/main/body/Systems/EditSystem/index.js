@@ -199,6 +199,7 @@ class EditSystemForm extends Component {
                   title={"Neues Gerät"}
                 />
                 <div className="jumbotron">
+                <p>Status: {this.state.system.Status}</p>
                 <p>Seriennummer: {this.state.system.SN}</p>
                 <p>Modell: {this.state.system.Modell}</p>
                 <p>KHK Lager: {this.state.system.Lager_KHK}</p>

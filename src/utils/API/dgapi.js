@@ -227,5 +227,21 @@ async function startKHKImport_Lagerbestand(){
     })
   return await result
 }
+async function massenStatus(allData){
+  var data = {
+    status: allData.status,
+    systeme: allData.sn
+  }
+  console.log(data)
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/massStatus`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus}

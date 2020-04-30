@@ -1,0 +1,8 @@
+.massImport {
+    margin: 1% 0;
+    padding: 1% 0;
+    align-items: center
+}
+.massImport:nth-of-type(even){
+    background-color: #ddd;
+}
