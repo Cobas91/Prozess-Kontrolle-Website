@@ -43,8 +43,9 @@ class Auswertung extends Component {
       }
     }
     _save(){
-      dgapi.setStatus(this.state.versand)
       this.props.updateApp()
+      dgapi.setStatus(this.state.versand)
+
     }
     render() {
       
@@ -55,6 +56,13 @@ class Auswertung extends Component {
               filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["SN"] }),
               filterAll: true
+          },
+          {
+            Header: "Lieferschein",
+            accessor: "LSNummer",
+            filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["LSNummer"] }),
+            filterAll: true
           },
           {
               Header: "Modell",
