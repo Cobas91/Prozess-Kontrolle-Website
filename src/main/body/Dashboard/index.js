@@ -10,7 +10,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             readme:{
-              manual: ["Übersicht anzeige für Versand hinzugefügt", "In Übersicht Alle Geräte Spalte Computername ergänzt"]
+              manual: ["Massen Status ändern hinzugefügt"]
             },
             notify:{         
                 title: "",
