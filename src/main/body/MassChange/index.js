@@ -86,7 +86,7 @@ class Template extends Component {
                 status: true,
                 type: "success"
               })
-            console.log(erg)
+            this.props.updateApp()
         })
         
     }
