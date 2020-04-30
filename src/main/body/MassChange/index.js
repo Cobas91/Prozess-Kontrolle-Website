@@ -75,18 +75,28 @@ class Template extends Component {
 
     _save(){
         dgapi.massenStatus(this.state).then((erg)=>{
-            this.setState({
-                snCount: 0,
-                Eingabe: "",
-                sn:{}
-            })
-            this.props.setAlert({  
-                title: "Status geändert",
-                message: `Es wurden ${erg.success.length} Systeme aktualisiert, ${erg.error.length} Fehler sind aufgetreten`,
-                status: true,
-                type: "success"
-              })
-            this.props.updateApp()
+            if(erg.message === "success"){
+                this.setState({
+                    snCount: 0,
+                    Eingabe: "",
+                    sn:{}
+                })
+                this.props.setAlert({  
+                    title: "Status geändert",
+                    message: `Es wurden ${erg.success.length} Systeme aktualisiert, ${erg.error.length} Fehler sind aufgetreten`,
+                    status: true,
+                    type: "success"
+                  })
+                this.props.updateApp()
+            }else{
+                this.props.setAlert({  
+                    title: "Fehler",
+                    message: erg.message,
+                    status: true,
+                    type: "error"
+                })
+            }
+            
         })
         
     }

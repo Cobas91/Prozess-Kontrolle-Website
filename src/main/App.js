@@ -69,9 +69,7 @@ class App extends Component {
       mobile: !this.state.mobile
     })
   }
-  _setWorkData(){
 
-  }
   _toggleMenu(){
     this.setState({
       isOpen: !this.isOpen
