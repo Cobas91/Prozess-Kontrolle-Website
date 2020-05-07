@@ -15,6 +15,7 @@ import UebersichtVersand from "./components/UebersichtVersand"
 import Admin from "./Administration/index"
 import MassChange from "./MassChange/index"
 import AppConfig from "./Administration/AppConfig/index"
+import DBLogs from "./Administration/DBLogs/index"
 
 class Body extends Component {
     render() {
@@ -106,6 +107,16 @@ class Body extends Component {
                 <Navbar {...this.props}/>
                     <div className="col-md-11">
                         <AppConfig {... this.props}/>
+                    </div>
+                </div>
+            )   
+        }
+        if(this.props.App.site === "dblogs"){
+            return(
+                <div className="row">
+                <Navbar {...this.props}/>
+                    <div className="col-md-11">
+                        <DBLogs {... this.props}/>
                     </div>
                 </div>
             )   

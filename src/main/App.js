@@ -22,7 +22,8 @@ class App extends Component {
             type: "default"
           },
         user: {
-          name: ""
+          name: "",
+          admin: true
         }
       }
         this._updateApp = this._updateApp.bind(this)
@@ -111,11 +112,18 @@ class App extends Component {
     }
   }
   _setUsername(input){
+    //TODO LOGIN ADMIN BERECHTIGUNG
+    var admin = false;
+    if(input === "DHA" || input === "SGÄ"){
+      admin = true
+    }
     this.setState(
       prevState => ({
         ...prevState,
         user: {
-          name: input
+          ...prevState.user,
+          name: input,
+          admin: admin
         }
       }),
       () => console.log("Setting Username", this.state)

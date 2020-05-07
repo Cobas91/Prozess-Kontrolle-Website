@@ -261,5 +261,12 @@ async function saveConfig(config){
   const resjason = await result.json()
   return resjason
 }
+async function getDBlogs(){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/logs`, {
+      method: 'get'
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus, getConfig, saveConfig}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus, getConfig, saveConfig, getDBlogs}

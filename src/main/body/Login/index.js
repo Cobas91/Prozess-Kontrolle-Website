@@ -21,7 +21,7 @@ class Login extends Component {
               [name]: value
             } 
           }),
-          () => console.log(this.state)
+          () => console.log("Login State:",this.state)
         );
       }
     render() {

@@ -74,7 +74,7 @@ class AppConfig extends Component {
         }
     }
   render() {
-    console.log("Checklisten State: ", this.state)
+    console.log("AppConfig State: ", this.state)
         return(
             <div >
             <SweetAlert title={this.props.App.notify.title} onConfirm={this.props.hideAlert} show={this.props.App.notify.status} type={this.props.App.notify.type}>

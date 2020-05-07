@@ -51,7 +51,7 @@ class Tabelle extends Component {
             noDataText: "Keine Daten gefunden...",
             rowsText: "Datensätze",
             pageText: "Seite",
-            defaultPageSize: 10
+            defaultPageSize: this.props.pageSize ? this.props.pageSize : 10
         })
         
         if(this.props.export){
