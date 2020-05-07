@@ -80,11 +80,14 @@ class Navigation extends Component {
                     <li> <FiCodesandbox className="navIcon"/>Administration
                         <ul className="sub-menu">
                         <li>
+                            <Link onClick={() => { this.props.setSite("config", {}) }}><FiDownload onClick={() => { this.props.setSite("config", {}) }} className="navIcon"/>App Konfiguration</Link>
+                        </li> 
+                        <li>
                             <Link onClick={() => { this.props.setSite("admin", {}) }}><FiDownload onClick={() => { this.props.setSite("admin", {}) }} className="navIcon"/>Admin Panel</Link>
                         </li>
                         <li>
                             <Link onClick={() => { this.props.setSite("upload", {}) }}><FiDownload onClick={() => { this.props.setSite("upload", {}) }} className="navIcon"/>KHK Import</Link>
-                        </li>    
+                        </li>  
                         </ul>
                     </li>
 

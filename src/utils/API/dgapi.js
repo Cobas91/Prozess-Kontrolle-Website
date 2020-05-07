@@ -243,5 +243,23 @@ async function massenStatus(allData){
   const resjason = await result.json()
   return resjason
 }
+async function getConfig(){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/cfg/get`, {
+      method: 'get'
+    })
+  const resjason = await result.json()
+  return resjason
+}
+async function saveConfig(config){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/cfg/set`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(config)
+    })
+  const resjason = await result.json()
+  return resjason
+}
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus, getConfig, saveConfig}
