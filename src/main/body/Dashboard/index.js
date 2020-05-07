@@ -10,7 +10,7 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             readme:{
-              manual: ["Massen Status ändern hinzugefügt"]
+              manual: ["Dropdown Filter in Übersicht eingefügt"]
             },
             notify:{         
                 title: "",
