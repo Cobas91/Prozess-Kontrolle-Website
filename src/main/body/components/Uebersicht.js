@@ -97,7 +97,7 @@ class Auswertung extends Component {
               <Dropdown
               title={""}
               name={"Status"}
-              options={this.props.App.data.status}
+              options={this.state.filter.status}
               value={filter ? filter.value : ''}
               placeholder={"Status wählen..."}
               handlechange={event => onChange(event.target.value)}
