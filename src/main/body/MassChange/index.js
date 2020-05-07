@@ -15,7 +15,8 @@ class Template extends Component {
             snCount: 0,
             status: "",
             Eingabe: "",
-            sn:{}
+            sn:{},
+            bemerkung: ""
         }
         this._save = this._save.bind(this)
         this._handleInput = this._handleInput.bind(this)
@@ -79,7 +80,8 @@ class Template extends Component {
                 this.setState({
                     snCount: 0,
                     Eingabe: "",
-                    sn:{}
+                    sn:{},
+                    bemerkung: ""
                 })
                 this.props.setAlert({  
                     title: "Status geändert",
@@ -113,7 +115,7 @@ class Template extends Component {
                     type={"primary"}
                     title={"Speichern"}
                     />
-                    <form onSubmit={this._handleSubmit}>
+                    
                     <Dropdown
                     title={"Status"}
                     name={"status"}
@@ -122,6 +124,15 @@ class Template extends Component {
                     placeholder={"Status wählen"}
                     handlechange={this._handleInput}
                     />
+                    <Input
+                    inputType={"text"}
+                    title={"Bemerkung"}
+                    name={"bemerkung"}
+                    value={this.state.bemerkung}
+                    placeholder={"Bemerkung eingeben...."}
+                    handlechange={this._handleInput}
+                    />
+                    <form onSubmit={this._handleSubmit}>
                     <Input
                     inputType={"text"}
                     title={"Seriennummer"}
@@ -133,7 +144,7 @@ class Template extends Component {
                     </form>
                     {this.createInput()}
                 </div>
-            </div> 
+            </div>
         )
     }
 }

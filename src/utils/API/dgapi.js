@@ -230,9 +230,9 @@ async function startKHKImport_Lagerbestand(){
 async function massenStatus(allData){
   var data = {
     status: allData.status,
-    systeme: allData.sn
+    systeme: allData.sn,
+    bemerkung: allData.bemerkung
   }
-  console.log(data)
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/massStatus`, {
       method: 'post',
       headers: {
