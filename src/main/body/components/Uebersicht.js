@@ -13,16 +13,39 @@ class Auswertung extends Component {
       super(props);
 
       this.state = {
-          gotData: false,
-          notify:{          //Object für die Benachrichtigung
-            title: "",
-            message: "",
-            status: false,
-            type: "default"
+          filter:{
+            kunde: [],
+            status: []
           }
+          
       };
     }
+    _handleFilterInput(e) {
+      let value = e.target.value;
+      let name = e.target.name;
+      this.setState(
+        prevState => ({
+          system: {
+            ...prevState.system,
+            [name]: value
+          }
+        }),
+        () => console.log("Editform State aktualisiert: ",this.state)
+      );
+  }
+  componentDidMount(){
+    var filterKunde = this.props.App.data.kunden
+    filterKunde.push("")
 
+    var filterStatus = this.props.App.data.status
+    filterStatus.push("")
+    this.setState({
+      filter:{
+        kunde: filterKunde,
+        status: filterStatus
+      }
+    })
+  }
     render() {
       
         const TableHeaderChecklisten = [
@@ -52,14 +75,34 @@ class Auswertung extends Component {
             accessor: "Kunde",
             filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["Kunde"] }),
-              filterAll: true  
+              filterAll: true, 
+              Filter: ({ filter, onChange }) => (
+                <Dropdown
+                title={""}
+                name={"Kunde"}
+                options={this.state.filter.kunde}
+                value={filter ? filter.value : ''}
+                placeholder={"Kunde wählen...."}
+                handlechange={event => onChange(event.target.value)}
+                />
+            )
           },
           {
             Header: "Aktueller Status",
             accessor: "Status",
             filterMethod: (filter, rows) =>
                     matchSorter(rows, filter.value, { keys: ["Status"] }),
-            filterAll: true
+            filterAll: true,
+            Filter: ({ filter, onChange }) => (
+              <Dropdown
+              title={""}
+              name={"Status"}
+              options={this.props.App.data.status}
+              value={filter ? filter.value : ''}
+              placeholder={"Status wählen..."}
+              handlechange={event => onChange(event.target.value)}
+              />
+          )
           },
           {
             Header: "Letzte Bemerkung",
