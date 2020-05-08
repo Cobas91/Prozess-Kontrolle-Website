@@ -268,5 +268,27 @@ async function getDBlogs(){
   const resjason = await result.json()
   return resjason
 }
+async function sendTeams(type, data){
+  var toSend = {
+    type: type,
+    data: data
+  }
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/teams`, {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(toSend)
+    })
+  const resjason = await result.json()
+  return resjason
+}
+async function getVersandReady(){
+  const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/get/versand`, {
+    method: 'get'
+  })
+  const resjason = await result.json()
+  return resjason
+}
 
-export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus, getConfig, saveConfig, getDBlogs}
+export {getAllKunden, addNewSystem, getAllSystems, addExcelImport, getAllData, updateSystem, pxeReset, getComments, addChecklisteToSystem, askforPDF, startKHKImport_Lagerbestand, setStatus, massenStatus, getConfig, saveConfig, getDBlogs, sendTeams, getVersandReady}

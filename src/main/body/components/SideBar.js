@@ -91,6 +91,9 @@ class Navigation extends Component {
                             </li>
                             <li>
                                 <Link onClick={() => { this.props.setSite("dblogs", {}) }}><FiDownload onClick={() => { this.props.setSite("dblogs", {}) }} className="navIcon"/>DB Logs</Link>
+                            </li>
+                            <li>
+                                <Link onClick={() => { this.props.setSite("teams", {}) }}><FiDownload onClick={() => { this.props.setSite("teams", {}) }} className="navIcon"/>Teams</Link>
                             </li>  
                             </ul>
                         </li>
