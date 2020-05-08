@@ -4,6 +4,7 @@ import "../../../../css/App.css"
 import * as dgapi from '../../../../utils/API/dgapi'
 import Input from "../../components/Input"
 import Button from '../../components/Button'
+import Dropdown from '../../components/Dropdown'
 import SweetAlert from 'react-bootstrap-sweetalert'
 class AppConfig extends Component {
     constructor(props) {
@@ -24,6 +25,10 @@ class AppConfig extends Component {
     }
     async componentDidMount(){
        var config = await dgapi.getConfig()
+       var teamschannels = []
+       for(var name in config.teams.channels){
+         teamschannels.push({Name:name})
+       }
        this.setState(
         prevState => ({
             ...prevState,
@@ -34,7 +39,10 @@ class AppConfig extends Component {
                 PowerBI_Uhrzeit: `${config.PowerBI.time.stunde}:${config.PowerBI.time.minute}:${config.PowerBI.time.sekunde}`,
                 powerbi_checklisten_pfad: `${config.PowerBI.checklisten.pfad}${config.PowerBI.checklisten.powerBIFile}`,
                 powerbi_systeme_pfad: `${config.PowerBI.systeme.pfad}${config.PowerBI.systeme.powerBIFile}`,
-                powerbi_status_pfad: `${config.PowerBI.status.pfad}${config.PowerBI.status.powerBIFile}`
+                powerbi_status_pfad: `${config.PowerBI.status.pfad}${config.PowerBI.status.powerBIFile}`,
+                teams_daily_channel: config.teams.dailyFeedback.channel,
+                teams_daily_time: `${config.teams.dailyFeedback.time.stunde}:${config.teams.dailyFeedback.time.minute}:${config.teams.dailyFeedback.time.sekunde}`,
+                teams_avaiable_channels: teamschannels
             }
           }
         ),
@@ -143,6 +151,27 @@ class AppConfig extends Component {
                     name={"powerbi_status_pfad"}
                     value={this.state.config.powerbi_status_pfad ? this.state.config.powerbi_status_pfad: ''}
                     placeholder={"Pfad für Datei eingeben...."}
+                    handlechange={this._handleInput}
+                    />
+                </div>
+            </div>
+            <div className="jumbotron">
+                <div className="form-group">
+                    <h3>Daily Status Message || Teams</h3>
+                    <Dropdown
+                      title={"Channel"}
+                      name={"teams_daily_channel"}
+                      options={this.state.config.teams_avaiable_channels}
+                      value={this.state.config.teams_daily_channel ? this.state.config.teams_daily_channel : ''}
+                      placeholder={"Kunde wählen...."}
+                      handlechange={this._handleInput}
+                      />
+                    <Input
+                    inputType={"text"}
+                    title={"Uhrzeit"}
+                    name={"teams_daily_time"}
+                    value={this.state.config.teams_daily_time ? this.state.config.teams_daily_time: ''}
+                    placeholder={"Uhrzeit für PowerBI Export eingeben....."}
                     handlechange={this._handleInput}
                     />
                 </div>

@@ -268,10 +268,11 @@ async function getDBlogs(){
   const resjason = await result.json()
   return resjason
 }
-async function sendTeams(type, data){
+async function sendTeams(type, data, channel){
   var toSend = {
     type: type,
-    data: data
+    data: data,
+    channel: channel
   }
   const result = await fetch(`http://${serverData.ip}:${serverData.port}/api/db/teams`, {
       method: 'post',

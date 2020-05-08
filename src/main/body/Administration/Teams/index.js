@@ -27,17 +27,17 @@ class Teams extends Component {
         console.log(readyText)
         var data2 = {
             "themeColor": "0076D7",
-            "text": "Text",
+            "text": "Testnachricht",
             "sections": [{
-                "activityTitle": "Folgende Geräte sind Versandbereit",
-                "activitySubtitle": "Geräte an den Versand zur Kommisionierung übergeben.",
-                "activityImage": "https://image.flaticon.com/icons/png/512/1932/1932893.png",
-                "text": readyText,
+                "activityTitle": "Hier könnte ihr Werbung stehen",
+                "activitySubtitle": "Nachrichten Untertitel",
+                "activityImage": "",
+                "text": "Diese Nachricht ist von der Website versendet wirden.",
                 "markdown": true
             }
             ]
         }
-        var result = await dgapi.sendTeams("versandReady", data2, "Dev");
+        dgapi.sendTeams("versandReady", data2, "Dev");
 
     }
 
