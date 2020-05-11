@@ -6,7 +6,8 @@
 @import "./Tabelle.css";
 @import "./Button.css";
 @import "./MassImport.css";
-
+@import "./Header.css";
+@import "./Footer.css";
 html {
   font-size: 10px;
   background-color: #f2f3f5;

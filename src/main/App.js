@@ -7,6 +7,7 @@ import LoadingScreen from "./body/components/LoadingScreen";
 import Body from "./body/index";
 import Footer from "./footer/index";
 import Login from "./body/Login/index";
+import Header from "./header/index";
 import SweetAlert from "react-bootstrap-sweetalert/lib/dist/SweetAlert";
 class App extends Component {
   constructor(props) {
@@ -184,6 +185,7 @@ class App extends Component {
       );
     return (
       <div className="container-fluid">
+        <Header {...this.state} setSite={this._setSite} />
         <Body
           App={this.state}
           toggleMobile={this._toggleMobile}

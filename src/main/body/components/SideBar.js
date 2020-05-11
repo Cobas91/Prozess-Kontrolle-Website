@@ -50,7 +50,7 @@ class Navigation extends Component {
     if (this.props.App.user.admin) {
       return (
         <div className="col-lg-1 sidebar">
-          <div className="logo">
+          {/* <div className="logo">
             <Link
               onClick={() => {
                 this.props.setSite("dashboard", { SN: null });
@@ -58,7 +58,7 @@ class Navigation extends Component {
             >
               <img src={logo} alt="DG Logo" />
             </Link>
-          </div>
+          </div> */}
           <FiMenu onClick={this._toggleMenu} className="sideBarToggle" />
           <ul className={sideBarClass}>
             {/* Dashboard */}

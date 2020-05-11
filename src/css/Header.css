@@ -1,0 +1,21 @@
+.header {
+  padding: 20px 20px;
+  margin-right: -15px;
+  margin-left: -15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgb(236, 236, 236);
+}
+
+.avatar {
+  width: 45px;
+  margin: 0 5px;
+}
+.leftPos {
+  margin-right: auto;
+}
+.header .logo {
+  width: 15%;
+}
