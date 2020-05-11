@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import EditSystemForm from "../Systems/EditSystem/index";
-import NewSystemForm from "../Systems/NewSystem/index";
 import ReadMe from "../components/ReadMe";
 import Input from "../components/Input";
 

@@ -98,10 +98,15 @@ async function getAllChecklisten() {
   return resjason;
 }
 
-function _sortUebersicht(data) {
+function sortSystems(data, where) {
+  Object.getOwnPropertyNames(where[0]);
+  console.log();
   var erg = [];
   data.forEach((system) => {
-    if (system.Status === "Versand Ready") {
+    if (
+      system[Object.getOwnPropertyNames(where[0])[0]] ===
+      where[0][Object.getOwnPropertyNames(where[0])[0]]
+    ) {
       erg.push(system);
     }
   });
@@ -116,7 +121,9 @@ async function getAllData() {
   var systeme = await getAllSystems();
   var status = await getAllStatus();
   var checklisten = await getAllChecklisten();
-  var uebersichtVersand = await _sortUebersicht(systeme);
+  var uebersichtVersand = await sortSystems(systeme, [
+    { Status: "Versand Ready" },
+  ]);
   const data = {
     systeme: systeme,
     kunden: kunden,
@@ -363,4 +370,5 @@ export {
   getDBlogs,
   sendTeams,
   getVersandReady,
+  sortSystems,
 };

@@ -8,53 +8,59 @@
 @import "./MassImport.css";
 
 html {
-    font-size: 10px;
-    background-color: #F2F3F5;
+  font-size: 10px;
+  background-color: #f2f3f5;
 }
 
 body {
-    font-family: 'robotoregular', sans-serif;
-    font-size: 1.6rem;
-    color: #003452;
+  font-family: "robotoregular", sans-serif;
+  font-size: 1.6rem;
+  color: #003452;
 }
 
 .col-md-11 {
-    padding-left: 30px;
+  padding-left: 30px;
 }
 
 h2 {
-    font-size: 2.5rem;
-    font-weight: normal;
-    margin-top:20px;
-    margin-bottom: 30px;
-    color: #E3000F;
+  font-size: 2.5rem;
+  font-weight: normal;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #e3000f;
 }
-
+h3 {
+  font-size: 2rem;
+  font-weight: normal;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #b80c18;
+}
 .App {
-    text-align: center;
+  text-align: center;
 }
 
 .App-logo {
-    height: 40vmin;
+  height: 40vmin;
 }
 
 .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
 .App-link {
-    color: #09d3ac;
+  color: #09d3ac;
 }
 
-@media (max-width: 768px) { 
-    body {
-        font-size: 1.8rem;
-    }
- }
+@media (max-width: 768px) {
+  body {
+    font-size: 1.8rem;
+  }
+}

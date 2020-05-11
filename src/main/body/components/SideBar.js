@@ -4,7 +4,6 @@ import {
   FiHome,
   FiPlusSquare,
   FiEdit,
-  FiUpload,
   FiDownload,
   FiBox,
   FiMenu,
@@ -100,21 +99,6 @@ class Navigation extends Component {
                     Alle Geräte
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      this.props.setSite("uebersicht_versand", { SN: null });
-                    }}
-                  >
-                    <FiActivity
-                      onClick={() => {
-                        this.props.setSite("uebersicht_versand", { SN: null });
-                      }}
-                      className="navIcon"
-                    />
-                    Versand
-                  </Link>
-                </li>
               </ul>
             </li>
             {/* Systeme */}
@@ -189,21 +173,6 @@ class Navigation extends Component {
                       className="navIcon"
                     />
                     App Konfiguration
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
-                      this.props.setSite("upload", {});
-                    }}
-                  >
-                    <FiDownload
-                      onClick={() => {
-                        this.props.setSite("upload", {});
-                      }}
-                      className="navIcon"
-                    />
-                    KHK Import
                   </Link>
                 </li>
                 <li>

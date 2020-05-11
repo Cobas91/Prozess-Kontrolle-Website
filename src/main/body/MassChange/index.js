@@ -57,13 +57,15 @@ class Template extends Component {
   }
   createInput() {
     var erg = [];
-    for (var sn in this.state.sn) {
+    for (var seriennummer in this.state.sn) {
       erg.push(
         <div className="row massImport">
-          <label className="form-label col-md-6">{this.state.sn[sn]}</label>
+          <label className="form-label col-md-6">
+            {this.state.sn[seriennummer]}
+          </label>
           <Button
             action={() => {
-              this._delete(sn);
+              this._delete(seriennummer);
             }}
             type={"btn btn-danger col-md-4"}
             title={"Löschen"}

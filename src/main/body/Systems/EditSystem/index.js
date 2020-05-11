@@ -9,7 +9,6 @@ import TextArea from "../../components/TextArea";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
 import Accordion from "../../components/Accordion";
-import Checkliste from "../../components/checkliste";
 import Switch from "../../components/Switch.js";
 
 class EditSystemForm extends Component {

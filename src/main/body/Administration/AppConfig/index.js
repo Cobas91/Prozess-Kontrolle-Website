@@ -87,9 +87,7 @@ class AppConfig extends Component {
     await dgapi.startKHKImport_Lagerbestand();
     this.props.updateApp();
   }
-  async _handleInput(e) {
-    e.preventDefault();
-  }
+
   render() {
     console.log("AppConfig State: ", this.state);
     return (
