@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
+
 class Login extends Component {
   constructor(props) {
     super(props); //since we are extending class Table so we have to use super in order to override Component class constructor

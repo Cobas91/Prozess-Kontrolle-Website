@@ -1,6 +1,7 @@
 /* eslint.disable */
 import React, { Component } from "react";
 import "../css/App.css";
+import bean from "../images/mrbean.gif";
 import * as dgapi from "../utils/API/dgapi";
 import * as login from "../utils/login";
 import LoadingScreen from "./body/components/LoadingScreen";
@@ -147,7 +148,7 @@ class App extends Component {
     } else {
       this._setAlert({
         title: "Login fehlgeschlagen!",
-        message: `Logindaten sind nicht bekannt! Bitte Eingabe überprüfen.`,
+        message: <img src={bean} alt="Nope!...." />,
         status: true,
         type: "error",
       });
