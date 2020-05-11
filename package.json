@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^1.6.8",
+    "bcrypt": "^4.0.1",
     "bootstrap": "^4.4.1",
     "file-saver": "^2.0.2",
     "match-sorter": "^4.1.0",

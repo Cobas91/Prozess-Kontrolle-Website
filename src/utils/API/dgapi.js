@@ -350,6 +350,23 @@ async function getVersandReady() {
   const resjason = await result.json();
   return resjason;
 }
+async function getUsername(input) {
+  var user = {
+    name: input,
+  };
+  const result = await fetch(
+    `http://${serverData.ip}:${serverData.port}/api/db/login`,
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }
+  );
+  const resjason = await result.json();
+  return resjason;
+}
 
 export {
   getAllKunden,
@@ -371,4 +388,5 @@ export {
   sendTeams,
   getVersandReady,
   sortSystems,
+  getUsername,
 };

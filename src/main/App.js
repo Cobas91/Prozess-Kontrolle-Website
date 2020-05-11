@@ -2,11 +2,12 @@
 import React, { Component } from "react";
 import "../css/App.css";
 import * as dgapi from "../utils/API/dgapi";
+import * as login from "../utils/login";
 import LoadingScreen from "./body/components/LoadingScreen";
 import Body from "./body/index";
 import Footer from "./footer/index";
 import Login from "./body/Login/index";
-
+import SweetAlert from "react-bootstrap-sweetalert/lib/dist/SweetAlert";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ class App extends Component {
         name: "",
         admin: true,
       },
+      site: "dashboard",
     };
     this._updateApp = this._updateApp.bind(this);
     this._toggleMenu = this._toggleMenu.bind(this);
@@ -34,7 +36,10 @@ class App extends Component {
     this._setSite = this._setSite.bind(this);
     this._setUsername = this._setUsername.bind(this);
   }
-
+  async _isDevelopment() {
+    var result = await dgapi.getConfig();
+    return result.development;
+  }
   async componentDidMount() {
     var data = await dgapi.getAllData();
     var mobile = false;
@@ -59,7 +64,7 @@ class App extends Component {
       },
       workData: { SN: null },
       loading: false,
-      site: "dashboard",
+      development: await this._isDevelopment(),
     });
   }
   async _updateApp() {
@@ -119,32 +124,55 @@ class App extends Component {
       );
     }
   }
-  _setUsername(input) {
-    //TODO LOGIN ADMIN BERECHTIGUNG
+  async _setUsername(input) {
+    var erg = await login.checkUser(input);
     var admin = false;
-    if (input === "DHA" || input === "SGÄ") {
-      admin = true;
+    if (erg.login === true) {
+      if (erg.Berechtigung > 1) {
+        admin = true;
+      }
+      this.setState(
+        (prevState) => ({
+          ...prevState,
+          user: {
+            ...prevState.user,
+            name: erg.User,
+            admin: admin,
+            berechtigung: erg.Berechtigung,
+          },
+        }),
+        () => console.log("Setting Username", this.state)
+      );
+    } else {
+      this._setAlert({
+        title: "Login fehlgeschlagen!",
+        message: `Logindaten sind nicht bekannt! Bitte Eingabe überprüfen.`,
+        status: true,
+        type: "error",
+      });
     }
-    this.setState(
-      (prevState) => ({
-        ...prevState,
-        user: {
-          ...prevState.user,
-          name: input,
-          admin: admin,
-        },
-      }),
-      () => console.log("Setting Username", this.state)
-    );
   }
   render() {
     //Error´s ausblenden
     console.warning = () => {};
     console.error = () => {};
-    // console.log = () =>{}
-    console.log("App-State", this.state);
-    if (this.state.user.name === "")
-      return <Login App={this.state} setName={this._setUsername} />;
+    if (this.state.user.berechtigung <= 2) {
+      console.log = () => {};
+    }
+    if (this.state.development === false && this.state.user.name === "")
+      return (
+        <>
+          <SweetAlert
+            title={this.state.notify.title}
+            onConfirm={this._hideAlert}
+            show={this.state.notify.status}
+            type={this.state.notify.type}
+          >
+            {this.state.notify.message}
+          </SweetAlert>
+          <Login App={this.state} setName={this._setUsername} />
+        </>
+      );
     if (this.state.loading === true)
       return (
         <LoadingScreen type="balls" color="#A61609" className="LoadingScreen" />
