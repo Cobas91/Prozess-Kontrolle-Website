@@ -75,6 +75,7 @@ class Auswertung extends Component {
     });
   }
   _setStandardView() {
+    this.props.updateApp();
     this.setState({
       ...this.state,
       view: tableView.standard(this),
@@ -82,6 +83,7 @@ class Auswertung extends Component {
     });
   }
   _setLieferscheineView() {
+    this.props.updateApp();
     this.setState({
       ...this.state,
       view: tableView.lieferscheine(this.state.filter),
@@ -89,6 +91,7 @@ class Auswertung extends Component {
     });
   }
   _setVersandReady() {
+    this.props.updateApp();
     this.setState({
       ...this.state,
       view: tableView.versandReady(this),
@@ -96,7 +99,6 @@ class Auswertung extends Component {
     });
   }
   render() {
-    console.log("Übersicht State:", this.state);
     return (
       <div className="form-group">
         <h2>Übersicht alle Systeme</h2>

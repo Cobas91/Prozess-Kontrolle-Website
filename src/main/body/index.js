@@ -6,7 +6,6 @@ import Dashboard from "./Dashboard/index";
 import Navbar from "./components/SideBar";
 import UploadForm from "./Administration/Upload";
 import Uebersicht from "./Dashboard/AllSystems/Uebersicht";
-import UebersichtVersand from "./Dashboard/SystemVersand/UebersichtVersand";
 import MassChange from "./MassChange/index";
 import AppConfig from "./Administration/AppConfig/index";
 import DBLogs from "./Administration/DBLogs/index";
