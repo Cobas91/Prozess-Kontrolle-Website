@@ -159,6 +159,11 @@ class App extends Component {
     if (this.state.user.berechtigung <= 2) {
       console.log = () => {};
     }
+    // Auto Reload Page after 30 Minutes.
+    setInterval(function () {
+      window.location.reload(false);
+    }, 1800000);
+
     if (this.state.development === false && this.state.user.name === "")
       return (
         <>
