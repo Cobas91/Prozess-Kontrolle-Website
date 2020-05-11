@@ -1,8 +1,7 @@
 import React from "react";
 
-
 import Select from "react-select";
-import Button from "../components/Button"
+import Button from "../components/Button";
 
 // Import React Table
 import ReactTable from "react-table";
@@ -14,7 +13,7 @@ class NewTable extends React.Component {
     this.state = {
       data: this.props.App.data.systeme,
       filtered: [],
-      select2: undefined
+      select2: undefined,
     };
   }
 
@@ -50,10 +49,10 @@ class NewTable extends React.Component {
         Extern Select2 :{" "}
         <Select
           style={{ width: "50%", marginBottom: "20px" }}
-          onChange={entry => {
+          onChange={(entry) => {
             this.setState({ select2: entry });
             this.onFilteredChangeCustom(
-              entry.map(o => {
+              entry.map((o) => {
                 return o.value;
               }),
               "firstName"
@@ -86,42 +85,48 @@ class NewTable extends React.Component {
           }}
           columns={[
             {
-                Header: "Seriennummer",
-                accessor: "SN"
+              Header: "Seriennummer",
+              accessor: "SN",
             },
             {
               Header: "Kunde",
-              accessor: "Kunde"
+              accessor: "Kunde",
             },
             {
               Header: "KHK Matchcode",
-              accessor: "Kunde_KHK"
+              accessor: "Kunde_KHK",
             },
             {
               Header: "Aktueller Status",
-              accessor: "Status"
+              accessor: "Status",
             },
             {
               Header: "Letzte Bemerkung",
-              accessor: "Bemerkung"
+              accessor: "Bemerkung",
             },
             {
               Header: "",
               accessor: "SN",
-                Cell: row => 
+              Cell: (row) => (
                 <div className="tabelle_feld">
-                  <Button className="tabelle_Feld" action={() => this.props.setSite("editsystem",{SN: row.value})} title="Editieren"/>
+                  <Button
+                    className="tabelle_Feld"
+                    action={() =>
+                      this.props.setSite("editsystem", { SN: row.value })
+                    }
+                    title="Editieren"
+                  />
                 </div>
-            }
+              ),
+            },
           ]}
           defaultPageSize={10}
           className="-striped -highlight"
         />
         <br />
-
       </div>
     );
   }
 }
-  
+
 export default NewTable;

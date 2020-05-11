@@ -1,11 +1,11 @@
 import React from "react";
 
-const Select = props => {
-  var kundenNamen = []
-  for(var index in props.options){
-    kundenNamen.push(props.options[index].Name)
+const Select = (props) => {
+  var kundenNamen = [];
+  for (var index in props.options) {
+    kundenNamen.push(props.options[index].Name);
   }
-  if(props.title === ""){
+  if (props.title === "") {
     return (
       <div className="form-group">
         <select
@@ -18,7 +18,7 @@ const Select = props => {
           <option value="" disabled>
             {props.placeholder}
           </option>
-          {kundenNamen.map(option => {
+          {kundenNamen.map((option) => {
             return (
               <option id={option} value={option} label={option}>
                 {option}
@@ -28,7 +28,7 @@ const Select = props => {
         </select>
       </div>
     );
-  }else{
+  } else {
     return (
       <div className="form-group">
         <label> {props.title} </label>
@@ -42,7 +42,7 @@ const Select = props => {
           <option value="" disabled>
             {props.placeholder}
           </option>
-          {kundenNamen.map(option => {
+          {kundenNamen.map((option) => {
             return (
               <option id={option} value={option} label={option}>
                 {option}
@@ -53,7 +53,6 @@ const Select = props => {
       </div>
     );
   }
-  
 };
 
 export default Select;

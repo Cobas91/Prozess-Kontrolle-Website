@@ -1,12 +1,10 @@
 import React from "react";
 
-const Input = props => {
+const Input = (props) => {
   //console.log(props.value);
   return (
     <div className="form-group">
-      <label className="form-label">
-        {props.title}
-      </label>
+      <label className="form-label">{props.title}</label>
       <input
         className="form-control"
         id={props.name}

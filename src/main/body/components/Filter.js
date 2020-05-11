@@ -1,9 +1,9 @@
 import React from "react";
 
-const Filter = props => {
-  var kundenNamen = []
-  for(var index in props.options){
-    kundenNamen.push(props.options[index].Name)
+const Filter = (props) => {
+  var kundenNamen = [];
+  for (var index in props.options) {
+    kundenNamen.push(props.options[index].Name);
   }
   return (
     <div className="form-group">
@@ -18,7 +18,7 @@ const Filter = props => {
         <option value="" disabled>
           {props.placeholder}
         </option>
-        {kundenNamen.map(option => {
+        {kundenNamen.map((option) => {
           return (
             <option id={option} value={option} label={option}>
               {option}
