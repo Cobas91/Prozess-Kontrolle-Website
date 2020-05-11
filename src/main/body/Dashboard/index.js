@@ -9,9 +9,9 @@ class Dashboard extends Component {
     this.state = {
       readme: {
         manual: [
-          "Dropdown Filter in Übersicht eingefügt",
-          "Admin Ansicht für Dennis + Stephan",
-          "Bemerkung kann bei Massten Änderung für alle Systeme hinzugefügt werden.",
+          "Übersicht 'Alle Systeme' angepasst",
+          "Automatische Teams nachricht jeden morgen um 8",
+          "Allgemeine Anpassungen, Übersicht",
         ],
       },
       notify: {
