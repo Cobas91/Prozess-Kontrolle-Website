@@ -86,7 +86,7 @@ class Auswertung extends Component {
     this.props.updateApp();
     this.setState({
       ...this.state,
-      view: tableView.lieferscheine(this.state.filter),
+      view: tableView.lieferscheine(this),
       data: this.props.App.data.systeme,
     });
   }

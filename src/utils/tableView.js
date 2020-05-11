@@ -5,7 +5,7 @@ import matchSorter from "match-sorter";
 import React from "react";
 
 function standard(comp) {
-  console.log("Table View", comp);
+  console.log("Table View", comp.state);
   var standard = [
     {
       Header: "Seriennummer",
@@ -38,7 +38,7 @@ function standard(comp) {
         <Dropdown
           title={""}
           name={"Kunde"}
-          options={comp.kundenFilter}
+          options={comp.state.filter.kundenFilter}
           value={filter ? filter.value : ""}
           placeholder={"Kunde wählen...."}
           handlechange={(event) => onChange(event.target.value)}
@@ -55,7 +55,7 @@ function standard(comp) {
         <Dropdown
           title={""}
           name={"Status"}
-          options={comp.statusFilter}
+          options={comp.state.filter.statusFilter}
           value={filter ? filter.value : ""}
           placeholder={"Status wählen..."}
           handlechange={(event) => onChange(event.target.value)}
@@ -118,7 +118,7 @@ function lieferscheine(comp) {
         <Dropdown
           title={""}
           name={"Kunde"}
-          options={comp.kundenFilter}
+          options={comp.state.filter.kundenFilter}
           value={filter ? filter.value : ""}
           placeholder={"Kunde wählen...."}
           handlechange={(event) => onChange(event.target.value)}
@@ -135,7 +135,7 @@ function lieferscheine(comp) {
         <Dropdown
           title={""}
           name={"Status"}
-          options={comp.statusFilter}
+          options={comp.state.filter.statusFilter}
           value={filter ? filter.value : ""}
           placeholder={"Status wählen..."}
           handlechange={(event) => onChange(event.target.value)}
