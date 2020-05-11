@@ -77,6 +77,19 @@ class AppConfig extends Component {
       });
     }
   }
+  async _startUpdate() {
+    this.props.setAlert({
+      title: "Update wird ausgeführt",
+      message: `Die Datenbank wird aktualisiert, das kann einen moment dauern.....`,
+      status: true,
+      type: "success",
+    });
+    await dgapi.startKHKImport_Lagerbestand();
+    this.props.updateApp();
+  }
+  async _handleInput(e) {
+    e.preventDefault();
+  }
   render() {
     console.log("AppConfig State: ", this.state);
     return (
@@ -90,6 +103,16 @@ class AppConfig extends Component {
           {this.props.App.notify.message}
         </SweetAlert>
         <h2>App Konfiguration</h2>
+        <div className="form-group">
+          <label>Datenbank aktualisieren</label>
+          <Button
+            action={() => {
+              this._startUpdate();
+            }}
+            type={"primary"}
+            title={"Aktualisieren"}
+          />
+        </div>
         <div className="jumbotron">
           <div className="form-group">
             <h3>Daily KHK Import KHK -> SYSTOOL</h3>

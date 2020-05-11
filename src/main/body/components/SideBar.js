@@ -194,21 +194,6 @@ class Navigation extends Component {
                 <li>
                   <Link
                     onClick={() => {
-                      this.props.setSite("admin", {});
-                    }}
-                  >
-                    <FiDownload
-                      onClick={() => {
-                        this.props.setSite("admin", {});
-                      }}
-                      className="navIcon"
-                    />
-                    Admin Panel
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    onClick={() => {
                       this.props.setSite("upload", {});
                     }}
                   >

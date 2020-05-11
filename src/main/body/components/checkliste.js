@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import "../../../css/App.css";
 import SweetAlert from "react-bootstrap-sweetalert";
 
-import Switch from "../components/Switch.js";
-import TextArea from "../components/TextArea.js";
-import Button from "../components/Button.js";
+import Switch from "./Switch.js";
+import TextArea from "./TextArea.js";
+import Button from "./Button.js";
 
 import * as dgapi from "../../../utils/API/dgapi";
 
