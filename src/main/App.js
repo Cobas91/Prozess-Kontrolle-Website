@@ -88,7 +88,7 @@ class App extends Component {
       },
       loading: false,
     });
-    this.componentDidMount();
+    //this.componentDidMount();
   }
   _toggleMobile() {
     this.setState({
