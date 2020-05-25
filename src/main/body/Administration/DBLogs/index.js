@@ -44,7 +44,7 @@ class AppConfig extends Component {
         <Tabelle
           data={this.state.logs}
           header={header}
-          DropdownFilter={true}
+          filter={true}
           TableName="DBLogs"
           pageSize={20}
           {...this.props}
