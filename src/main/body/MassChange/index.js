@@ -17,6 +17,7 @@ class Template extends Component {
       Eingabe: "",
       sn: {},
       bemerkung: "",
+      kunde: "",
     };
     this._save = this._save.bind(this);
     this._handleInput = this._handleInput.bind(this);
@@ -118,7 +119,14 @@ class Template extends Component {
         <h2>Massen Status Änderung</h2>
         <div className="form-group">
           <Button action={this._save} type={"primary"} title={"Speichern"} />
-
+          <Dropdown
+            title={"Kunde"}
+            name={"kunde"}
+            options={this.props.App.data.kunden}
+            value={this.state.kunde}
+            placeholder={"Kunde wählen"}
+            handlechange={this._handleInput}
+          />
           <Dropdown
             title={"Status"}
             name={"status"}

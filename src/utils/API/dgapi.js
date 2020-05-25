@@ -286,6 +286,7 @@ async function massenStatus(allData) {
     systeme: allData.sn,
     bemerkung: allData.bemerkung,
     Straße: allData.Straße,
+    Kunde: allData.kunde,
   };
   const result = await fetch(
     `http://${serverData.ip}:${serverData.port}/api/db/massStatus`,
