@@ -127,6 +127,14 @@ class Template extends Component {
             placeholder={"Status wählen"}
             handlechange={this._handleInput}
           />
+          <Dropdown
+            title={"Betankungsstraße"}
+            name={"Straße"}
+            options={this.props.App.data.straßen}
+            value={this.state.straße}
+            placeholder={"Straße wählen......"}
+            handlechange={this._handleInput}
+          />
           <Input
             inputType={"text"}
             title={"Bemerkung"}
@@ -135,6 +143,8 @@ class Template extends Component {
             placeholder={"Bemerkung eingeben...."}
             handlechange={this._handleInput}
           />
+          <br />
+          <hr />
           <form onSubmit={this._handleSubmit}>
             <Input
               inputType={"text"}

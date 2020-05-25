@@ -1,6 +1,7 @@
 /* eslint.disable */
 import React, { Component } from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse, CardBody, Card } from "reactstrap";
+import Button from "./Button";
 import "../../../css/App.css";
 
 class Template extends Component {
@@ -21,13 +22,7 @@ class Template extends Component {
   render() {
     return (
       <div>
-        <Button
-          color="info"
-          onClick={this._handleClick}
-          style={{ marginBottom: "1rem" }}
-        >
-          {this.props.buttonName}
-        </Button>
+        <Button action={this._handleClick} title={this.props.buttonName} />
         <Collapse isOpen={this.state.isOpen}>
           <Card>
             <CardBody>

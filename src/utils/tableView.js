@@ -72,7 +72,6 @@ function standard(comp) {
       Cell: (row) => (
         <div className="tabelle_feld">
           <Button
-            className="tabelle_Feld"
             action={() => comp.props.setSite("editsystem", { SN: row.value })}
             title="Editieren"
           />
@@ -179,15 +178,19 @@ function versandReady(comp) {
       filterMethod: (filter, rows) =>
         matchSorter(rows, filter.value, { keys: ["Kunde"] }),
       filterAll: true,
-    },
-    {
-      Header: (
-        <Button
-          action={comp._save}
-          type={"primary"}
-          title={"Status Versand setzen"}
+      Filter: ({ filter, onChange }) => (
+        <Dropdown
+          title={""}
+          name={"Kunde"}
+          options={comp.state.filter.kundenFilter}
+          value={filter ? filter.value : ""}
+          placeholder={"Kunde wählen...."}
+          handlechange={(event) => onChange(event.target.value)}
         />
       ),
+    },
+    {
+      Header: <Button action={comp._save} title={"Status Versand setzen"} />,
       Cell: (row) => (
         <div className="tabelle_feld">
           <Switch

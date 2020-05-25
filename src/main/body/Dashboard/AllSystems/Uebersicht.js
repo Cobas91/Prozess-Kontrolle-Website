@@ -75,7 +75,6 @@ class Auswertung extends Component {
     });
   }
   _setStandardView() {
-    this.props.updateApp();
     this.setState({
       ...this.state,
       view: tableView.standard(this),
@@ -83,7 +82,6 @@ class Auswertung extends Component {
     });
   }
   _setLieferscheineView() {
-    this.props.updateApp();
     this.setState({
       ...this.state,
       view: tableView.lieferscheine(this),
@@ -91,7 +89,6 @@ class Auswertung extends Component {
     });
   }
   _setVersandReady() {
-    this.props.updateApp();
     this.setState({
       ...this.state,
       view: tableView.versandReady(this),
@@ -122,8 +119,9 @@ class Auswertung extends Component {
           <Tabelle
             data={this.state.data}
             header={this.state.view ? this.state.view : []}
-            DropdownFilter={true}
+            filter={true}
             TableName="Übersicht"
+            export={false}
             {...this.props}
           />
         </div>

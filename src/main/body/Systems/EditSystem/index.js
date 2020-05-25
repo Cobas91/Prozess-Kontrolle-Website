@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
 
 import * as dgapi from "../../../../utils/API/dgapi";
+import * as time from "../../../../utils/time";
 
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
@@ -10,6 +11,7 @@ import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
 import Accordion from "../../components/Accordion";
 import Switch from "../../components/Switch.js";
+import Hyrachie from "../../components/Hierarchie";
 
 class EditSystemForm extends Component {
   constructor(props) {
@@ -37,11 +39,13 @@ class EditSystemForm extends Component {
         status: false,
         type: "default",
       },
+      accordion: false,
     };
     this._handleInput = this._handleInput.bind(this);
     this._save = this._save.bind(this);
     this._reset = this._reset.bind(this);
     this._insertNewUSer = this._insertNewUSer.bind(this);
+    this._accordion = this._accordion.bind(this);
   }
   async _insertNewUSer() {
     this.setState(
@@ -72,7 +76,6 @@ class EditSystemForm extends Component {
             Computername: system.Computername,
             Software: system.Software,
             BIOS: system.BIOS,
-            timestamp: system.timestamp,
           },
         });
         return true;
@@ -142,11 +145,23 @@ class EditSystemForm extends Component {
       await dgapi.addChecklisteToSystem(this.state.checkliste);
       this.props.updateApp();
       this.props.hideAlert();
+      this.setState((prevState) => ({
+        system: {
+          ...prevState.system,
+          lastChange: time.convert(new Date().getTime(), "DD MM HH mm"),
+        },
+      }));
     } else {
       await dgapi.updateSystem(this.state.system);
       await dgapi.addChecklisteToSystem(this.state.checkliste);
       this.props.updateApp();
       this.props.hideAlert();
+      this.setState((prevState) => ({
+        system: {
+          ...prevState.system,
+          lastChange: time.convert(new Date().getTime(), "DD MM HH mm"),
+        },
+      }));
     }
   }
   _reset() {
@@ -166,7 +181,14 @@ class EditSystemForm extends Component {
       () => console.log("Checkliste aktualisiert: ", this.state)
     );
   }
+  _accordion() {
+    this.setState((prevState) => ({
+      ...prevState,
+      accordion: this.state.accordion ? false : true,
+    }));
+  }
   render() {
+    console.log("Editstate:", this.state);
     if (this.state.getData === false) {
       return (
         <div className="form-group">
@@ -199,21 +221,41 @@ class EditSystemForm extends Component {
     return (
       <div>
         <h2>Edit System</h2>
-        <Button action={this._reset} type={"error"} title={"Neues Gerät"} />
+        <Button action={this._accordion} title={"Detail Infos anzeigen"} />
         <div className="jumbotron">
-          <p>Status: {this.state.system.Status}</p>
+          <p>Aktueller Status: {this.state.system.Status}</p>
+          <p>Betankungsstraße: {this.state.system.Straße}</p>
           <p>Seriennummer: {this.state.system.SN}</p>
+          <p>Computername: {this.state.system.Computername}</p>
+          <p>Assetnummer: {this.state.system.Assetnummer}</p>
           <p>Modell: {this.state.system.Modell}</p>
           <p>KHK Lager: {this.state.system.Lager_KHK}</p>
           <p>KHK Kunde: {this.state.system.Kunde_KHK}</p>
-          <Accordion name="Bemerkungen anzeigen" sn={this.state.system.ID} />
         </div>
+
+        <div
+          className={
+            this.state.accordion ? "jumbotron accordion_show" : "collapse"
+          }
+        >
+          <Accordion name="Bemerkungen anzeigen" sn={this.state.system.ID} />
+          <Hyrachie sn={this.state.system.SN} />
+        </div>
+
         <Input
           inputType={"text"}
           title={"Hersteller"}
           name={"Hersteller"}
           value={this.state.system.Hersteller}
           placeholder={"Hersteller eintragen...."}
+          handlechange={this._handleInput}
+        />
+        <Input
+          inputType={"text"}
+          title={"Modell"}
+          name={"Modell"}
+          value={this.state.system.Modell}
+          placeholder={"Modell eintragen...."}
           handlechange={this._handleInput}
         />
         <Dropdown
@@ -230,6 +272,14 @@ class EditSystemForm extends Component {
           name={"Computername"}
           value={this.state.system.Computername}
           placeholder={"Computername eingeben...."}
+          handlechange={this._handleInput}
+        />
+        <Dropdown
+          title={"Betankungsstraße"}
+          name={"Straße"}
+          options={this.props.App.data.straßen}
+          value={this.state.system.Straße}
+          placeholder={"Bitte Straße wählen..."}
           handlechange={this._handleInput}
         />
         <Input
@@ -305,9 +355,7 @@ class EditSystemForm extends Component {
           checked={this.state.checkliste.Software}
         />
         {/* Bemerkung */}
-        <label>
-          {"Letzte Ändernung am: " + this.state.checkliste.timestamp}
-        </label>
+        <label>{"Letzte Ändernung am: " + this.state.system.lastChange}</label>
         <Input
           disabled
           inputType={"text"}

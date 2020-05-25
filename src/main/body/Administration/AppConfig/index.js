@@ -5,6 +5,7 @@ import * as dgapi from "../../../../utils/API/dgapi";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
+import Switch from "../../components/Switch.js";
 import SweetAlert from "react-bootstrap-sweetalert";
 class AppConfig extends Component {
   constructor(props) {
@@ -35,8 +36,11 @@ class AppConfig extends Component {
           Lieferschein_Import: `${config.Lieferschein_Import.pfad}${config.Lieferschein_Import.file}`,
           PowerBI_Uhrzeit: `${config.PowerBI.time.stunde}:${config.PowerBI.time.minute}:${config.PowerBI.time.sekunde}`,
           powerbi_checklisten_pfad: `${config.PowerBI.checklisten.pfad}${config.PowerBI.checklisten.powerBIFile}`,
+          powerbi_checklisten_active: config.PowerBI.checklisten.active,
           powerbi_systeme_pfad: `${config.PowerBI.systeme.pfad}${config.PowerBI.systeme.powerBIFile}`,
+          powerbi_systeme_active: config.PowerBI.systeme.active,
           powerbi_status_pfad: `${config.PowerBI.status.pfad}${config.PowerBI.status.powerBIFile}`,
+          powerbi_status_active: config.PowerBI.status.active,
           teams_daily_channel: config.teams.dailyFeedback.channel,
           teams_daily_time: `${config.teams.dailyFeedback.time.stunde}:${config.teams.dailyFeedback.time.minute}:${config.teams.dailyFeedback.time.sekunde}`,
           teams_avaiable_channels: teamschannels,
@@ -87,7 +91,17 @@ class AppConfig extends Component {
     await dgapi.startKHKImport_Lagerbestand();
     this.props.updateApp();
   }
-
+  _handleSwitchChange(value, name) {
+    this.setState(
+      (prevState) => ({
+        config: {
+          ...prevState.config,
+          [name]: value,
+        },
+      }),
+      () => console.log("AppConfig State aktualisiert: ", this.state)
+    );
+  }
   render() {
     console.log("AppConfig State: ", this.state);
     return (
@@ -155,6 +169,7 @@ class AppConfig extends Component {
         <div className="jumbotron">
           <div className="form-group">
             <h3>Export PowerBI</h3>
+            {/* PowerBI Uhrzeit */}
             <Input
               inputType={"text"}
               title={"Uhrzeit"}
@@ -166,6 +181,19 @@ class AppConfig extends Component {
               }
               placeholder={"Uhrzeit für PowerBI Export eingeben....."}
               handlechange={this._handleInput}
+            />
+            <hr />
+            {/* PowerBI Export Checklisten*/}
+            <Switch
+              title="Aktiv"
+              onChange={(e) =>
+                this._handleSwitchChange(e, "powerbi_checklisten_active")
+              }
+              checked={
+                this.state.config.powerbi_checklisten_active
+                  ? this.state.config.powerbi_checklisten_active
+                  : ""
+              }
             />
             <Input
               inputType={"text"}
@@ -179,6 +207,20 @@ class AppConfig extends Component {
               placeholder={"Pfad für Datei eingeben...."}
               handlechange={this._handleInput}
             />
+
+            <hr />
+            {/* PowerBI Export Systeme*/}
+            <Switch
+              title="Aktiv"
+              onChange={(e) =>
+                this._handleSwitchChange(e, "powerbi_systeme_active")
+              }
+              checked={
+                this.state.config.powerbi_systeme_active
+                  ? this.state.config.powerbi_systeme_active
+                  : ""
+              }
+            />
             <Input
               inputType={"text"}
               title={"Systeme speicherort"}
@@ -190,6 +232,20 @@ class AppConfig extends Component {
               }
               placeholder={"Pfad für Datei eingeben...."}
               handlechange={this._handleInput}
+            />
+
+            <hr />
+            {/* PowerBI Export Status*/}
+            <Switch
+              title="Aktiv"
+              onChange={(e) =>
+                this._handleSwitchChange(e, "powerbi_status_active")
+              }
+              checked={
+                this.state.config.powerbi_status_active
+                  ? this.state.config.powerbi_status_active
+                  : ""
+              }
             />
             <Input
               inputType={"text"}

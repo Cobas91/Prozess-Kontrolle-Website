@@ -116,11 +116,22 @@ function sortSystems(data, where) {
     return erg;
   }
 }
+async function getAllStraßen() {
+  const result = await fetch(
+    `http://${serverData.ip}:${serverData.port}/api/db/all/strasen`,
+    {
+      method: "get",
+    }
+  );
+  const resjason = await result.json();
+  return resjason;
+}
 async function getAllData() {
   var kunden = await getAllKunden();
   var systeme = await getAllSystems();
   var status = await getAllStatus();
   var checklisten = await getAllChecklisten();
+  var straßen = await getAllStraßen();
   var uebersichtVersand = await sortSystems(systeme, [
     { Status: "Versand Ready" },
   ]);
@@ -130,6 +141,7 @@ async function getAllData() {
     status: status,
     checklisten: checklisten,
     uebersichtVersand: uebersichtVersand,
+    straßen: straßen,
   };
   return data;
 }
@@ -273,6 +285,7 @@ async function massenStatus(allData) {
     status: allData.status,
     systeme: allData.sn,
     bemerkung: allData.bemerkung,
+    Straße: allData.Straße,
   };
   const result = await fetch(
     `http://${serverData.ip}:${serverData.port}/api/db/massStatus`,
@@ -367,6 +380,21 @@ async function getUsername(input) {
   const resjason = await result.json();
   return resjason;
 }
+async function getHierarchie(sn) {
+  var toFind = { sn: sn };
+  const result = await fetch(
+    `http://${serverData.ip}:${serverData.port}/api/db/hyrachie`,
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(toFind),
+    }
+  );
+  const resjason = await result.json();
+  return resjason;
+}
 
 export {
   getAllKunden,
@@ -389,4 +417,5 @@ export {
   getVersandReady,
   sortSystems,
   getUsername,
+  getHierarchie,
 };

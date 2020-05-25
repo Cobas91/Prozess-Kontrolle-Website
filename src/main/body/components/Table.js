@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import ReactTable, { ReactTableDefaults } from "react-table";
 import "react-table/react-table.css";
 import Export from "../components/ExcelExport";
@@ -38,6 +38,9 @@ class Tabelle extends Component {
 
     this.setState({ filtered: filtered });
   };
+  componentDidMount() {
+    console.log(this);
+  }
   render() {
     //Set Defaults for Table
     Object.assign(ReactTableDefaults, {
@@ -50,7 +53,6 @@ class Tabelle extends Component {
       pageText: "Seite",
       defaultPageSize: this.props.pageSize ? this.props.pageSize : 10,
     });
-
     if (this.props.export) {
       return (
         <>
@@ -59,16 +61,10 @@ class Tabelle extends Component {
             fileName={this.props.TableName + "_" + Time.convert(Date.now())}
             Name={this.props.TableName + " Exportieren"}
           />
-          <ReactTable data={this.props.data} columns={this.props.header} />
-        </>
-      );
-    } else if (this.props.DropdownFilter) {
-      return (
-        <>
           <ReactTable
             data={this.props.data}
             columns={this.props.header}
-            filterable={true}
+            filterable={this.props.filter}
             showPagination={true}
             PaginationComponent={tableCount}
           />
@@ -77,7 +73,13 @@ class Tabelle extends Component {
     } else {
       return (
         <>
-          <ReactTable data={this.props.data} columns={this.props.header} />
+          <ReactTable
+            data={this.props.data}
+            columns={this.props.header}
+            filterable={this.props.filter}
+            showPagination={true}
+            PaginationComponent={tableCount}
+          />
         </>
       );
     }

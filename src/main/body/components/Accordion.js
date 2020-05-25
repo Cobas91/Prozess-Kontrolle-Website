@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse, CardBody, Card } from "reactstrap";
+import Button from "./Button";
 import * as dgapi from "../../../utils/API/dgapi";
+import * as time from "../../../utils/time";
 class Accordion extends Component {
   constructor(props) {
     super(props);
@@ -28,26 +30,27 @@ class Accordion extends Component {
       return <div></div>;
     } else {
       return (
-        <div>
+        <>
           <Button
-            color="info"
-            onClick={this._handleClick}
-            style={{ marginBottom: "1rem" }}
-          >
-            {this.props.name}
-          </Button>
+            action={this._handleClick}
+            className="btn btn-outline-info"
+            title={this.props.name}
+          />
           <Collapse isOpen={this.state.isOpen}>
             <Card>
               <CardBody>
                 <ul>
                   {this.state.bemerkungen.map((item, key) => (
-                    <li>{item.comment}</li>
+                    <li>
+                      {time.convert(item.timestamp, "DD MM HH mm")} -{" "}
+                      {item.comment}
+                    </li>
                   ))}
                 </ul>
               </CardBody>
             </Card>
           </Collapse>
-        </div>
+        </>
       );
     }
   }

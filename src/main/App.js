@@ -15,7 +15,7 @@ class App extends Component {
     super(props);
     //State initialisieren
     this.state = {
-      Version: "1.2",
+      Version: "2.0",
       loading: true, //Loadingscreen anzeigen?
       notify: {
         //Object für die Benachrichtigung
@@ -57,6 +57,7 @@ class App extends Component {
         status: data.status,
         checklisten: data.checklisten,
         uebersichtVersand: data.uebersichtVersand,
+        straßen: data.straßen,
       },
       window: {
         windowWidth: window.innerWidth,
@@ -67,10 +68,15 @@ class App extends Component {
       workData: { SN: null },
       loading: false,
       development: await this._isDevelopment(),
+      user: {
+        name: (await this._isDevelopment()) ? "Development, Mode" : "",
+        admin: (await this._isDevelopment()) ? true : false,
+      },
     });
   }
   async _updateApp() {
     var data = await dgapi.getAllData();
+    console.log("Update App:", data);
     this.setState({
       ...this.state,
       data: {
@@ -82,7 +88,7 @@ class App extends Component {
       },
       loading: false,
     });
-    // this.componentDidMount();
+    this.componentDidMount();
   }
   _toggleMobile() {
     this.setState({
