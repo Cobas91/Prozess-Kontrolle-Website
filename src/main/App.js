@@ -121,6 +121,7 @@ class App extends Component {
   }
   _setSite(site, data) {
     this._hideAlert();
+    this._updateApp();
     if (site !== "") {
       this.setState(
         (prevState) => ({

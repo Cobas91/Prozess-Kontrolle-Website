@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
 import * as dgapi from "../../../utils/API/dgapi";
 
-class Template extends Component {
+class MassChange extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -169,4 +169,4 @@ class Template extends Component {
     );
   }
 }
-export default Template;
+export default MassChange;

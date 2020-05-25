@@ -15,6 +15,13 @@ function standard(comp) {
       filterAll: true,
     },
     {
+      Header: "Lieferschein",
+      accessor: "LSNummer",
+      filterMethod: (filter, rows) =>
+        matchSorter(rows, filter.value, { keys: ["LSNummer"] }),
+      filterAll: true,
+    },
+    {
       Header: "Computername",
       accessor: "Computername",
       filterMethod: (filter, rows) =>
