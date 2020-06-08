@@ -25,26 +25,31 @@ class Login extends Component {
       () => console.log("Login State:", this.state)
     );
   }
+  async _handleFormSubmit(e) {
+    e.preventDefault();
+  }
   render() {
     return (
       <div className="loading_main">
         <div className="LoadingScreen">
           <label>Wer benutzt dieses Tool gerade?</label>
-          <Input
-            inputtype={"text"}
-            title={""}
-            name={"name"}
-            value={this.state.user.name}
-            placeholder={"Bitte Initialien oder Name eintragen...."}
-            handlechange={this._handleInput}
-          />
-          <Button
-            action={() => {
-              this.props.setName(this.state.user.name);
-            }}
-            type={"primary"}
-            title={"Übernehmen"}
-          />
+          <form onSubmit={this._handleFormSubmit}>
+            <Input
+              inputtype={"text"}
+              title={""}
+              name={"name"}
+              value={this.state.user.name}
+              placeholder={"Bitte Initialien oder Name eintragen...."}
+              handlechange={this._handleInput}
+            />
+            <Button
+              action={() => {
+                this.props.setName(this.state.user.name);
+              }}
+              type={"primary"}
+              title={"Übernehmen"}
+            />
+          </form>
         </div>
       </div>
     );
