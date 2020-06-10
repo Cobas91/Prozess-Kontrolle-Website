@@ -85,6 +85,7 @@ class App extends Component {
         status: data.status,
         checklisten: data.checklisten,
         uebersichtVersand: data.uebersichtVersand,
+        straßen: data.straßen,
       },
       loading: false,
     });

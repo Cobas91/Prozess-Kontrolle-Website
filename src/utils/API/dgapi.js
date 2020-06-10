@@ -186,26 +186,6 @@ async function setStatus(input) {
   }
 }
 
-async function pxeReset(sn) {
-  const data = {
-    data: {
-      SN: sn,
-    },
-  };
-  const result = await fetch(
-    `http://${serverData.ip}:${serverData.port}/api/db/pxeReset`,
-    {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  );
-  const resjason = await result.json();
-  return resjason;
-}
-
 async function getComments(sn) {
   const data = {
     table: "comments_systeme",
@@ -404,7 +384,6 @@ export {
   addExcelImport,
   getAllData,
   updateSystem,
-  pxeReset,
   getComments,
   addChecklisteToSystem,
   askforPDF,

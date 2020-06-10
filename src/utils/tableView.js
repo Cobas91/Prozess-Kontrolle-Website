@@ -70,10 +70,6 @@ function standard(comp) {
       ),
     },
     {
-      Header: "Letzte Bemerkung",
-      accessor: "Bemerkung",
-    },
-    {
       Header: "",
       accessor: "SN",
       Cell: (row) => (
