@@ -377,6 +377,17 @@ async function getHierarchie(sn) {
   return resjason;
 }
 
+async function clearUpDatabase() {
+  const result = await fetch(
+    `http://${serverData.ip}:${serverData.port}/api/db/clearup`,
+    {
+      method: "get",
+    }
+  );
+  const resjason = await result.json();
+  return resjason;
+}
+
 export {
   getAllKunden,
   addNewSystem,
@@ -398,4 +409,5 @@ export {
   sortSystems,
   getUsername,
   getHierarchie,
+  clearUpDatabase,
 };

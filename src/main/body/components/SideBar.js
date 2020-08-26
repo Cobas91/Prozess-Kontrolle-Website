@@ -204,6 +204,21 @@ class Navigation extends Component {
                     />
                     Teams
                   </Link>
+                  <li>
+                    <Link
+                      onClick={() => {
+                        this.props.setSite("clearDB", {});
+                      }}
+                    >
+                      <FiDownload
+                        onClick={() => {
+                          this.props.setSite("clearDB", {});
+                        }}
+                        className="navIcon"
+                      />
+                      ClearDB
+                    </Link>
+                  </li>
                 </li>
               </ul>
             </li>
